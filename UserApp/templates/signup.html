@@ -1,0 +1,136 @@
+
+{% extends 'index.html' %}
+{% block content %}
+ {% load static %}
+<!-- page title area start  -->
+            <section class="page-title-area page-title-spacing p-relative zindex-1 "
+                data-background="{% static 'assets/img/bg/work-bg.jpg'%}">
+                <div class="ms-overlay ms-overlay9 p-absolute zindex--1"></div>
+               <div class="container">
+                    <div class="ms-maxw-510 mx-auto">
+                        <div style="background-color: #131212" class="ms-login-wrap text-center ms-login-space ms-bg-2">
+                            <h3 class="ms-title4 mb-50">Create Your account</h3>
+                            {% if messages %}
+                                <div class="alert alert-danger">
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="ms-input2-box mb-25">
+                                    <input type="text" name="name" placeholder="Name" required>
+                                </div>
+                                <div class="ms-input2-box mb-25">
+                                    <input type="email" name="email" placeholder="Email" required>
+                                </div>
+                                <div class="ms-input2-box mb-25">
+                                    <input type="password" name="password" placeholder="Password" required>
+                                </div>
+                                <div class="ms-input2-box mb-25">
+                                    <input type="password" name="check_password" placeholder="Confirm Password" required>
+                                </div>
+                                  <div class="ms-input2-box mb-25">
+                                      <div class="ms-input-box-file style-2">
+                                          <label>Attach Cover Photo</label>
+                                          <div style="display: flex; justify-content: center; align-items: center; text-align: center;  " class="ms-upload-img ">
+                                              <div class="ms-upload-file image-upload">
+                                                  <input type="file" name="profile_image" accept="image/*" onchange="previewImage(event)" />
+                                                  <i class="fas fa-plus"></i>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                <div class="ms-submit-btn mb-40">
+                                    <button class="unfill__btn d-block w-100" type="submit">Create
+                                        Account</button>
+                                </div>
+                                <div class="ms-divided-btn mb-45">
+                                    <span>or</span>
+                                </div>
+                                <div class="ms-fb mb-40">
+                                    <button class="ms-fb-btn" type="submit"><i class="fa-brands fa-facebook"></i>
+                                        Log in with facebook</button>
+                                </div>
+                                <div class="ms-not-account mb-35">
+                                    <p>Already have an account? <a href="login.html">Log
+                                            in</a></p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- page title area end  -->
+
+            <!-- login Area Start Here  -->
+
+            <!-- login Area End Here  -->
+
+            <!-- Partner Area Start Here  -->
+            <div class="ms-partner-area fix pt-80 pb-130">
+                <div class="container">
+                    <div class="swiper-container ms-partner-active">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-01.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-02.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-03.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-04.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-05.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-04.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-01.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-02.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-03.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-04.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-05.png'%}" alt="partner image">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{% static 'assets/img/partner/partner-04.png'%}" alt="partner image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Partner Area End Here  -->
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0]; // Get the selected file
+            const reader = new FileReader(); // Create a FileReader object
+
+            reader.onload = function(e) {
+                const imageUpload = document.querySelector('.image-upload');
+                imageUpload.style.backgroundImage = `url(${e.target.result})`;
+                imageUpload.style.backgroundSize = 'cover'; // Cover the entire area
+                imageUpload.style.backgroundPosition = 'center'; // Center the image
+                imageUpload.style.color = 'transparent'; // Hide the text color
+            }
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the image file as a data URL
+            }
+        }
+    </script>
+ {% endblock %}

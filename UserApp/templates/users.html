@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+ {% load static %}
+{% block content %}
+
+ <div class="ezui">testing</div>
+ {% for user in users %}
+        <li>name : {{ user.name }} email : {{ user.email }}
+        </li>
+    {% endfor %}
+{% endblock %}

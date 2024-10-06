@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Musicly - Music Bands and Musicians HTML5 Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.svg in the root directory -->
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.svg' %}">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'assets/app/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/meanmenu.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/backtotop.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/flaticon_musicly.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/fontawesome-pro.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/spacing.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/main.css' %}">
+</head>
+
+<body>
+<div class="mouseCursor cursor-outer"></div>
+    <div class="mouseCursor cursor-inner"><span>Drag</span></div>
+
+    <!-- Preloader start -->
+    <div id="preloader">
+        <div class="line-loader">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <!-- preloader end -->
+{% include 'navbar.html' %}
+<div class="ms-all-content ms-all-content-space">
+{% block content %}
+{% endblock %}
+{% include 'footer.html' %}
+  </div>
+ <!-- Back to top start -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- Back to top end -->
+
+    <script src="{% static 'assets/app/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/meanmenu.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/slick.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/backtotop.js' %}"></script>
+    <script src="{% static 'assets/app/js/ajax-form.js' %}"></script>
+    <script src="{% static 'assets/app/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/gsap.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/ScrollToPlugin.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/SplitText.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/ScrollTrigger.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/jquery.jplayer.min.js' %}"></script>
+    <script src="{% static 'assets/app/js/jplayer.playlist.js' %}"></script>
+    <script src="{% static 'assets/app/js/settings.js' %}"></script>
+    <script src="{% static 'assets/app/js/main.js' %}"></script>
+</body>
+
+</html>
