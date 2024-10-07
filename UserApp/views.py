@@ -154,6 +154,7 @@ def reset_password(request):
         return redirect('resetPassword')
     return render(request, 'resetPassword.html')
 
+
 def sendRestPassword(email):
     user = User.objects(email=email).first()
     subject = 'Reset Password!'
@@ -205,3 +206,33 @@ def reset_password_view(request):
 
 def home(request):
     return render(request, 'home.html')
+
+
+def editProfile(request):
+    email = request.session.get('user_email')
+    user = User.objects(email=email).first()
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        new_email = request.POST.get('email')
+        password = request.POST.get('password')
+        profile_image = request.FILES.get('profile_image')
+        if check_password(password, user.password):
+            user.username = name
+            user.email = new_email
+            if profile_image:
+                if user.image:
+                    user.image.replace(profile_image, content_type=profile_image.content_type)
+                else:
+                    user.image.put(profile_image, content_type=profile_image.content_type)
+            user.save()
+            request.session['user_email'] = new_email
+            request.session['user_name'] = name
+            if profile_image:
+                image = user.image.read()
+                img_str = base64.b64encode(image).decode('utf-8')
+                request.session['profile_image'] = f"data:image/jpeg;base64,{img_str}"
+            messages.success(request, "Profile updated successfully!")
+            return redirect('userInfo')
+        else:
+            messages.error(request, "Invalid password. Please enter the correct password to update your profile.")
+    return render(request, 'editProfile.html', {'user': user})
