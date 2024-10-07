@@ -55,37 +55,41 @@ def signup(request):
     return render(request, 'signup.html')
 
 
+def set_user_session(request, user):
+    request.session['user_id'] = str(user.id)
+    request.session['user_name'] = str(user.username)
+    request.session['user_email'] = str(user.email)
+    if user.image:
+        image = user.image.read()
+        img_str = base64.b64encode(image).decode('utf-8')
+        request.session['profile_image'] = f"data:image/jpeg;base64,{img_str}"
+
+
 def user_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
+        skip = request.POST.get('skip')
         user = User.objects(email=email).first()
         if user and check_password(password, user.password):
-            request.session['user_id'] = str(user.id)
-            request.session['user_name'] = str(user.username)
-            request.session['user_email'] = str(user.email)
-            if user.image:
-                image = user.image.read()
-                img_str = base64.b64encode(image).decode('utf-8')
-                request.session['profile_image'] = f"data:image/jpeg;base64,{img_str}"
-            if user.verified:
+            if skip or user.verified:
+                set_user_session(request, user)
                 messages.success(request, "Logged in successfully!")
-                return redirect('login')
+                return redirect('userInfo')
             else:
-                user.token = create_token(user.email)
+                user.token = create_token(user.email, "mail")
                 user.save()
                 sendVerifyEmail(user.email)
                 messages.error(request, "You need to verify your email!")
         else:
             messages.error(request, "Invalid email or password.")
-            return redirect('login')
+        return redirect('login')
     return render(request, 'login.html')
 
 
 @custom_login_required
 def profile(request):
-    nom = "nejd"
-    return render(request, 'profile.html', {'user_name': nom})
+    return render(request, 'profile.html', {})
 
 
 @custom_login_required
@@ -116,6 +120,7 @@ def verifyEmail(request):
         user = User.objects(token=token).first()
         if user and verify_token(user.token):
             user.verified = True
+            user.token = None
             user.save()
             messages.success(request, "Your email has been verified! You can now log in.")
             return redirect('login')
@@ -123,13 +128,80 @@ def verifyEmail(request):
         return redirect('login')
 
 
-def create_token(email):
-    return serializer.dumps(email, salt='email-confirmation-salt')
+def create_token(email, type_mail):
+    return serializer.dumps((email, type_mail), salt='email-confirmation-salt')
 
 
 def verify_token(token, expiration=3600):
     try:
-        email = serializer.loads(token, salt='email-confirmation-salt', max_age=expiration)
+        email, type_mail = serializer.loads(token, salt='email-confirmation-salt', max_age=expiration)
+        return email, type_mail
     except Exception as e:
         return None
-    return email
+
+
+def reset_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = User.objects(email=email).first()
+        if user:
+            user.token = create_token(user.email, 'password')
+            sendRestPassword(user.email)
+            user.save()
+            messages.success(request, "A Reset Password Email Was Sent!")
+            return redirect('login')
+        messages.success(request, "Email Does Not Exist!")
+        return redirect('resetPassword')
+    return render(request, 'resetPassword.html')
+
+def sendRestPassword(email):
+    user = User.objects(email=email).first()
+    subject = 'Reset Password!'
+    link = "http://127.0.0.1:8000/users/reset_password?token=" + user.token
+    html_message = render_to_string('resetpasswordmail.html', {'name': user.username, 'link': link})
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    email = EmailMultiAlternatives(subject, '', from_email, recipient_list)
+    email.attach_alternative(html_message, "text/html")
+    email.send(fail_silently=False)
+
+
+def reset_password_view(request):
+    token = request.GET.get('token')
+    result = verify_token(token)
+
+    if result:  # Check if result is not None
+        email, type_mail = result
+    else:
+        messages.error(request, "Token Expired or Invalid!")
+        return redirect('login')
+
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        checkPassword = request.POST.get('checkPassword')
+
+        if password == checkPassword:
+            user = User.objects(email=email).first()
+            if user:
+                user.password = make_password(password)
+                user.token = None
+                user.save()
+                messages.success(request, "Password Changed!")
+                return redirect('login')
+            else:
+                messages.error(request, "User not found!")
+        else:
+            messages.error(request, "Passwords don't match!")
+
+        return render(request, 'resetPassword2.html', {'token': token})
+
+    else:
+        if type_mail == 'password' and email:
+            return render(request, 'resetPassword2.html', {'token': token})
+        else:
+            messages.error(request, "Invalid token or request type!")
+            return redirect('login')
+
+
+def home(request):
+    return render(request, 'home.html')
