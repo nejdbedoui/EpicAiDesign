@@ -1,0 +1,52 @@
+{% extends 'profile.html' %}
+{% block profile_content %}
+    {% load static %}
+
+    <form method="POST" action="{% url 'editProfile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div  class="ms-input2-box mb-25">
+            <div  class="ms-input-box-file style-2">
+                <div  style="display: flex; justify-content: center; align-items: center; text-align: center;"
+                     class="ms-upload-img ">
+                    <div  class="ms-upload-file image-upload"
+                         style="background-image: url('{{ request.session.profile_image }}'); background-size: cover;background-position: center;">
+                        <input  type="file" name="profile_image" accept="image/*" onchange="previewImage(event)"/>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ms-input2-box mb-25">
+            <input type="text" name="name" placeholder="Name" value="{{ user.username }}" required>
+        </div>
+        <div class="ms-input2-box mb-25">
+            <input type="email" name="email" placeholder="Email" value="{{ user.email }}" required>
+        </div>
+        <div class="ms-input2-box mb-25">
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="ms-submit-btn mb-40">
+            <button class="unfill__btn d-block w-100" type="submit">Update Account</button>
+        </div>
+    </form>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imageUpload = document.querySelector('.image-upload');
+                imageUpload.style.backgroundImage = `url(${e.target.result})`;
+                imageUpload.style.backgroundSize = 'cover';
+                imageUpload.style.backgroundPosition = 'center';
+                imageUpload.style.color = 'transparent';
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+{% endblock %}

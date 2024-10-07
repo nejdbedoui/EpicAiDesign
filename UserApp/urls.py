@@ -10,4 +10,6 @@ urlpatterns = [
     path('verifyEmail', views.verifyEmail, name='verify_email'),
     path('resetPassword', views.reset_password, name='resetPassword'),
     path('reset_password', views.reset_password_view, name='reset_password'),
+    path('profile/editProfile/', views.editProfile, name='editProfile'),
+
 ]
