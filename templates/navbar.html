@@ -7,7 +7,7 @@
                 <div class="offcanvas__content">
                     <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
                         <div class="offcanvas__logo">
-                            <a href="index.html">
+                            <a href="{% url 'home' %}">
                                 <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo">
                             </a>
                         </div>
@@ -66,7 +66,7 @@
                         <div class="mega__menu-wrapper p-relative">
                             <div class="header__main d-flex align-items-center justify-content-between">
                                 <div class="header__logo pt-25 pb-25">
-                                    <a href="index.html">
+                                    <a href="{% url 'home' %}">
                                         <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo not found">
                                     </a>
                                 </div>
@@ -143,24 +143,9 @@
                                         <div class="main-menu main-menu-ff-space">
                                             <nav id="mobile-menu">
                                                 <ul>
-                                                    <li class="has-dropdown">
-                                                        <a href="index.html">Home</a>
-                                                        <ul class="submenu">
-                                                            <li><a href="index.html">Home Style 01</a></li>
-                                                            <li><a href="index-2.html">Home Style 02</a></li>
-                                                            <li><a href="index-3.html">Home Style 03</a></li>
-                                                            <li class="has-dropdown">
-                                                                <a href="javascript:void(0)">RTL Demos</a>
-                                                                <ul class="submenu">
-                                                                    <li><a href="index-rtl.html">Home Style 01 RTL</a>
-                                                                    </li>
-                                                                    <li><a href="index-2-rtl.html">Home Style 02 RTL</a>
-                                                                    </li>
-                                                                    <li><a href="index-3-rtl.html">Home Style 03 RTL</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
+                                                    <li >
+                                                        <a href="{% url 'home' %}">Home</a>
+
                                                     </li>
                                                     <li>
                                                         <a href="about.html">About us</a>
@@ -255,6 +240,14 @@
                                                     <li>
                                                         <a href="contact.html"> Help Center</a>
                                                     </li>
+                                                    <li>
+                                                         <div class="enquiry__list ml-10 mr-10 ms-browse-act-wrap p-relative">
+                                            <div class="ms-enquiry-box p-relative d-none d-xl-inline-flex">
+                                                <a href="{% url 'login' %}"><i class="flaticon-star icon"></i> <span class="text">Start Now</span> </a>
+                                            </div>
+
+                                        </div>
+                                                    </li>
                                                 </ul>
                                             </nav>
                                             <!-- for wp -->
@@ -269,71 +262,24 @@
                                     </div>
 
                                     <div class="header__action-inner d-flex align-items-center">
-                                        <div class="enquiry__list ml-10 mr-10 ms-browse-act-wrap p-relative">
-                                            <div class="ms-enquiry-box p-relative d-none d-xl-inline-flex">
-                                                <a href="#"><i class="flaticon-star icon"></i> <span class="text">My
-                                                        enquiry list</span> <span class="number">03</span></a>
+                                        {% if request.session.profile_image and request.session.user_name %}
+                                            <div class="user__acount d-none d-xxl-inline-flex">
+                                                <span>
+                                                    <a href="{% url 'userInfo' %}">
+                                                        <img src="{{ request.session.profile_image }}" alt="Profile Image" style="width: 100%; height: 100%;background-size: cover; border-radius: 50%;">
+                                                    </a>
+                                                </span>
                                             </div>
-                                            <div class="ms-browse-act-item-wrap p-absolute">
-                                                <div class="ms-song-item">
-                                                    <div class="ms-song-img p-relative">
-                                                        <a href="genres.html"><img src="../../static/assets/img/genres/genres-03.jpg"
-                                                                alt="brand-song"></a>
-                                                    </div>
-                                                    <div class="ms-song-content">
-                                                        <h3 class="ms-song-title"><a href="genres.html">The
-                                                                Sonics
-                                                                Corporate
-                                                                Band</a>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                                <div class="ms-song-item">
-                                                    <div class="ms-song-img p-relative">
-                                                        <a href="genres.html"><img src="../../static/assets/img/genres/genres-04.jpg"
-                                                                alt="brand-song"></a>
-                                                    </div>
-                                                    <div class="ms-song-content">
-                                                        <h3 class="ms-song-title"><a href="genres.html">The
-                                                                Northern
-                                                                Lights</a>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                                <div class="ms-song-item">
-                                                    <div class="ms-song-img p-relative">
-                                                        <a href="genres.html"><img src="../../static/assets/img/genres/genres-05.jpg"
-                                                                alt="brand-song"></a>
-                                                    </div>
-                                                    <div class="ms-song-content">
-                                                        <h3 class="ms-song-title"><a href="genres.html">The
-                                                                Sweet
-                                                                The
-                                                                Jets</a>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="header__btn">
-                                            <a href="join.html" class="ms-border-btn"><i
-                                                    class="fa-regular fa-plus"></i>List
-                                                Your Service</a>
-                                        </div>
-                                        {% if request.session.profile_image %}
-                                        <div class="user__acount d-none d-xxl-inline-flex">
-                                            <span>
-                                                <a href="{% url 'userInfo' %}">
-
-                                                           <img src="{{ request.session.profile_image }}" alt="Profile Image" style="width: 100%; height: 100%;background-size: cover; border-radius: 50%;">
-
-                                                   
-
-                                                </a>
-                                            </span>
-                                        </div>
                                         {% endif %}
-
+                                        {% if not request.session.profile_image and request.session.user_name %}
+                                            <div class="user__acount d-none d-xxl-inline-flex">
+                                                <span>
+                                                    <a href="{% url 'userInfo' %}">
+                                                        <i class="flaticon-user"></i>
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                     <div class="header__hamburger">
                                         <div class="sidebar__toggle">

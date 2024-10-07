@@ -11,12 +11,14 @@
                             <div class="ms-news-sidebar mb-50">
                                <div class="ms-news-img m-img fix ms-br-15 mb-30">
                                    <img src="{{ request.session.profile_image }}" alt="Profile Image">
-                                   <span class="ms-news-cat"><a href="profile.html">{{request.session.user_name}}</a></span>
+                                   <span class="ms-news-cat"><a href="{% url 'userInfo' %}">{{request.session.user_name}}</a></span>
                                </div>
                                     <ul style="list-style-type: none;width: 100%;" class="tagcloud">
                                         <li><a style="width: 100%; text-align: center" href="{% url 'userInfo' %}">Personal Info</a></li>
                                         <li><a style="width: 100%; text-align: center" href="#">Wish list</a></li>
                                         <li><a style="width: 100%; text-align: center" href="#">product</a></li>
+                                        <li><a style="width: 100%; text-align: center" href="{% url 'logout' %}"> <i class="fa-solid fa-power-off"></i> Logout</a></li>
+
                                     </ul>
 
                                 <div class="ms-news-widget">
