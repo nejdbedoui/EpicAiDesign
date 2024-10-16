@@ -1,0 +1,334 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Products Area Start  -->
+    <div class="ms-product-area  p-relative">
+
+        <div class="container">
+            <div class="row mb-30">
+                <div class="col-lg-5">
+
+
+                    <div class="tab-pane fade active show" id="nav1" role="tabpanel"
+                         aria-labelledby="nav1-tab">
+                        <div class="product__modal-img w-img">
+                            <div role="tabpanel"
+                                 aria-labelledby="nav-profile-tab" tabindex="0">
+                                <div class="ms-genres-tab2-text ms-genres-tab2-padding ms-bg-2 ms-br-15">
+                                    <h4 class="ms-title3 white-text text-center mb-25">Happy –
+                                        Pharrell
+                                        Williams</h4>
+                                    <div class="ms-genres-img fix m-img ms-br-15 mb-60 d-inline-block">
+                                       <div id="waveform"></div>
+                                    </div>
+                                    <div class="ms-border2 mb-30">
+                                        <h4 class="ms-title3 white-text text-center mb-30">Demo
+                                            Tracks
+                                        </h4>
+                                    </div>
+                                    <div class="ms-genres-audio">
+                                        <div class="ms-header2-song">
+                                            <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                                            <div id="jp_container_1" class="jp-audio" role="application"
+                                                 aria-label="media player">
+                                                <div class="jp-type-playlist">
+                                                    <!-- Hidden Singer Info -->
+                                                    <div class="ms-header2-singer d-none">
+
+                                                        <div class="ms-header2-singer-img">
+
+                                                            <a href="#"><img src="{% static 'assets/img/header/singer.png'%}"
+                                                                             alt="singer"></a>
+                                                        </div>
+
+
+                                                        <div class="ms-header2-singer-text">
+                                                            <h4><a href="genres-details.html">Lazy Soul</a></h4>
+                                                            <div class="jp-title"></div>
+                                                        </div>
+                                                    </div>
+                                                    <audio id="audio-player" style="display:none;"></audio>
+                                                    <!-- Controls -->
+                                                    <div class="">
+                                                        <div class="jp-controls-holder"
+                                                             style="display: flex; align-items: center">
+
+                                                            <button class="jp-play jp-btn" tabindex="0"
+                                                                    onclick="playAudio()"><i class="fa fa-play"></i>
+                                                            </button>
+                                                             <div class="jp-times">
+                                                                <div class="jp-current-time" role="timer"
+                                                                     aria-label="time"></div>
+                                                            </div>
+                                                            -
+                                                            <div class="jp-times">
+                                                                <div class="jp-duration" role="timer"
+                                                                     aria-label="duration"></div>
+                                                            </div>
+
+                                                            <!-- Volume Control -->
+                                                            <div class="jp-volume-controls">
+                                                                <button class="jp-mute jp-btn" tabindex="0"
+                                                                        onclick="toggleMute()">
+                                                                    <i id="volume-icon" class="fa fa-volume-up"></i>
+                                                                </button>
+                                                                <div class="jp-volume-bar"
+                                                                     onclick="changeVolume(event)">
+                                                                    <div class="jp-volume-bar-value"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Time and Progress -->
+                                                    </div>
+
+                                                    <!-- Playlist -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- jPlayer Initialization -->
+                                    <script>
+                                        var audioData = "{{ base64_audio|escapejs }}";
+                                        var volumeIcon = document.getElementById("volume-icon");
+                                        var volumeBarValue = document.querySelector(".jp-volume-bar-value");
+                                        var audioPlayer = document.getElementById("audio-player");
+
+                                        // Elements for time and progress
+                                        var currentTimeElement = document.querySelector(".jp-current-time");
+                                        var durationElement = document.querySelector(".jp-duration");
+                                        var playBarElement = document.querySelector(".jp-play-bar");
+                                        var seekBarElement = document.querySelector(".jp-seek-bar");
+                                        // Store the initial volume level
+                                        var audiolvl = audioPlayer.volume;
+                                        var playButton = document.querySelector(".jp-play i");
+                                        // Function to play or pause audio
+                                       document.addEventListener('DOMContentLoaded', function() {
+                                            // Initialize WaveSurfer
+                                            var wavesurfer = WaveSurfer.create({
+                                                container: '#waveform',  // The container where waveform will be displayed
+                                                waveColor: '#A8DBA8',    // Color of the waveform
+                                                progressColor: '#3B8686', // Color of the progress
+                                                height: 100,             // Height of the waveform
+                                                barWidth: 2              // Width of the bars in the waveform
+                                            });
+
+                                            wavesurfer.load(audioData);
+
+                                            // Update WaveSurfer's playback position based on audioPlayer's current time
+                                            audioPlayer.addEventListener('timeupdate', function () {
+                                                var currentTime = audioPlayer.currentTime;  // Get the current time
+                                                wavesurfer.seekTo(currentTime / audioPlayer.duration); // Seek WaveSurfer
+                                            });
+
+                                            // Optional: Update the current time displayed in your UI
+                                            wavesurfer.on('seek', function (progress) {
+                                                console.log("Seeked to:", progress * wavesurfer.getDuration());
+                                            });
+                                        });
+
+
+                                        function playAudio() {
+
+
+                                            if (audioPlayer.paused) {
+                                                if (!audioPlayer.src) {
+                                                    audioPlayer.src = audioData;  // Load the base64 audio data
+                                                }
+                                                audioPlayer.play()
+                                                    .then(() => {
+                                                        console.log("Audio is playing");
+                                                        playButton.classList.remove("fa-play");
+                                                        playButton.classList.add("fa-pause");
+                                                    })
+                                                    .catch(error => {
+                                                        console.error("Error playing audio:", error);
+                                                    });
+                                            } else {
+                                                audioPlayer.pause();
+                                                playButton.classList.remove("fa-pause");
+                                                playButton.classList.add("fa-play");
+                                                console.log("Audio is paused");
+                                            }
+                                        }
+
+                                        // Update time and progress bar when audio is playing
+                                        audioPlayer.addEventListener('timeupdate', function () {
+                                            var currentTime = audioPlayer.currentTime;  // Get the current time
+                                            var duration = audioPlayer.duration;  // Get the total duration
+                                            var progress = (currentTime / duration) * 100;  // Calculate progress percentage
+
+                                            // Update the current time and progress bar
+                                            currentTimeElement.textContent = formatTime(currentTime);
+                                            playBarElement.style.width = progress + "%";
+                                        });
+
+                                        // Set the total duration when the audio metadata is loaded
+                                        audioPlayer.addEventListener('loadedmetadata', function () {
+                                            var duration = audioPlayer.duration;  // Get the total duration
+                                            durationElement.textContent = formatTime(duration);  // Set duration element
+                                        });
+                                        audioPlayer.addEventListener('ended', function() {
+                                            var playButton = document.querySelector(".jp-play i");
+                                            playButton.classList.remove("fa-pause");
+                                            playButton.classList.add("fa-play");
+                                            console.log("Audio has ended, play button reset.");
+                                        });
+                                        // Seek functionality: Move the playback position when the user clicks on the seek bar
+                                        seekBarElement.addEventListener('click', function (event) {
+                                            var barWidth = seekBarElement.offsetWidth;  // Get the full width of the seek bar
+                                            var clickPosition = event.offsetX;  // Position where the user clicked
+                                            var newTime = (clickPosition / barWidth) * audioPlayer.duration;  // Calculate new time
+
+                                            audioPlayer.currentTime = newTime;  // Set the new playback position
+                                        });
+
+                                        // Function to toggle mute
+                                        function toggleMute() {
+                                            audioPlayer.muted = !audioPlayer.muted;
+
+                                            if (audioPlayer.muted) {
+                                                audiolvl = audioPlayer.volume;  // Save current volume level
+                                                audioPlayer.volume = 0;  // Mute audio
+                                                volumeIcon.classList.remove("fa-volume-up");
+                                                volumeIcon.classList.add("fa-volume-mute");
+                                            } else {
+                                                audioPlayer.volume = audiolvl;  // Restore volume
+                                                volumeIcon.classList.remove("fa-volume-mute");
+                                                volumeIcon.classList.add("fa-volume-up");
+                                            }
+                                        }
+
+                                        // Change volume level based on user click on volume bar
+                                        function changeVolume(event) {
+                                            var volumeBar = document.querySelector(".jp-volume-bar");
+                                            var barWidth = volumeBar.offsetWidth;
+                                            var clickPosition = event.offsetX;
+                                            var newVolume = clickPosition / barWidth;
+
+                                            audioPlayer.volume = newVolume;  // Set volume
+                                            volumeBarValue.style.width = (newVolume * 100) + "%";  // Update volume bar
+
+                                            audiolvl = newVolume;  // Update stored volume level
+
+                                            if (newVolume === 0) {
+                                                volumeIcon.classList.remove("fa-volume-up");
+                                                volumeIcon.classList.add("fa-volume-mute");
+                                            } else {
+                                                volumeIcon.classList.remove("fa-volume-mute");
+                                                volumeIcon.classList.add("fa-volume-up");
+                                            }
+                                        }
+
+                                        // Function to format time in MM:SS
+                                        function formatTime(seconds) {
+                                            var minutes = Math.floor(seconds / 60);
+                                            var seconds = Math.floor(seconds % 60);
+                                            if (seconds < 10) {
+                                                seconds = "0" + seconds;  // Add leading zero if less than 10 seconds
+                                            }
+                                            if (minutes < 10) {
+                                                minutes = "0" + minutes;  // Add leading zero if less than 10 seconds
+                                            }
+                                            return minutes + ":" + seconds;
+                                        }
+
+
+                                    </script>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
+                        <div class="product__modal-img w-img">
+                            <img src="{% static 'assets/img/shop/product-02.png' %}" alt="product image">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">
+                        <div class="product__modal-img w-img">
+                            <img src="{% static 'assets/img/shop/product-03.png' %}" alt="product image">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab">
+                        <div class="product__modal-img w-img">
+                            <img src="{% static 'assets/img/shop/product-04.png' %}" alt="product image">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-product-modal-content mb-60">
+                        <div class="d-flex align-items-center justify-content-between mb-35 mr-40">
+                        </div>
+                        <h2 class="ms-product-title2 mb-30">
+                            <a href="addmusic.html">Denon DJ LC6000 Prime Perfor mance Expansion
+                                Controller</a>
+                        </h2>
+                        <div class="ms-is-product-stock mb-25">
+                            <span><i class="fa-solid fa-check"></i> In stock</span>
+                        </div>
+                        <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
+                            <div class="nav nav-tabs mb-tab-button-style justify-content-xl-end" id="nav-tab"
+                                 role="tablist">
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link active" id="nav-faq-1-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-1" type="button" role="tab"
+                                            aria-controls="nav-faq-1" aria-selected="true">
+                                        Drawing
+                                    </button>
+                                </div>
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link" id="nav-faq-2-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-2" type="button" role="tab"
+                                            aria-controls="nav-faq-2" aria-selected="false">
+                                        Entertainers
+                                    </button>
+                                </div>
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link" id="nav-faq-3-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-3" type="button" role="tab"
+                                            aria-controls="nav-faq-3" aria-selected="false">
+                                        Musical Acts
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ms-product-short-desc mb-25">
+                            <div class="col-lg-12">
+                                <div class="ms-input-box style-2">
+                                    <textarea cols="30" rows="10"
+                                              placeholder="We do not charge for leads. The only money you’ll..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__modal-form">
+                            <div class="product-quantity-cart ms-product-quantity-flex mb-30">
+                                <div class="offcanvas__btn mb-30">
+                                    <a class="ms-border-btn" href="services.html"><i class="fa-solid fa-plus"></i>
+                                        Generate</a>
+                                </div>
+                                <div class="banner__form-button">
+                                    <button class="ms-white-bg"><i
+                                            class="flaticon-heart"></i> Save
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Products Area End  -->
+
+
+{% endblock %}
