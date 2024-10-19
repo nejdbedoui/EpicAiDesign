@@ -12,5 +12,6 @@ urlpatterns = [
     path('reset_password', views.reset_password_view, name='reset_password'),
     path('profile/editProfile/', views.editProfile, name='editProfile'),
     path('user_list', views.user_list, name='user_list'),
-    path('Gallery',views.gallery,name='Gallery'),
+    path('Gallery', views.gallery, name='Gallery'),
+    path('Gallery/<str:category>/', views.gallery, name='Gallerys'),
 ]
