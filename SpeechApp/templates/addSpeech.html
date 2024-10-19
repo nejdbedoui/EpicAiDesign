@@ -16,10 +16,11 @@
                             <div role="tabpanel"
                                  aria-labelledby="nav-profile-tab" tabindex="0">
                                 <div class="ms-genres-tab2-text ms-genres-tab2-padding ms-bg-2 ms-br-15">
-                                    <h4 class="ms-title3 white-text text-center mb-25">{{ category }}
-                                        </h4>
+                                    <h4 class="ms-title3 white-text text-center mb-25">Happy –
+                                        Pharrell
+                                        Williams</h4>
                                     <div class="ms-genres-img fix m-img ms-br-15 mb-60 d-inline-block">
-                                        <div id="waveform"></div>
+                                       <div id="waveform"></div>
                                     </div>
                                     <div class="ms-border2 mb-30">
                                         <h4 class="ms-title3 white-text text-center mb-30">Demo
@@ -37,9 +38,8 @@
 
                                                         <div class="ms-header2-singer-img">
 
-                                                            <a href="#"><img
-                                                                    src="{% static 'assets/img/header/singer.png' %}"
-                                                                    alt="singer"></a>
+                                                            <a href="#"><img src="{% static 'assets/img/header/singer.png'%}"
+                                                                             alt="singer"></a>
                                                         </div>
 
 
@@ -57,7 +57,7 @@
                                                             <button class="jp-play jp-btn" tabindex="0"
                                                                     onclick="playAudio()"><i class="fa fa-play"></i>
                                                             </button>
-                                                            <div class="jp-times">
+                                                             <div class="jp-times">
                                                                 <div class="jp-current-time" role="timer"
                                                                      aria-label="time"></div>
                                                             </div>
@@ -102,7 +102,7 @@
                                         var seekBarElement = document.querySelector(".jp-seek-bar");
                                         var audiolvl = audioPlayer.volume;
                                         var playButton = document.querySelector(".jp-play i");
-                                        document.addEventListener('DOMContentLoaded', function () {
+                                       document.addEventListener('DOMContentLoaded', function() {
                                             var wavesurfer = WaveSurfer.create({
                                                 container: '#waveform',
                                                 waveColor: '#A8DBA8',
@@ -143,7 +143,6 @@
                                                 console.log("Audio is paused");
                                             }
                                         }
-
                                         audioPlayer.addEventListener('timeupdate', function () {
                                             var currentTime = audioPlayer.currentTime;
                                             var duration = audioPlayer.duration;
@@ -156,7 +155,7 @@
                                             var duration = audioPlayer.duration;
                                             durationElement.textContent = formatTime(duration);
                                         });
-                                        audioPlayer.addEventListener('ended', function () {
+                                        audioPlayer.addEventListener('ended', function() {
                                             var playButton = document.querySelector(".jp-play i");
                                             playButton.classList.remove("fa-pause");
                                             playButton.classList.add("fa-play");
@@ -169,7 +168,6 @@
 
                                             audioPlayer.currentTime = newTime;
                                         });
-
                                         function toggleMute() {
                                             audioPlayer.muted = !audioPlayer.muted;
 
@@ -184,7 +182,6 @@
                                                 volumeIcon.classList.add("fa-volume-up");
                                             }
                                         }
-
                                         function changeVolume(event) {
                                             var volumeBar = document.querySelector(".jp-volume-bar");
                                             var barWidth = volumeBar.offsetWidth;
@@ -202,7 +199,6 @@
                                                 volumeIcon.classList.add("fa-volume-up");
                                             }
                                         }
-
                                         function formatTime(seconds) {
                                             var minutes = Math.floor(seconds / 60);
                                             var seconds = Math.floor(seconds % 60);
@@ -241,64 +237,63 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="ms-product-modal-content mb-60">
-                        <form method="POST" enctype="multipart/form-data" action="{% url 'music' %}">
-    {% csrf_token %}
-    <div class="d-flex align-items-center justify-content-between mb-35 mr-40"></div>
-    <h2 class="ms-product-title2 mb-30">
-        <a href="addmusic.html">Create your music Here </a>
-    </h2>
-    <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
-        <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
-            <div class="ms-product-stock-item mb-20">
-                <input style="display: none" type="radio" name="category" value="Classical music" id="nav-faq-1" {% if category_default == "Classical music" %}checked{% endif %}>
-                <label class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1" data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab" aria-controls="nav-faq-1" aria-selected="true">
-                    Classical
-                </label>
-            </div>
-            <div class="ms-product-stock-item mb-20">
-                <input style="display: none" type="radio" name="category" value="Pop Music" id="nav-faq-2" {% if category_default == "Pop Music" %}checked{% endif %}>
-                <label class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab" data-bs-target="#nav-faq-2" role="tab" aria-controls="nav-faq-2" aria-selected="false">
-                    Pop
-                </label>
-            </div>
-            <div class="ms-product-stock-item mb-20">
-                <input style="display: none" type="radio" name="category" value="Rock Music" id="nav-faq-3" {% if category_default == "Rock Music" %}checked{% endif %}>
-                <label class="nav-link" id="nav-faq-3-tab" for="nav-faq-3" data-bs-toggle="tab" data-bs-target="#nav-faq-3" role="tab" aria-controls="nav-faq-3" aria-selected="false">
-                    Rock
-                </label>
-            </div>
-            <div class="ms-product-stock-item mb-20">
-                <input style="display: none" type="radio" name="category" value="Hip-hop Music" id="nav-faq-4" {% if category_default == "Hip-hop Music" %}checked{% endif %}>
-                <label class="nav-link" id="nav-faq-4-tab" for="nav-faq-4" data-bs-toggle="tab" data-bs-target="#nav-faq-4" role="tab" aria-controls="nav-faq-4" aria-selected="false">
-                    Hip-hop
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="ms-product-short-desc mb-25">
-        <div class="col-lg-12">
-            <div class="ms-input-box style-2">
-                <textarea cols="30" rows="10" name="prompt" placeholder="Enter your prompt here...">{{ prompt_default }}</textarea>
-            </div>
-        </div>
-    </div>
-    <div class="product__modal-form">
-        <div class="product-quantity-cart ms-product-quantity-flex mb-30">
-            <div class="offcanvas__btn mb-30">
-                <button type="submit" name="action" value="generate" class="ms-border-btn"><i class="fa-solid fa-plus"></i>
-                    Generate
-                </button>
-            </div>
-            <div class="banner__form-button">
-                <button name="action" value="save" class="ms-white-bg"><i class="flaticon-heart"></i> Save</button>
-            </div>
-        </div>
-    </div>
-</form>
+                        <div class="d-flex align-items-center justify-content-between mb-35 mr-40">
+                        </div>
+                        <h2 class="ms-product-title2 mb-30">
+                            <a href="addSpeech.html">Denon DJ LC6000 Prime Perfor mance Expansion
+                                Controller</a>
+                        </h2>
+                        <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
+                            <div class="nav nav-tabs mb-tab-button-style justify-content-xl-end" id="nav-tab"
+                                 role="tablist">
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link active" id="nav-faq-1-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-1" type="button" role="tab"
+                                            aria-controls="nav-faq-1" aria-selected="true">
+                                        Drawing
+                                    </button>
+                                </div>
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link" id="nav-faq-2-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-2" type="button" role="tab"
+                                            aria-controls="nav-faq-2" aria-selected="false">
+                                        Entertainers
+                                    </button>
+                                </div>
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link" id="nav-faq-3-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-3" type="button" role="tab"
+                                            aria-controls="nav-faq-3" aria-selected="false">
+                                        Musical Acts
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ms-product-short-desc mb-25">
+                            <div class="col-lg-12">
+                                <div class="ms-input-box style-2">
+                                    <textarea cols="30" rows="10"
+                                              placeholder="I am the moon, Queen of Night, a riddle wrapped in borrowed light, a silver spool where dreams unwind, ancient orb as old as time."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__modal-form">
+                            <div class="product-quantity-cart ms-product-quantity-flex mb-30">
+                                <div class="offcanvas__btn mb-30">
+                                    <a class="ms-border-btn" href="services.html"><i class="fa-solid fa-plus"></i>
+                                        Generate</a>
+                                </div>
+                                <div class="banner__form-button">
+                                    <button class="ms-white-bg"><i
+                                            class="flaticon-heart"></i> Save
+                                    </button>
+                                </div>
 
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
 
         </div>

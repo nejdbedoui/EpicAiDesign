@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('add_music', views.Add_music, name='add_music'),
+    path('music', views.Generate_music, name='music'),
 ]

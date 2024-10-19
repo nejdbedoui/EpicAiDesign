@@ -85,7 +85,7 @@
                                                     <a href="about.html">About us</a>
                                                 </li>
                                                 <li>
-                                                    <a href="work-system.html">How It Works</a>
+                                                     <a href="{% url 'Gallery' %}">My Gallery</a>
                                                 </li>
                                                 <li class="has-dropdown has-mega-menu">
                                                     <a href="javascript:void(0)">Pages</a>
@@ -212,45 +212,56 @@
                                     <div class="ms-browse-act-item-wrap p-absolute">
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
-                                                <a href="genres.html"><img
+                                                <a href="{% url 'add_image' %}"><img
                                                         src="{% static 'assets/img/genres/genres-01.jpg' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
-                                                <h3 class="ms-song-title"><a href="genres.html">Image</a>
+                                                <h3 class="ms-song-title"><a href="{% url 'add_image' %}">Image</a>
                                                 </h3>
                                             </div>
                                         </div>
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
-                                                <a href="genres.html"><img
+                                                <a href="{% url 'music' %}"><img
                                                         src="{% static 'assets/img/genres/genres-02.jpg' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
-                                                <h3 class="ms-song-title"><a href="genres.html">Music</a>
+                                                <h3 class="ms-song-title"><a href="{% url 'music' %}">Music</a>
                                                 </h3>
                                             </div>
                                         </div>
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
-                                                <a href="genres.html"><img
+                                                <a href="{% url 'add_poem' %}"><img
                                                         src="{% static 'assets/img/genres/genres-03.jpg' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
-                                                <h3 class="ms-song-title"><a href="genres.html">Poem</a>
+                                                <h3 class="ms-song-title"><a href="{% url 'add_poem' %}">Poem</a>
                                                 </h3>
                                             </div>
                                         </div>
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
-                                                <a href="genres.html"><img
+                                                <a href="{% url 'add_speech' %}"><img
                                                         src="{% static 'assets/img/genres/genres-04.jpg' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
-                                                <h3 class="ms-song-title"><a href="genres.html">Animation</a>
+                                                <h3 class="ms-song-title"><a href="{% url 'add_speech' %}">Speech</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="ms-song-item">
+                                            <div class="ms-song-img p-relative">
+                                                <a href="{% url 'add_video' %}"><img
+                                                        src="{% static 'assets/img/genres/genres-05.jpg' %}"
+                                                        alt="brand-song"></a>
+                                            </div>
+                                            <div class="ms-song-content">
+                                                <h3 class="ms-song-title"><a href="{% url 'add_video' %}">Video</a>
                                                 </h3>
                                             </div>
                                         </div>
@@ -261,7 +272,7 @@
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
-                                                <h3 class="ms-song-title"><a href="genres.html">Video</a>
+                                                <h3 class="ms-song-title"><a href="genres.html">Reel</a>
                                                 </h3>
                                             </div>
                                         </div>
