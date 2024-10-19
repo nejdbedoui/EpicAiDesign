@@ -8,7 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('django.contrib.auth.urls')),
     path('users/', include('UserApp.urls')),
-    path('animation/', include('AnimationApp.urls')),
+    path('animation/', include('SpeechApp.urls')),
     path('image/', include('ImageApp.urls')),
     path('music/', include('MusicApp.urls')),
     path('poem/', include('PoemApp.urls')),

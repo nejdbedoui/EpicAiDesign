@@ -11,14 +11,7 @@
                     <div class="ms-maxw-510 mx-auto" >
                         <div style="background-color: #131212" class="ms-login-wrap text-center ms-login-space ms-bg-2">
                             <h3 class="ms-title4 mb-50">Welcome Again</h3>
-                             {% if messages %}
-                                <div class="alert alert-danger">
-                                    {% for message in messages %}
-                                        {{ message }}
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
-                           <form method="POST">
+                           <form method="POST" >
                                 {% csrf_token %}
                                 <div class="ms-input2-box mb-25">
                                     <input type="email" name="email" required placeholder="Email">
@@ -27,7 +20,7 @@
                                     <input type="password" name="password" required placeholder="Password">
                                 </div>
                                 <div  class="ms-input2-box mb-30">
-                                    <input style="width: 5%; height: 5%" type="checkbox" name="skip" >Skip verify email
+                                    <input style="width: 5%; height: 5%" checked type="checkbox" name="skip" >Skip verify email
                                 </div>
                                 <div class="ms-submit-btn mb-40">
                                     <button class="unfill__btn d-block w-100" type="submit">Log in</button>

@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load embed_video_tags %}
+{% block content %}
+
+    <!-- Products Area Start  -->
+    <div class="ms-product-area  p-relative">
+
+        <div class="container">
+            <div class="row mb-30">
+
+                <div class="col-lg-6">
+                    <div class="ms-product-modal-content mb-60">
+                        <div class="d-flex align-items-center justify-content-between mb-35 mr-40">
+                        </div>
+                        <h2 class="ms-product-title2 mb-30">
+                            <a href="addVideo.html">Denon DJ LC6000 Prime Perfor mance Expansion
+                                Controller</a>
+                        </h2>
+                        <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
+                            <div class="nav nav-tabs mb-tab-button-style justify-content-xl-end" id="nav-tab"
+                                 role="tablist">
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link active" id="nav-faq-1-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-1" type="button" role="tab"
+                                            aria-controls="nav-faq-1" aria-selected="true">
+                                        Drawing
+                                    </button>
+                                </div>
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link" id="nav-faq-2-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-2" type="button" role="tab"
+                                            aria-controls="nav-faq-2" aria-selected="false">
+                                        Entertainers
+                                    </button>
+                                </div>
+                                <div class="ms-product-stock-item mb-20">
+                                    <button class="nav-link" id="nav-faq-3-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-faq-3" type="button" role="tab"
+                                            aria-controls="nav-faq-3" aria-selected="false">
+                                        Musical Acts
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ms-product-short-desc mb-25">
+                            <div class="col-lg-12">
+                                <div class="ms-input-box style-2">
+                                    <textarea cols="30" rows="10"
+                                              placeholder="We do not charge for leads. The only money you’ll..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__modal-form">
+                            <div class="product-quantity-cart ms-product-quantity-flex mb-30">
+                                <div class="offcanvas__btn mb-30">
+                                    <a class="ms-border-btn" href="services.html"><i class="fa-solid fa-plus"></i>
+                                        Generate</a>
+                                </div>
+                                <div class="banner__form-button">
+                                    <button class="ms-white-bg"><i
+                                            class="flaticon-heart"></i> Save
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-lg-6">
+                    <div class="product__modal-box product-dbox-grid mb-60">
+                        <ul class="nav nav-tabs border-0" id="modalTab" role="tablist">
+
+                        </ul>
+                        <div class="tab-content br-15 ms-bg-2 d-flex align-items-center" id="modalTabContent">
+                            <div class="tab-pane fade active show" id="nav1" role="tabpanel"
+                                 aria-labelledby="nav1-tab">
+                                <div class="product__modal-img w-img">
+                                    {% video video 'small' %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Products Area End  -->
+{% endblock %}

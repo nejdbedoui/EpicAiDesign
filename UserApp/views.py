@@ -236,3 +236,8 @@ def editProfile(request):
         else:
             messages.error(request, "Invalid password. Please enter the correct password to update your profile.")
     return render(request, 'editProfile.html', {'user': user})
+
+
+
+def gallery(request):
+    return render(request,'gallery.html')
