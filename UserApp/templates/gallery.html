@@ -16,59 +16,59 @@
                                     <input style="display: none" type="radio" name="category" value="Classical music"
                                            id="nav-faq-1"
                                            {% if category_default == "Images" %}checked{% endif %}>
-                                    <label class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1"
+                                    <label  class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1"
                                            data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
                                            aria-controls="nav-faq-1"
-                                           {% if category_default == "Images" %}aria-selected="true"{% endif %}>
-                                        Images
+                                           {% if category == "Images" %}aria-selected="true"{% endif %}>
+                                       <a href="{% url 'Gallerys' category="Images" %}">Images</a>
                                     </label>
                                 </div>
                                 <div class="ms-product-stock-item mb-20">
                                     <input style="display: none" type="radio" name="category" value="Pop Music"
-                                           id="nav-faq-2" {% if category_default == "Music" %}checked{% endif %}>
-                                    <label class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab"
+                                           id="nav-faq-2" {% if category == "Music" %}checked{% endif %}>
+                                    <label type="button" class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab"
                                            data-bs-target="#nav-faq-2" role="tab" aria-controls="nav-faq-2"
-                                           {% if category_default == "Music" %}aria-selected="true"{% endif %}>
-                                        Music
+                                           {% if category == "Music" %}aria-selected="true"{% endif %}>
+                                         <a href="{% url 'Gallerys' category="Music" %}">Music</a>
                                     </label>
                                 </div>
                                 <div class="ms-product-stock-item mb-20">
                                     <input style="display: none" type="radio" name="category" value="Rock Music"
-                                           id="nav-faq-3" {% if category_default == "Poem" %}checked{% endif %}>
+                                           id="nav-faq-3" {% if category == "Poem" %}checked{% endif %}>
                                     <label class="nav-link" id="nav-faq-3-tab" for="nav-faq-3" data-bs-toggle="tab"
                                            data-bs-target="#nav-faq-3" role="tab" aria-controls="nav-faq-3"
-                                           {% if category_default == "Poem" %}aria-selected="true"{% endif %}>
-                                        Poem
+                                           {% if category == "Poem" %}aria-selected="true"{% endif %}>
+                                        <a href="{% url 'Gallerys' category="Poem" %}">Poem</a>
                                     </label>
                                 </div>
                                 <div class="ms-product-stock-item mb-20">
                                     <input style="display: none" type="radio" name="category" value="Hip-hop Music"
                                            id="nav-faq-4"
-                                           {% if category_default == "Speech" %}checked{% endif %}>
+                                           {% if category == "Speech" %}checked{% endif %}>
                                     <label class="nav-link" id="nav-faq-4-tab" for="nav-faq-4" data-bs-toggle="tab"
                                            data-bs-target="#nav-faq-4" role="tab" aria-controls="nav-faq-4"
-                                           {% if category_default == "Speech" %}aria-selected="true"{% endif %}>
-                                        Speech
+                                           {% if category == "Speech" %}aria-selected="true"{% endif %}>
+                                         <a href="{% url 'Gallerys' category="Speech" %}">Speech</a>
                                     </label>
                                 </div>
                                 <div class="ms-product-stock-item mb-20">
                                     <input style="display: none" type="radio" name="category" value="Hip-hop Music"
                                            id="nav-faq-5"
-                                           {% if category_default == "Video" %}checked{% endif %}>
+                                           {% if category == "Video" %}checked{% endif %}>
                                     <label class="nav-link" id="nav-faq-5-tab" for="nav-faq-5" data-bs-toggle="tab"
                                            data-bs-target="#nav-faq-5" role="tab" aria-controls="nav-faq-5"
-                                           {% if category_default == "Video" %}aria-selected="true"{% endif %}>
-                                        Video
+                                           {% if category == "Video" %}aria-selected="true"{% endif %}>
+                                        <a href="{% url 'Gallerys' category="Video" %}">Video</a>
                                     </label>
                                 </div>
                                 <div class="ms-product-stock-item mb-20">
                                     <input style="display: none" type="radio" name="category" value="Hip-hop Music"
                                            id="nav-faq-6"
-                                           {% if category_default == "Reel" %}checked{% endif %}>
+                                           {% if category == "Reel" %}checked{% endif %}>
                                     <label class="nav-link" id="nav-faq-6-tab" for="nav-faq-6" data-bs-toggle="tab"
                                            data-bs-target="#nav-faq-6" role="tab" aria-controls="nav-faq-6"
-                                           {% if category_default == "Reel" %}aria-selected="true"{% endif %}>
-                                        Reel
+                                           {% if category == "Reel" %}aria-selected="true"{% endif %}>
+                                        <a href="{% url 'Gallerys' category="Reel" %}">Reel</a>
                                     </label>
                                 </div>
                             </div>

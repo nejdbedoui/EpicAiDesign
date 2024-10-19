@@ -9,6 +9,11 @@ from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 
+import ImageApp.models
+import MusicApp.models
+import PoemApp.models
+import SpeechApp.models
+import VideoApp.models
 from EpicAiDesign import settings
 from .decorator import custom_login_required
 from .models import User
@@ -238,6 +243,20 @@ def editProfile(request):
     return render(request, 'editProfile.html', {'user': user})
 
 
+def gallery(request, category=None):
+    images, music, video, poem, speech = None
+    match category:
+        case "Images":
+            images = ImageApp.models.ImageArt.objects.all()
+        case "Music":
+            music = MusicApp.models.MusicArt.objects.all()
+        case "Video":
+            video = VideoApp.models.VideoArt.objects.all()
+        case "Poem":
+            poem = PoemApp.models.PoemArt.objects.all()
+        case "Speech":
+            speech = SpeechApp.models.Speech.objects.all()
 
-def gallery(request):
-    return render(request,'gallery.html')
+    return render(request, 'gallery.html',
+                  {'category': category, 'images': images, 'music': music, 'videos': video, 'poem': poem,
+                   'speech': speech})
