@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, FileField, DateTimeField, BooleanField
+from mongoengine import Document, StringField, FileField, DateTimeField, BooleanField, FloatField
 
 
 class ImageArt(Document):
@@ -6,4 +6,5 @@ class ImageArt(Document):
     image = FileField()
     category = StringField(max_length=100)
     public = BooleanField()
+    rating = FloatField()
     created_at = DateTimeField()

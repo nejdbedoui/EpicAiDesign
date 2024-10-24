@@ -7,4 +7,5 @@ class MusicArt(Document):
     audio = FileField()
     duration = FloatField()
     public = BooleanField()
+    rating = FloatField()
     created_at = DateTimeField()
