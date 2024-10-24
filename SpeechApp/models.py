@@ -3,5 +3,6 @@ from mongoengine import Document, StringField, FileField, DateTimeField, FloatFi
 
 class Speech(Document):
     title = StringField(max_length=200)
-    animation = FileField()
+    speech = FileField()
+    category = StringField(max_length=100)
     created_at = DateTimeField()

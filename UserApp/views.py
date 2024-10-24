@@ -243,20 +243,24 @@ def editProfile(request):
     return render(request, 'editProfile.html', {'user': user})
 
 
-def gallery(request, category=None):
-    images, music, video, poem, speech = None
+def gallery(request):
+    data = None
+    category = request.POST.get('category')
+    sort = request.POST.get('sort')
+    if sort is None:
+        sort = 'created_at'
+    if category is None:
+        category = 'Images'
     match category:
         case "Images":
-            images = ImageApp.models.ImageArt.objects.all()
+            data = ImageApp.models.ImageArt.objects.all().order_by(f"-{sort}")
         case "Music":
-            music = MusicApp.models.MusicArt.objects.all()
+            data = MusicApp.models.MusicArt.objects.all().order_by(f"-{sort}")
         case "Video":
-            video = VideoApp.models.VideoArt.objects.all()
+            data = VideoApp.models.VideoArt.objects.all().order_by(f"-{sort}")
         case "Poem":
-            poem = PoemApp.models.PoemArt.objects.all()
+            data = PoemApp.models.PoemArt.objects.all().order_by(f"-{sort}")
         case "Speech":
-            speech = SpeechApp.models.Speech.objects.all()
-
+            data = SpeechApp.models.Speech.objects.all().order_by(f"-{sort}")
     return render(request, 'gallery.html',
-                  {'category': category, 'images': images, 'music': music, 'videos': video, 'poem': poem,
-                   'speech': speech})
+                  {'category': category, 'data': data, 'sort': sort})

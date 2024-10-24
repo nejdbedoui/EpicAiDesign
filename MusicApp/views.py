@@ -4,9 +4,8 @@ from datetime import datetime
 from io import BytesIO
 
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 import requests
-from django.http import HttpResponse
 from django.conf import settings
 from EpicAiDesign.External_url import *
 from MusicApp.models import MusicArt
@@ -27,53 +26,64 @@ def Generate_music(request):
         category = request.POST.get('category')
         prompt = request.POST.get('prompt')
         action = request.POST.get('action')
+        title = request.POST.get('title')
         payload = {
             'prompts': [category, prompt]
         }
         if action == 'generate':
-            generate(request, category, prompt, payload, default)
+            title = f"{category} - {prompt}"
+            return generate(request, title, category, prompt, payload, default)
         elif action == 'save' and default:
-            save(request, category, prompt, default)
-    return render(request, 'addmusic.html', {'base64_audio': default,'category_default': category, 'category': "Happy – Pharrell"})
+            audio = request.POST.get('audio')
+            return save(request, title, category, prompt, audio)
+    return render(request, 'addmusic.html',
+                  {'base64_audio': default, 'title': "Happy – Pharrell", 'category': category})
 
 
-def generate(request, category, prompt, payload, default):
+def generate(request, title, category, prompt, payload, default):
     response = requests.post(MUSIC_Ai_API_URL, json=payload)
     if response.status_code == 200:
         audio_content = response.content
         encoded_string = base64.b64encode(audio_content).decode('utf-8')
         base64_audio = f"data:audio/mp3;base64,{encoded_string}"
-        default = base64_audio
         return render(request, 'addmusic.html', {
             'base64_audio': base64_audio,
-            'category_default': category,
             'prompt_default': prompt,
-            'category': f"{category} - {prompt}"
+            'category': category,
+            'title': title
         })
     else:
         messages.error(request,
                        f"Error: {response.status_code} - {response.json().get('error', 'Unknown error')}")
         return render(request, 'addmusic.html',
-                      {'base64_audio': default, 'category_default': category, 'prompt_default': prompt,
-                       'category': f"{category} - {prompt}"})
+                      {'base64_audio': default, 'prompt_default': prompt,
+                       'category': f"{category}"})
 
 
-def save(request, category, prompt, default):
+def save(request, title, category, prompt, default):
     audio_data = default.split(',')[1]
     audio_bytes = base64.b64decode(audio_data)
     audio_file = BytesIO(audio_bytes)
     music_art = MusicArt(
-        title=f"{category} - {prompt}",
+        title=title,
         category=category,
         audio=audio_file,
         duration=0.0,
         created_at=datetime.now()
-
     )
     music_art.save()
     messages.success(request, "Your music has been saved successfully!")
     return render(request, 'addmusic.html', {
         'base64_audio': default,
-        'category_default': category,
-        'prompt_default': prompt
+        'category': category,
+        'prompt_default': prompt,
+        'title': title
     })
+
+
+def Details_music(request, id):
+    music = MusicArt.objects(id=id).first()
+    encoded_string = base64.b64encode(music.audio.read()).decode('utf-8')
+    base64_audio = f"data:audio/mp3;base64,{encoded_string}"
+    print(music.audio.read())
+    return render(request, 'detailsmusic.html', {'base64_audio': base64_audio, 'music': music})

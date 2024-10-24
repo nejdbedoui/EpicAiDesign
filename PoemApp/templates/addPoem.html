@@ -4,7 +4,8 @@
 
     <!-- Products Area Start  -->
     <div class="ms-product-area  p-relative">
-
+<form method="POST" enctype="multipart/form-data" action="{% url 'add_poem' %}">
+{% csrf_token %}
         <div class="container">
             <div class="row mb-30">
 
@@ -20,33 +21,45 @@
                             <div class="nav nav-tabs mb-tab-button-style justify-content-xl-end" id="nav-tab"
                                  role="tablist">
                                 <div class="ms-product-stock-item mb-20">
-                                    <button class="nav-link active" id="nav-faq-1-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-faq-1" type="button" role="tab"
-                                            aria-controls="nav-faq-1" aria-selected="true">
-                                        Dramatic
-                                    </button>
-                                </div>
-                                <div class="ms-product-stock-item mb-20">
-                                    <button class="nav-link" id="nav-faq-2-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-faq-2" type="button" role="tab"
-                                            aria-controls="nav-faq-2" aria-selected="false">
-                                        Lyric
-                                    </button>
-                                </div>
-                                <div class="ms-product-stock-item mb-20">
-                                    <button class="nav-link" id="nav-faq-3-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-faq-3" type="button" role="tab"
-                                            aria-controls="nav-faq-3" aria-selected="false">
-                                        Narrative
-                                    </button>
-                                </div>
+                                        <input style="display: none" type="radio" name="category"
+                                               value="Dramatic" id="nav-faq-1"
+                                               {% if category == "Dramatic" %}checked{% endif %}>
+                                        <label class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1"
+                                               data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
+                                               aria-controls="nav-faq-1" aria-selected="true">
+                                            Dramatic
+                                        </label>
+                                    </div>
+                                    <div class="ms-product-stock-item mb-20">
+                                        <input style="display: none" type="radio" name="category" value="Lyric"
+                                               id="nav-faq-2"
+                                               {% if category == "Lyric" %}checked{% endif %}>
+                                        <label class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab"
+                                               data-bs-target="#nav-faq-2" role="tab" aria-controls="nav-faq-2"
+                                               aria-selected="false">
+                                            Lyric
+                                        </label>
+                                    </div>
+                                    <div class="ms-product-stock-item mb-20">
+                                        <input style="display: none" type="radio" name="category" value="Narrative"
+                                               id="nav-faq-3"
+                                               {% if category == "Narrative" %}checked{% endif %}>
+                                        <label class="nav-link" id="nav-faq-3-tab" for="nav-faq-3" data-bs-toggle="tab"
+                                               data-bs-target="#nav-faq-3" role="tab" aria-controls="nav-faq-3"
+                                               aria-selected="false">
+                                            Narrative
+                                        </label>
+                                    </div>
                             </div>
                         </div>
+                         <div class="ms-input-box style-2">
+                                        <input name="title" value="{{ title }}" placeholder="Enter your title here...">
+                                    </div>
                         <div class="ms-product-short-desc mb-25">
                             <div class="col-lg-12">
                                 <div class="ms-input-box style-2">
-                                    <textarea cols="30" rows="10"
-                                              placeholder="A poem about the moon."></textarea>
+                                    <textarea name="prompt"  cols="30" rows="10"
+                                              placeholder="A poem about the moon.">{{ prompt }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -56,34 +69,35 @@
                 <div class="col-lg-6 ">
                     <br><br><br>
                     <div class="">
-
                         <div class="tab-content   align-items-center" id="modalTabContent">
                             <div style="width: 100%;height: 100%" class="ms-input-box style-2">
-                                    <textarea style="width: 100%;height: 100%" cols="30" rows="10"
-                                              placeholder="I am the moon, Queen of Night, a riddle wrapped in borrowed light, a silver spool where dreams unwind, ancient orb as old as time."></textarea>
+                                    <textarea name="text"  style="width: 100%;height: 100%" cols="30" rows="10"
+                                              placeholder="I am the moon, Queen of Night, a riddle wrapped in borrowed light, a silver spool where dreams unwind, ancient orb as old as time.">{{ text }}</textarea>
                             </div>
                         </div>
 
                     </div>
                     <div class="product__modal-form">
                         <div class="product-quantity-cart ms-product-quantity-flex mb-30">
-                            <div class="offcanvas__btn mb-30">
-                                <a class="ms-border-btn" href="services.html"><i class="fa-solid fa-plus"></i>
-                                    Generate</a>
-                            </div>
-                            <div class="banner__form-button">
-                                <button class="ms-white-bg"><i
-                                        class="flaticon-heart"></i> Save
-                                </button>
-                            </div>
-
-
-                        </div>
+                                    <div class="offcanvas__btn mb-30">
+                                        <button type="submit" name="action" value="generate" class="ms-border-btn"><i
+                                                class="fa-solid fa-plus"></i>
+                                            Generate
+                                        </button>
+                                    </div>
+                                    <div class="banner__form-button">
+                                        <button name="action" value="save" class="ms-white-bg"><i
+                                                class="flaticon-heart"></i> Save
+                                        </button>
+                                    </div>
+                                </div>
                     </div>
+
                 </div>
             </div>
 
         </div>
+</form>
     </div>
     <!-- Products Area End  -->
 
