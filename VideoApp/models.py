@@ -7,4 +7,5 @@ class VideoArt(Document):
     video = EmbedVideoField()
     duration = FloatField()
     category = StringField(max_length=100)
+    rating = FloatField()
     created_at = DateTimeField()

@@ -6,4 +6,5 @@ class Speech(Document):
     speech = FileField()
     category = StringField(max_length=100)
     public = BooleanField()
+    rating = FloatField()
     created_at = DateTimeField()

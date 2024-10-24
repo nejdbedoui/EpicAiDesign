@@ -6,4 +6,5 @@ class PoemArt(Document):
     category = StringField(max_length=100)
     text = StringField()
     public = BooleanField()
+    rating = FloatField()
     created_at = DateTimeField()
