@@ -7,21 +7,22 @@
 
         <div class="container">
             <div class="row mb-30">
-                <div class="col-lg-5">
+                <div class="col-lg-12">
+
+
                     <div class="tab-pane fade active show" id="nav1" role="tabpanel"
                          aria-labelledby="nav1-tab">
                         <div class="product__modal-img w-img">
                             <div role="tabpanel"
                                  aria-labelledby="nav-profile-tab" tabindex="0">
                                 <div class="ms-genres-tab2-text ms-genres-tab2-padding ms-bg-2 ms-br-15">
-                                    <h4 class="ms-title3 white-text text-center mb-25">{{ title }}
+                                    <h4 class="ms-title3 white-text text-center mb-25">{{ music.title }}
                                     </h4>
                                     <div class="ms-genres-img fix m-img ms-br-15 mb-60 d-inline-block">
                                         <div id="waveform"></div>
                                     </div>
                                     <div class="ms-border2 mb-30">
-                                        <h4 class="ms-title3 white-text text-center mb-30">Demo
-                                            Tracks
+                                        <h4 class="ms-title3 white-text text-center mb-30">{{ music.category }}
                                         </h4>
                                     </div>
                                     <div class="ms-genres-audio">
@@ -77,7 +78,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <br>
+
                                                         <!-- Time and Progress -->
                                                     </div>
 
@@ -234,90 +235,10 @@
                             <img src="{% static 'assets/img/shop/product-04.png' %}" alt="product image">
                         </div>
                     </div>
+
+
                 </div>
-                <div class="col-lg-6">
-                    <div class="ms-product-modal-content mb-60">
-                        <form method="POST" enctype="multipart/form-data" action="{% url 'music' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="audio" value="{{ base64_audio }}" id="audioInput">
-                            <div class="d-flex align-items-center justify-content-between mb-35 mr-40"></div>
-                            <h2 class="ms-product-title2 mb-30">
-                                <a href="addmusic.html">Create your music Here </a>
-                            </h2>
-                            <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
-                                <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
-                                    <div class="ms-product-stock-item mb-20">
-                                        <input style="display: none" type="radio" name="category"
-                                               value="Classical music" id="nav-faq-1"
-                                               {% if category == "Classical music" %}checked{% endif %}>
-                                        <label class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1"
-                                               data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
-                                               aria-controls="nav-faq-1" aria-selected="true">
-                                            Classical
-                                        </label>
-                                    </div>
-                                    <div class="ms-product-stock-item mb-20">
-                                        <input style="display: none" type="radio" name="category" value="Pop Music"
-                                               id="nav-faq-2"
-                                               {% if category == "Pop Music" %}checked{% endif %}>
-                                        <label class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab"
-                                               data-bs-target="#nav-faq-2" role="tab" aria-controls="nav-faq-2"
-                                               aria-selected="false">
-                                            Pop
-                                        </label>
-                                    </div>
-                                    <div class="ms-product-stock-item mb-20">
-                                        <input style="display: none" type="radio" name="category" value="Rock Music"
-                                               id="nav-faq-3"
-                                               {% if category == "Rock Music" %}checked{% endif %}>
-                                        <label class="nav-link" id="nav-faq-3-tab" for="nav-faq-3" data-bs-toggle="tab"
-                                               data-bs-target="#nav-faq-3" role="tab" aria-controls="nav-faq-3"
-                                               aria-selected="false">
-                                            Rock
-                                        </label>
-                                    </div>
-                                    <div class="ms-product-stock-item mb-20">
-                                        <input style="display: none" type="radio" name="category" value="Hip-hop Music"
-                                               id="nav-faq-4"
-                                               {% if category == "Hip-hop Music" %}checked{% endif %}>
-                                        <label class="nav-link" id="nav-faq-4-tab" for="nav-faq-4" data-bs-toggle="tab"
-                                               data-bs-target="#nav-faq-4" role="tab" aria-controls="nav-faq-4"
-                                               aria-selected="false">
-                                            Hip-hop
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
 
-                                    <div class="ms-input-box style-2">
-                                        <input name="title" value='{{ title }}' placeholder="Enter your title here...">
-                                    </div>
-
-
-                                    <div class="ms-input-box style-2">
-                                        <textarea cols="30" rows="10" name="prompt"
-                                                  placeholder="Enter your prompt here...">{{ prompt_default }}</textarea>
-                                    </div>
-
-                            <div class="product__modal-form">
-                                <div class="product-quantity-cart ms-product-quantity-flex mb-30">
-                                    <div class="offcanvas__btn mb-30">
-                                        <button type="submit" name="action" value="generate" class="ms-border-btn"><i
-                                                class="fa-solid fa-plus"></i>
-                                            Generate
-                                        </button>
-                                    </div>
-                                    <div class="banner__form-button">
-                                        <button name="action" value="save" class="ms-white-bg"><i
-                                                class="flaticon-heart"></i> Save
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
 
             </div>
 

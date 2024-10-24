@@ -6,4 +6,5 @@ class VideoArt(Document):
     title = StringField(max_length=200)
     video = EmbedVideoField()
     duration = FloatField()
+    category = StringField(max_length=100)
     created_at = DateTimeField()

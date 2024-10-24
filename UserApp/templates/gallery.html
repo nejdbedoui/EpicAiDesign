@@ -5,372 +5,207 @@
 
     <!-- Products Area Start  -->
     <div class="ms-product-area  p-relative">
-
         <div class="container">
             <div class="ms-border2 pb-10 mb-65">
+            <form action="{% url 'Gallery' %}" method="POST" id="categoryForm">
+                 {% csrf_token %}
+                <input hidden="hidden" name="category" value={{ category }}>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="ms-product-stock sku  d-inline-block ">
                             <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
-                                <div class="ms-product-stock-item mb-20">
-                                    <input style="display: none" type="radio" name="category" value="Classical music"
-                                           id="nav-faq-1"
-                                           {% if category_default == "Images" %}checked{% endif %}>
-                                    <label  class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1"
-                                           data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
-                                           aria-controls="nav-faq-1"
-                                           {% if category == "Images" %}aria-selected="true"{% endif %}>
-                                       <a href="{% url 'Gallerys' category="Images" %}">Images</a>
-                                    </label>
-                                </div>
-                                <div class="ms-product-stock-item mb-20">
-                                    <input style="display: none" type="radio" name="category" value="Pop Music"
-                                           id="nav-faq-2" {% if category == "Music" %}checked{% endif %}>
-                                    <label type="button" class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab"
-                                           data-bs-target="#nav-faq-2" role="tab" aria-controls="nav-faq-2"
-                                           {% if category == "Music" %}aria-selected="true"{% endif %}>
-                                         <a href="{% url 'Gallerys' category="Music" %}">Music</a>
-                                    </label>
-                                </div>
-                                <div class="ms-product-stock-item mb-20">
-                                    <input style="display: none" type="radio" name="category" value="Rock Music"
-                                           id="nav-faq-3" {% if category == "Poem" %}checked{% endif %}>
-                                    <label class="nav-link" id="nav-faq-3-tab" for="nav-faq-3" data-bs-toggle="tab"
-                                           data-bs-target="#nav-faq-3" role="tab" aria-controls="nav-faq-3"
-                                           {% if category == "Poem" %}aria-selected="true"{% endif %}>
-                                        <a href="{% url 'Gallerys' category="Poem" %}">Poem</a>
-                                    </label>
-                                </div>
-                                <div class="ms-product-stock-item mb-20">
-                                    <input style="display: none" type="radio" name="category" value="Hip-hop Music"
-                                           id="nav-faq-4"
-                                           {% if category == "Speech" %}checked{% endif %}>
-                                    <label class="nav-link" id="nav-faq-4-tab" for="nav-faq-4" data-bs-toggle="tab"
-                                           data-bs-target="#nav-faq-4" role="tab" aria-controls="nav-faq-4"
-                                           {% if category == "Speech" %}aria-selected="true"{% endif %}>
-                                         <a href="{% url 'Gallerys' category="Speech" %}">Speech</a>
-                                    </label>
-                                </div>
-                                <div class="ms-product-stock-item mb-20">
-                                    <input style="display: none" type="radio" name="category" value="Hip-hop Music"
-                                           id="nav-faq-5"
-                                           {% if category == "Video" %}checked{% endif %}>
-                                    <label class="nav-link" id="nav-faq-5-tab" for="nav-faq-5" data-bs-toggle="tab"
-                                           data-bs-target="#nav-faq-5" role="tab" aria-controls="nav-faq-5"
-                                           {% if category == "Video" %}aria-selected="true"{% endif %}>
-                                        <a href="{% url 'Gallerys' category="Video" %}">Video</a>
-                                    </label>
-                                </div>
-                                <div class="ms-product-stock-item mb-20">
-                                    <input style="display: none" type="radio" name="category" value="Hip-hop Music"
-                                           id="nav-faq-6"
-                                           {% if category == "Reel" %}checked{% endif %}>
-                                    <label class="nav-link" id="nav-faq-6-tab" for="nav-faq-6" data-bs-toggle="tab"
-                                           data-bs-target="#nav-faq-6" role="tab" aria-controls="nav-faq-6"
-                                           {% if category == "Reel" %}aria-selected="true"{% endif %}>
-                                        <a href="{% url 'Gallerys' category="Reel" %}">Reel</a>
-                                    </label>
-                                </div>
+                                    <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Images" class="nav-link"
+                                                    id="nav-faq-1-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
+                                                    aria-controls="nav-faq-1"
+                                                    aria-selected="false" data-category="Images">
+                                                Images
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Music" class="nav-link"
+                                                    id="nav-faq-2-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-2" role="tab"
+                                                    aria-controls="nav-faq-2"
+                                                    aria-selected="false" data-category="Music">
+                                                Music
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Poem" class="nav-link"
+                                                    id="nav-faq-3-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-3" role="tab"
+                                                    aria-controls="nav-faq-3"
+                                                    aria-selected="false" data-category="Poem">
+                                                Poem
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Speech" class="nav-link"
+                                                    id="nav-faq-4-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-4" role="tab"
+                                                    aria-controls="nav-faq-4"
+                                                    aria-selected="false" data-category="Speech">
+                                                Speech
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Video" class="nav-link"
+                                                    id="nav-faq-5-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-5" role="tab"
+                                                    aria-controls="nav-faq-5"
+                                                    aria-selected="false" data-category="Video">
+                                                Video
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Reel" class="nav-link"
+                                                    id="nav-faq-6-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-6" role="tab"
+                                                    aria-controls="nav-faq-6"
+                                                    aria-selected="false" data-category="Reel">
+                                                Reel
+                                            </button>
+                                        </div>
+
+                                    </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="ms-product-wrap ms-product-grid mb-65">
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-01.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Denon DJ LC6000 Prime
-                        Perfor
-                        mance Expansion Controller</a></h3>
-                    <span class="ms-product-price ms-text2">$899.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <span class="ms-discount">25% off</span>
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-02.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Prime Go Rechargeable
-                        DJ
-                        Console</a></h3>
-                    <span class="ms-product-price ms-text2">$1,299.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-03.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Chauvet B-550 Bubble
-                        King
-                        Bubble Machine</a></h3>
-                    <span class="ms-product-price ms-text2">$1999.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-04.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Numark Scratch
-                        2-Channel Dj
-                        Mixer for Serato Dj Pro</a></h3>
-                    <span class="ms-product-price ms-text2">$1550.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-05.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">ADJ Jolt 300
-                        High-Powered
-                        RGBW Strobe Fixture</a></h3>
-                    <span class="ms-product-price ms-text2">$299.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-06.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">ADJ Mirror Ball Motor
-                        Prime
-                        Perfor mance Expansion Light</a></h3>
-                    <span class="ms-product-price ms-text2">$340.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-07.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Denon DJ LC6000 Prime
-                        Perfor
-                        mance Expansion Controller</a></h3>
-                    <span class="ms-product-price ms-text2">$440.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-02.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">ADJ Dotz TPar LED
-                        Light Fixture
-                        Perfor mance Controller</a></h3>
-                    <span class="ms-product-price ms-text2">$550.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-09.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Mono EFX FlyBy
-                        Modular Back
-                        pack with Breakaway</a></h3>
-                    <span class="ms-product-price ms-text2">$349.99</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-10.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Audio-Technica
-                        AT-LP60XBT
-                        Fully Automatic Wireless Belty</a></h3>
-                    <span class="ms-product-price ms-text2">$899.00</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-11.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">Behringer VMX100USB
-                        Profe
-                        ssional 2-Channel DJ Mixer</a></h3>
-                    <span class="ms-product-price ms-text2">$154.99</span>
-                </div>
-                <div class="ms-product-item">
-                    <div class="ms-product-img p-relative mb-20">
-                        <a href="shop-details.html"><img src="{% static 'assets/img/shop/product-12.png' %}"
-                                                         alt="product img"></a>
-                        <div class="ms-product-links">
-                            <ul>
-                                <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
-                                </li>
-                                <li><a href="cart.html"><i class="flaticon-trolley-cart"></i></a></li>
-                                <li><a href="wishlist.html"><i class="flaticon-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="ms-product-title mb-20"><a href="shop-details.html">ADJ Starburst
-                        6-Colour LED
-                        Sphere Lighting Effect</a></h3>
-                    <span class="ms-product-price ms-text2">$164.99</span>
-                </div>
-            </div>
-            <div class="basic-pagination ms-border5">
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-long-arrow-left"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">01</a>
-                        </li>
-                        <li>
-                            <span class="current">02</span>
-                        </li>
-                        <li>
-                            <a href="#">03</a>
-                        </li>
-                        <li>
-                            <a href="#">...</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-long-arrow-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Products Area End  -->
+                    <div class="col-md-4">
+                                <div class="ms-genres-filter ms-genres-border ms-genres-select text-md-end mb-10">
+                                    <span class="ms-genres-text mr-15">Sort by :</span>
+                                      <select name="sort" class="ms-nice-select float-none" form="categoryForm" onchange="this.form.submit()">
+                                        <option value="created_at" {% if sort == 'created_at' %}selected{% endif %}>Date</option>
+                                        <option value="category" {% if sort == 'category' %}selected{% endif %}>Category</option>
+                                        <option value="title" {% if sort == 'title' %}selected{% endif %}>Name</option>
+                                    </select>
+                                </div>
+                            </div>
 
-    <!-- Partner Area Start Here  -->
-    <div class="ms-partner-area fix pb-130">
-        <div class="container">
-            <div class="swiper-container ms-partner-active">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-01.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-02.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-03.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-05.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-01.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-02.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-03.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-05.png' %}" alt="partner image">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                </div>
+            </form>
+                <div class="ms-product-wrap ms-product-grid mb-65">
+                 {% for item in data %}
+                    {% if category == 'Images' %}
+                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                    {% elif category == 'Music' %}
+                        {% include 'Music_cards.html' with item=item image='assets/img/Images/sound.png' %}
+                    {% elif category == 'Video' %}
+                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                    {% elif category == 'Poem' %}
+                        {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
+                    {% elif category == 'Speech' %}
+                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                    {% endif %}
+                 {% endfor %}
+                </div>
+                <div class="basic-pagination ms-border5">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-long-arrow-left"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="current" >01</a>
+                            </li>
+                            <li>
+                                <a href="#">02</a>
+                            </li>
+                            <li>
+                                <a href="#">03</a>
+                            </li>
+                            <li>
+                                <a href="#">...</a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-long-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Products Area End  -->
+
+        <!-- Partner Area Start Here  -->
+        <div class="ms-partner-area fix pb-130">
+            <div class="container">
+                <div class="swiper-container ms-partner-active">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-01.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-02.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-03.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-05.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-01.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-02.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-03.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-05.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Partner Area End Here  -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Get the current category from a Django template variable passed as a JS variable
+                var category = "{{ category }}";  // Assuming category is passed in from the template context
+
+                // Get all labels with the class `nav-link`
+                var labels = document.querySelectorAll('.nav-link');
+
+                // Loop through each label and check if the data-category matches the currentCategory
+                labels.forEach(function (label) {
+                    if (label.getAttribute('data-category') === category) {
+                        label.setAttribute('aria-selected', 'true');
+                        label.classList.add('active');  // Add active class if you need
+                    } else {
+                        label.setAttribute('aria-selected', 'false');
+                        label.classList.remove('active');
+                    }
+                });
+            });
+
+        </script>
     </div>
-    <!-- Partner Area End Here  -->
 {% endblock %}
