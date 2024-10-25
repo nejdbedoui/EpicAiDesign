@@ -1,0 +1,211 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+
+    <!-- Products Area Start  -->
+    <div class="ms-product-area  p-relative">
+        <div class="container">
+            <div class="ms-border2 pb-10 mb-65">
+            <form action="{% url 'Gallery' %}" method="POST" id="categoryForm">
+                 {% csrf_token %}
+                <input hidden="hidden" name="category" value={{ category }}>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="ms-product-stock sku  d-inline-block ">
+                            <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
+                                    <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Images" class="nav-link"
+                                                    id="nav-faq-1-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
+                                                    aria-controls="nav-faq-1"
+                                                    aria-selected="false" data-category="Images">
+                                                Images
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Music" class="nav-link"
+                                                    id="nav-faq-2-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-2" role="tab"
+                                                    aria-controls="nav-faq-2"
+                                                    aria-selected="false" data-category="Music">
+                                                Music
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Poem" class="nav-link"
+                                                    id="nav-faq-3-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-3" role="tab"
+                                                    aria-controls="nav-faq-3"
+                                                    aria-selected="false" data-category="Poem">
+                                                Poem
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Speech" class="nav-link"
+                                                    id="nav-faq-4-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-4" role="tab"
+                                                    aria-controls="nav-faq-4"
+                                                    aria-selected="false" data-category="Speech">
+                                                Speech
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Video" class="nav-link"
+                                                    id="nav-faq-5-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-5" role="tab"
+                                                    aria-controls="nav-faq-5"
+                                                    aria-selected="false" data-category="Video">
+                                                Video
+                                            </button>
+                                        </div>
+
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Reel" class="nav-link"
+                                                    id="nav-faq-6-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-6" role="tab"
+                                                    aria-controls="nav-faq-6"
+                                                    aria-selected="false" data-category="Reel">
+                                                Reel
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                                <div class="ms-genres-filter ms-genres-border ms-genres-select text-md-end mb-10">
+                                    <span class="ms-genres-text mr-15">Sort by :</span>
+                                      <select name="sort" class="ms-nice-select float-none" form="categoryForm" onchange="this.form.submit()">
+                                        <option value="created_at" {% if sort == 'created_at' %}selected{% endif %}>Date</option>
+                                        <option value="category" {% if sort == 'category' %}selected{% endif %}>Category</option>
+                                        <option value="title" {% if sort == 'title' %}selected{% endif %}>Name</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                </div>
+            </form>
+                <div class="ms-product-wrap ms-product-grid mb-65">
+                 {% for item in data %}
+                    {% if category == 'Images' %}
+                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                    {% elif category == 'Music' %}
+                        {% include 'Music_cards.html' with item=item image='assets/img/Images/sound.png' %}
+                    {% elif category == 'Video' %}
+                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                    {% elif category == 'Poem' %}
+                        {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
+                    {% elif category == 'Speech' %}
+                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                    {% endif %}
+                 {% endfor %}
+                </div>
+                <div class="basic-pagination ms-border5">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-long-arrow-left"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="current" >01</a>
+                            </li>
+                            <li>
+                                <a href="#">02</a>
+                            </li>
+                            <li>
+                                <a href="#">03</a>
+                            </li>
+                            <li>
+                                <a href="#">...</a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-long-arrow-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Products Area End  -->
+
+        <!-- Partner Area Start Here  -->
+        <div class="ms-partner-area fix pb-130">
+            <div class="container">
+                <div class="swiper-container ms-partner-active">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-01.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-02.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-03.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-05.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-01.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-02.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-03.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-05.png' %}" alt="partner image">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="{% static 'assets/img/partner/partner-04.png' %}" alt="partner image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Partner Area End Here  -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Get the current category from a Django template variable passed as a JS variable
+                var category = "{{ category }}";  // Assuming category is passed in from the template context
+
+                // Get all labels with the class `nav-link`
+                var labels = document.querySelectorAll('.nav-link');
+
+                // Loop through each label and check if the data-category matches the currentCategory
+                labels.forEach(function (label) {
+                    if (label.getAttribute('data-category') === category) {
+                        label.setAttribute('aria-selected', 'true');
+                        label.classList.add('active');  // Add active class if you need
+                    } else {
+                        label.setAttribute('aria-selected', 'false');
+                        label.classList.remove('active');
+                    }
+                });
+            });
+
+        </script>
+    </div>
+{% endblock %}

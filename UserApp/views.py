@@ -9,6 +9,11 @@ from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 
+import ImageApp.models
+import MusicApp.models
+import PoemApp.models
+import SpeechApp.models
+import VideoApp.models
 from EpicAiDesign import settings
 from .decorator import custom_login_required
 from .models import User
@@ -236,3 +241,26 @@ def editProfile(request):
         else:
             messages.error(request, "Invalid password. Please enter the correct password to update your profile.")
     return render(request, 'editProfile.html', {'user': user})
+
+
+def gallery(request):
+    data = None
+    category = request.POST.get('category')
+    sort = request.POST.get('sort')
+    if sort is None:
+        sort = 'created_at'
+    if category is None:
+        category = 'Images'
+    match category:
+        case "Images":
+            data = ImageApp.models.ImageArt.objects.all().order_by(f"-{sort}")
+        case "Music":
+            data = MusicApp.models.MusicArt.objects.all().order_by(f"-{sort}")
+        case "Video":
+            data = VideoApp.models.VideoArt.objects.all().order_by(f"-{sort}")
+        case "Poem":
+            data = PoemApp.models.PoemArt.objects.all().order_by(f"-{sort}")
+        case "Speech":
+            data = SpeechApp.models.Speech.objects.all().order_by(f"-{sort}")
+    return render(request, 'gallery.html',
+                  {'category': category, 'data': data, 'sort': sort})
