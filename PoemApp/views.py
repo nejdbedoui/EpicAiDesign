@@ -2,12 +2,10 @@ from datetime import datetime
 
 from django.shortcuts import render
 from django.contrib import messages
+
+from EpicAiDesign.External_url import MUSIC_Ai_API_URL
 from PoemApp.models import PoemArt
 import requests
-from EpicAiDesign.External_url import poeme_Ai_API_URL
-
-
-
 
 def Add_poem(request):
     category = "musique"
@@ -27,17 +25,9 @@ def Add_poem(request):
 
 
 def generate(request, title, category, prompt):
-    payload = {
-        "prompt": prompt,
-        "category": category,
-        "max_length": 200  # You can change this value as needed
-    }
-    response = requests.post(poeme_Ai_API_URL, json=payload)
-    
-    data = response.json()
-    text = data.get('poem', 'No poem generated.')
+    response = requests.post(MUSIC_Ai_API_URL, json=prompt)
 
-
+    text = response.content
     return render(request, 'addPoem.html',
                   {'title': title, 'category': category, 'prompt': prompt, 'text': text})
 

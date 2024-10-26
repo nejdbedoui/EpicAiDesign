@@ -1,0 +1,50 @@
+{% load static %}
+
+<div style="max-width: 50%" class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="ms-genres-model-content">
+                <div class="ms-genres-top text-center mb-50">
+                    <button type="button" class="ms-model-close ms-close-btn"><i
+                            class="fa-sharp fa-solid fa-xmark"></i></button>
+                    <h2 class="ms-title2 white-text mb-20">Add track to Album  </h2>
+                    <p class="ms-text2">{{ item.title }}</p>
+                </div>
+
+                <form  method="POST" action="{% url 'add_to_Album' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="ms-genres-enquire-form">
+                    <div class="ms-input-box">
+                        <label>Track title</label>
+                        <input disabled name="title" type="text" value='{{ item.title }}' placeholder="Album Title">
+                        <input hidden="hidden" name="music_art_id" type="text" value='{{ item.id }}' placeholder="Album Title">
+                    </div>
+                        <div class="ms-input-box">
+                                            <label>Album</label>
+                                            <select class="ms-nice-select" name="selected_album">
+                                                {% for album in albums %}
+                                                <option value="{{ album.id }}">{{ album.title }}</option>
+                                               {% endfor %}
+                                            </select>
+                                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6">
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="ms-submit-btn text-lg-end mb-10">
+                                            <button type="submit" class="unfill__btn">Add Album</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-from mongoengine import Document, StringField, FileField, DateTimeField, FloatField, BooleanField
+from mongoengine import Document, StringField, FileField, DateTimeField, FloatField, BooleanField, ReferenceField
+
+import UserApp.models
 
 
 class MusicArt(Document):
@@ -9,3 +11,4 @@ class MusicArt(Document):
     public = BooleanField()
     rating = FloatField()
     created_at = DateTimeField()
+    user = ReferenceField(UserApp.models.User)

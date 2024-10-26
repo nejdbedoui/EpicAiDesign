@@ -1,10 +1,13 @@
-from mongoengine import Document, StringField, FileField, DateTimeField, BooleanField, FloatField
+from mongoengine import Document, StringField, ImageField, DateTimeField, BooleanField, FloatField
 
 
 class ImageArt(Document):
     title = StringField(max_length=200)
-    image = FileField()
+    image = ImageField()
     category = StringField(max_length=100)
     public = BooleanField()
     rating = FloatField()
     created_at = DateTimeField()
+
+    def __str__(self):
+        return self.title

@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 
+import AlbumApp.models
 import ImageApp.models
 import MusicApp.models
 import PoemApp.models
@@ -251,16 +252,31 @@ def gallery(request):
         sort = 'created_at'
     if category is None:
         category = 'Images'
+    albums = None
     match category:
         case "Images":
             data = ImageApp.models.ImageArt.objects.all().order_by(f"-{sort}")
         case "Music":
             data = MusicApp.models.MusicArt.objects.all().order_by(f"-{sort}")
+            albums = AlbumApp.models.MusicAlbum.objects.all()
         case "Video":
             data = VideoApp.models.VideoArt.objects.all().order_by(f"-{sort}")
         case "Poem":
             data = PoemApp.models.PoemArt.objects.all().order_by(f"-{sort}")
         case "Speech":
             data = SpeechApp.models.Speech.objects.all().order_by(f"-{sort}")
+    # match category:
+    #     case "Images":
+    #         data = ImageApp.models.ImageArt.objects(user=user).all().order_by(f"-{sort}")
+    #     case "Music":
+    #         data = MusicApp.models.MusicArt.objects(user=user).all().order_by(f"-{sort}")
+    #         albums = AlbumApp.models.MusicAlbum.objects(user=user).all()
+    #     case "Video":
+    #         data = VideoApp.models.VideoArt.objects(user=user).all().order_by(f"-{sort}")
+    #     case "Poem":
+    #         data = PoemApp.models.PoemArt.objects(user=user).all().order_by(f"-{sort}")
+    #     case "Speech":
+    #         data = SpeechApp.models.Speech.objects(user=user).all().order_by(f"-{sort}")
     return render(request, 'gallery.html',
-                  {'category': category, 'data': data, 'sort': sort})
+                  {'category': category, 'data': data, 'sort': sort, 'albums': albums})
+
