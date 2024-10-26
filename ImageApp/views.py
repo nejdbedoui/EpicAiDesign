@@ -14,7 +14,7 @@ from ImageApp.models import ImageArt
 
 def Generate_image(request):
     category = "Draw Image"
-    images = ImageArt.objects.all()  # Récupérer toutes les images de la base de données
+    images = ImageArt.objects.all()
     if request.method == 'POST':
         category = request.POST.get('category')
         prompt = request.POST.get('prompt', '').strip() or "a sleek Mercedes-Benz speeding on a winding road, with blurred scenery in the background"
@@ -29,8 +29,8 @@ def Generate_image(request):
             title = f"{category} - {prompt}"
             return generate(request, title, category, prompt, payload)
         elif action == 'save':
-            image_data = request.POST.get('image_data')
-            return save(request, title, category, prompt, image_data, images)  # Passer les images à la méthode save
+            base64_image = request.POST.get('base64_image')
+            return save(request, title, category, prompt, base64_image, images)  # Passer les images à la méthode save
 
     return render(request, 'addimage.html', {
         'title': "Real Image",
@@ -64,8 +64,8 @@ def generate(request, title, category, prompt, payload):
         })
 
 
-def save(request, title, category, prompt, image_data, images):
-    if image_data is None:
+def save(request, title, category, prompt, base64_image, images):
+    if base64_image is None:
         messages.error(request, "No image data found. Please generate an image first.")
         return render(request, 'addimage.html', {
             'category': category,
@@ -74,7 +74,7 @@ def save(request, title, category, prompt, image_data, images):
             'images': images
         })
 
-    image_data = image_data.split(',')[0]  # Enlever la partie 'data:image/png;base64,'
+    image_data = base64_image.split(',')[1]
     image_bytes = base64.b64decode(image_data)
     image_file = BytesIO(image_bytes)
 
@@ -82,9 +82,9 @@ def save(request, title, category, prompt, image_data, images):
     image_art = ImageArt(
         title=title,
         category=category,
-        image=image_file,
         created_at=datetime.now()
     )
+    image_art.image.put(image_file, content_type="image/png")
     image_art.save()
 
     messages.success(request, "Your image has been saved successfully!")
@@ -94,5 +94,6 @@ def save(request, title, category, prompt, image_data, images):
         'category': category,
         'prompt_default': prompt,
         'title': title,
+        'base64_image':base64_image,
         'images': images  # Passer toutes les images à la template
     })
