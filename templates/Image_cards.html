@@ -2,7 +2,7 @@
  {% load image_to_base64_filter %}
 <div style="max-width: 300px" class="ms-product-item">
                         <div class="ms-product-img p-relative mb-20">
-                            <a href="shop-details.html"> <img src="{{ item.image|file_to_base64_image }}" alt="{{ item.title }}"> </a>
+                            <a href="shop-details.html"> <img src="{{ item.image|to_base64 }}" alt="{{ item.title }}"> </a>
                             <div class="ms-product-links">
                                 <ul>
                                     <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>

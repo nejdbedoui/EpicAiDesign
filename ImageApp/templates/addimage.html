@@ -10,34 +10,7 @@
                 <div class="col-lg-6">
                     <div class="product__modal-box product-dbox-grid mb-60">
                         <ul class="nav nav-tabs border-0" id="modalTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav1" type="button" role="tab" aria-controls="nav1"
-                                        aria-selected="false">
-                                    <img src="{% static 'assets/img/shop/product-01.png' %}" alt="product image">
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="nav2-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav2" type="button" role="tab" aria-controls="nav2"
-                                        aria-selected="false">
-                                    <img src="{% static 'assets/img/shop/product-02.png' %}" alt="product image">
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="nav3-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav3" type="button" role="tab" aria-controls="nav3"
-                                        aria-selected="false">
-                                    <img src="{% static 'assets/img/shop/product-03.png' %}" alt="product image">
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="nav4-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav4" type="button" role="tab" aria-controls="nav4"
-                                        aria-selected="true">
-                                    <img src="{% static 'assets/img/shop/product-04.png' %}" alt="product image">
-                                </button>
-                            </li>
+
                         </ul>
                         <div class="tab-content br-15 ms-bg-2 d-flex align-items-center" id="modalTabContent">
                             <div class="tab-pane fade active show" id="nav1" role="tabpanel"
@@ -46,25 +19,25 @@
                                     {% if base64_image %}
                                         <img src="{{ base64_image }}" alt="Generated product image">
                                     {% else %}
-                                        <img src="{% static 'assets/img/shop/product-01.png' %}" alt="product image">
+                                        <img src="{% static 'assets/img/shop/merc-01.png' %}" alt="product image">
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
-                                <div class="product__modal-img w-img">
-                                    <img src="{% static '/images/generated_image_75.png' %}" alt="product image">
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">
-                                <div class="product__modal-img w-img">
-                                    <img src="{% static 'assets/img/shop/product-03.png' %}" alt="product image">
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab">
-                                <div class="product__modal-img w-img">
-                                    <img src="{% static 'assets/img/shop/product-04.png' %}" alt="product image">
-                                </div>
-                            </div>
+{#                            <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">#}
+{#                                <div class="product__modal-img w-img">#}
+{#                                    <img src="{% static '/images/generated_image_75.png' %}" alt="product image">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">#}
+{#                                <div class="product__modal-img w-img">#}
+{#                                    <img src="{% static 'assets/img/shop/product-03.png' %}" alt="product image">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab">#}
+{#                                <div class="product__modal-img w-img">#}
+{#                                    <img src="{% static 'assets/img/shop/product-04.png' %}" alt="product image">#}
+{#                                </div>#}
+{#                            </div>#}
                         </div>
                     </div>
                 </div>
@@ -124,8 +97,7 @@
                             <div class="ms-input-box style-2">
                                 <input name="title" value="{{ title }}" placeholder="Enter your title here...">
                             </div>
-                            <input type="hidden" name="image_data" id="image_data" value="">
-
+                                 <input type="hidden" name="base64_image" id="image_data" value="{{ base64_image }}">
                             <div class="ms-input-box style-2">
     <textarea cols="30" rows="10" name="prompt"
               placeholder="Enter your prompt here...">{{ prompt_default }}</textarea>
@@ -149,16 +121,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="saved-images mt-4">
-                        <h3>Saved Images</h3>
-                        {% for image in images %}
-                            <div class="image-item">
-                                <h4>{{ image.title }}</h4>
-                                <img src="{{ image.image.url }}" alt="{{ image.title }}"
-                                     style="width: 100%; max-width: 300px;">
-                            </div>
-                        {% endfor %}
-                    </div>
+
                 </div>
             </div>
 
@@ -168,12 +131,3 @@
 
 {% endblock %}
 
-<script>
-    // Remplir le champ caché avec les données de l'image générée
-    const imageElement = document.getElementById('generated_image');
-    const hiddenInput = document.getElementById('image_data');
-
-    if (imageElement) {
-        hiddenInput.value = imageElement.src;  // Remplir le champ caché avec les données de l'image
-    }
-</script>
