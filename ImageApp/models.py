@@ -8,3 +8,6 @@ class ImageArt(Document):
     public = BooleanField()
     rating = FloatField()
     created_at = DateTimeField()
+
+    def __str__(self):
+        return self.title
