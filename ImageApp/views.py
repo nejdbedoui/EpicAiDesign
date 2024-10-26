@@ -2,6 +2,7 @@ import base64
 import os
 from datetime import datetime
 from io import BytesIO
+from django.http import HttpResponseRedirect
 
 from django.contrib import messages
 from django.shortcuts import render
@@ -16,7 +17,7 @@ def Generate_image(request):
     images = ImageArt.objects.all()  # Récupérer toutes les images de la base de données
     if request.method == 'POST':
         category = request.POST.get('category')
-        prompt = request.POST.get('prompt', '').strip() or "draw a cat"
+        prompt = request.POST.get('prompt', '').strip() or "a sleek Mercedes-Benz speeding on a winding road, with blurred scenery in the background"
         action = request.POST.get('action')
         title = request.POST.get('title')
 
@@ -32,9 +33,9 @@ def Generate_image(request):
             return save(request, title, category, prompt, image_data, images)  # Passer les images à la méthode save
 
     return render(request, 'addimage.html', {
-        'title': "Artistic Vision",
+        'title': "Real Image",
         'category': category,
-        'prompt_default': "Draw Art design for A Cat",
+        'prompt_default': "a sleek Mercedes-Benz speeding on a winding road, with blurred scenery in the background",
         'images': images  # Passer toutes les images à la template
     })
 
