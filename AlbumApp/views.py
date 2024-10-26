@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from bson import ObjectId
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
@@ -59,4 +60,24 @@ def add_to_Album(request):
 def my_albums(request):
     user = UserApp.models.User.objects.get(email=request.session['user_email'])
     albums = MusicAlbum.objects(user=user).all().order_by('created_at')
+    if request.method == 'POST':
+        album_id  = request.POST.get('id_album')
+        album_to_delete = MusicAlbum.objects.get(id=album_id)
+        album_to_delete.delete()
     return render(request, 'my_albums.html', {'albums': albums})
+
+
+def album_tracks(request, id):
+    album = MusicAlbum.objects(id=id).first()
+    if request.method == 'POST':
+        id_music = request.POST.get('id_music')
+        print('started')
+        print(id_music)
+        music = MusicApp.models.MusicArt.objects(id=id_music).first()
+        if music in album.tracks:
+            album.tracks.remove(music)
+            print('removed')
+            album.save()
+    return render(request, 'album_tracks.html', {'album': album})
+
+

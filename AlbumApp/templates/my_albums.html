@@ -31,19 +31,24 @@
                                         <tbody>
                                          {% for album in albums %}
                                                   <tr>
-
-                                                <td class="ms-product-name-flex"><a href="shop-details.html">
+                                                <td class="ms-product-name-flex"><a href="{% url 'album_tracks' album.id %}">
                                                         <img src="{{ album.cover|to_base64 }}" alt="product">
                                                         <h6 class="ms-product-title">{{ album.title }}</h6>
                                                     </a>
                                                 </td>
-                                                <td><a  class="ms-table-action text-warning" href="#"><i class="fa-light fa-music "></i> {{ album.tracks|length }}</a></td>
-                                                <td><a  class="ms-table-action text-danger" href="#"><i class="fa-regular fa-star"></i> {{ album.rating }}/5</a></td>
+                                                <td><a  class="ms-table-action text-warning"><i class="fa-light fa-music "></i> {{ album.tracks|length }}</a></td>
+                                                <td><a  class="ms-table-action text-danger" ><i class="fa-regular fa-star"></i> {{ album.rating }}/5</a></td>
                                                 <td>
-                                                    <a class="ms-table-action " href="#"><i
-                                                            class="flaticon-heart"></i></a>
 
-                                                    <a class="ms-table-action" href="#"><i class="flaticon-bin"></i></a>
+
+
+                                                     <form method="POST" >
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="id_album" value="{{ album.id }}">
+                                                        <button type="submit" class="ms-table-action">
+                                                                   <i class="flaticon-bin"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                                 {% endfor %}
