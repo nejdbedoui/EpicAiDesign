@@ -2,8 +2,10 @@ from datetime import datetime
 
 from django.shortcuts import render
 from django.contrib import messages
-from PoemApp.models import PoemArt
 
+from EpicAiDesign.External_url import MUSIC_Ai_API_URL
+from PoemApp.models import PoemArt
+import requests
 
 def Add_poem(request):
     category = "Dramatic"
@@ -23,7 +25,9 @@ def Add_poem(request):
 
 
 def generate(request, title, category, prompt):
-    text="I am the moon, Queen of Night, a riddle wrapped in borrowed light, a silver spool where dreams unwind, ancient orb as old as time."
+    response = requests.post(MUSIC_Ai_API_URL, json=prompt)
+
+    text = response.content
     return render(request, 'addPoem.html',
                   {'title': title, 'category': category, 'prompt': prompt, 'text': text})
 

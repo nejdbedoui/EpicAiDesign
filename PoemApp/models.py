@@ -1,5 +1,5 @@
-from mongoengine import Document, StringField, DateTimeField, FloatField, BooleanField
-
+from mongoengine import Document, StringField, DateTimeField, FloatField, BooleanField, ReferenceField
+import UserApp.models
 
 class PoemArt(Document):
     title = StringField(max_length=200)
@@ -8,3 +8,4 @@ class PoemArt(Document):
     public = BooleanField()
     rating = FloatField()
     created_at = DateTimeField()
+    user = ReferenceField(UserApp.models.User)
