@@ -3,10 +3,14 @@ from datetime import datetime
 from django.shortcuts import render
 from django.contrib import messages
 from PoemApp.models import PoemArt
+import requests
+from EpicAiDesign.External_url import poeme_Ai_API_URL
+
+
 
 
 def Add_poem(request):
-    category = "Dramatic"
+    category = "musique"
     if request.method == 'POST':
         category = request.POST.get('category')
         prompt = request.POST.get('prompt')
@@ -23,9 +27,20 @@ def Add_poem(request):
 
 
 def generate(request, title, category, prompt):
-    text="I am the moon, Queen of Night, a riddle wrapped in borrowed light, a silver spool where dreams unwind, ancient orb as old as time."
+    payload = {
+        "prompt": prompt,
+        "category": category,
+        "max_length": 200  # You can change this value as needed
+    }
+    response = requests.post(poeme_Ai_API_URL, json=payload)
+    
+    data = response.json()
+    text = data.get('poem', 'No poem generated.')
+
+
     return render(request, 'addPoem.html',
                   {'title': title, 'category': category, 'prompt': prompt, 'text': text})
+
 
 
 def save(request, title, category, prompt, text):

@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath "C:\5twin4\python\EpicAiDesign\myenv")
+    export VIRTUAL_ENV=$(cygpath "E:\python-project\EpicAiDesign\myenv")
 else
     # use the path as-is
-    export VIRTUAL_ENV="C:\5twin4\python\EpicAiDesign\myenv"
+    export VIRTUAL_ENV="E:\python-project\EpicAiDesign\myenv"
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
