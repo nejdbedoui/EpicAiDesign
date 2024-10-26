@@ -1,0 +1,72 @@
+{% load static %}
+
+<div style="max-width: 50%" class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="ms-genres-model-content">
+                <div class="ms-genres-top text-center mb-50">
+                    <button type="button" class="ms-model-close ms-close-btn"><i
+                            class="fa-sharp fa-solid fa-xmark"></i></button>
+                    <h2 class="ms-title2 white-text mb-20">The different lights</h2>
+                    <p class="ms-text2">Rock &amp; pop wedding &amp; party band</p>
+                </div>
+
+                <form  method="POST" action="{% url 'addAlbum' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="ms-genres-enquire-form">
+                    <div class="ms-input-box">
+                        <label>Title</label>
+                        <input name="title" type="text" placeholder="Album Title">
+                    </div>
+                    <div class="ms-input2-box mb-25">
+                        <div class="ms-input-box-file style-2">
+                            <label>Attach Cover Photo</label>
+                            <div style="display: flex; justify-content: center; align-items: center; text-align: center;  "
+                                 class="ms-upload-img ">
+                                <div class="ms-upload-file image-upload">
+                                    <input type="file" name="cover" accept="image/*"
+                                           onchange="previewImage(event)"/>
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6">
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="ms-submit-btn text-lg-end mb-10">
+                                            <button type="submit" class="unfill__btn">Add Album</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0]; // Get the selected file
+        const reader = new FileReader(); // Create a FileReader object
+
+        reader.onload = function (e) {
+            const imageUpload = document.querySelector('.image-upload');
+            imageUpload.style.backgroundImage = `url(${e.target.result})`;
+            imageUpload.style.backgroundSize = 'cover'; // Cover the entire area
+            imageUpload.style.backgroundPosition = 'center'; // Center the image
+            imageUpload.style.color = 'transparent'; // Hide the text color
+        }
+
+        if (file) {
+            reader.readAsDataURL(file); // Read the image file as a data URL
+        }
+    }
+</script>

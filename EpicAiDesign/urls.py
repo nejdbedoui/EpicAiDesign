@@ -13,4 +13,5 @@ urlpatterns = [
     path('music/', include('MusicApp.urls')),
     path('poem/', include('PoemApp.urls')),
     path('video/', include('VideoApp.urls')),
+    path('Album/', include('AlbumApp.urls')),
 ]
