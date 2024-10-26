@@ -3,7 +3,7 @@
 {% block content %}
 
     <!-- Products Area Start  -->
-    <div class="ms-product-area  p-relative">
+    <div class="ms-product-area p-relative">
 
         <div class="container">
             <div class="row mb-30">
@@ -43,7 +43,11 @@
                             <div class="tab-pane fade active show" id="nav1" role="tabpanel"
                                  aria-labelledby="nav1-tab">
                                 <div class="product__modal-img w-img">
-                                    <img src="{% static 'assets/img/shop/product-01.png' %}" alt="product image">
+                                    {% if base64_image %}
+                                        <img src="{{ base64_image }}" alt="Generated product image">
+                                    {% else %}
+                                        <img src="{% static 'assets/img/shop/product-01.png' %}" alt="product image">
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
@@ -68,65 +72,64 @@
                     <div class="ms-product-modal-content mb-60">
                         <form method="POST" enctype="multipart/form-data" action="{% url 'add_image' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="audio" value="{{ base64_audio }}" id="audioInput">
                             <div class="d-flex align-items-center justify-content-between mb-35 mr-40"></div>
                             <h2 class="ms-product-title2 mb-30">
-                                <a href="addmusic.html">Create your music Here </a>
+                                <a href="addimage.html">Create your image Here</a>
                             </h2>
                             <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
-                                <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
+                                <div class="nav nav-tabs mb-tab-button-style" id="nav-tab" role="tablist">
                                     <div class="ms-product-stock-item mb-20">
                                         <input style="display: none" type="radio" name="category"
-                                               value="Classical music" id="nav-faq-1"
-                                               {% if category == "Classical music" %}checked{% endif %}>
+                                               value="Draw Image" id="nav-faq-1"
+                                               {% if category == "Draw Image" %}checked{% endif %}>
                                         <label class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1"
                                                data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
                                                aria-controls="nav-faq-1" aria-selected="true">
-                                            Classical
+                                            Draw
                                         </label>
                                     </div>
                                     <div class="ms-product-stock-item mb-20">
-                                        <input style="display: none" type="radio" name="category" value="Pop Music"
+                                        <input style="display: none" type="radio" name="category" value="Illustration"
                                                id="nav-faq-2"
-                                               {% if category == "Pop Music" %}checked{% endif %}>
+                                               {% if category == "Illustration" %}checked{% endif %}>
                                         <label class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab"
                                                data-bs-target="#nav-faq-2" role="tab" aria-controls="nav-faq-2"
                                                aria-selected="false">
-                                            Pop
+                                            Illustration
                                         </label>
                                     </div>
                                     <div class="ms-product-stock-item mb-20">
-                                        <input style="display: none" type="radio" name="category" value="Rock Music"
+                                        <input style="display: none" type="radio" name="category" value="Real Image"
                                                id="nav-faq-3"
-                                               {% if category == "Rock Music" %}checked{% endif %}>
+                                               {% if category == "Real Image" %}checked{% endif %}>
                                         <label class="nav-link" id="nav-faq-3-tab" for="nav-faq-3" data-bs-toggle="tab"
                                                data-bs-target="#nav-faq-3" role="tab" aria-controls="nav-faq-3"
                                                aria-selected="false">
-                                            Rock
+                                            Real Image
                                         </label>
                                     </div>
                                     <div class="ms-product-stock-item mb-20">
-                                        <input style="display: none" type="radio" name="category" value="Hip-hop Music"
+                                        <input style="display: none" type="radio" name="category" value="Art Image"
                                                id="nav-faq-4"
-                                               {% if category == "Hip-hop Music" %}checked{% endif %}>
+                                               {% if category == "Art Image" %}checked{% endif %}>
                                         <label class="nav-link" id="nav-faq-4-tab" for="nav-faq-4" data-bs-toggle="tab"
                                                data-bs-target="#nav-faq-4" role="tab" aria-controls="nav-faq-4"
                                                aria-selected="false">
-                                            Hip-hop
+                                            Art
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
-                                    <div class="ms-input-box style-2">
-                                        <input name="title" value='{{ title }}' placeholder="Enter your title here...">
-                                    </div>
+                            <div class="ms-input-box style-2">
+                                <input name="title" value="{{ title }}" placeholder="Enter your title here...">
+                            </div>
 
+                            <div class="ms-input-box style-2">
+    <textarea cols="30" rows="10" name="prompt"
+              placeholder="Enter your prompt here...">{{ prompt_default }}</textarea>
+                            </div>
 
-                                    <div class="ms-input-box style-2">
-                                        <textarea cols="30" rows="10" name="prompt"
-                                                  placeholder="Enter your prompt here...">{{ prompt_default }}</textarea>
-                                    </div>
 
                             <div class="product__modal-form">
                                 <div class="product-quantity-cart ms-product-quantity-flex mb-30">
@@ -144,7 +147,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -154,3 +156,4 @@
     <!-- Products Area End  -->
 
 {% endblock %}
+
