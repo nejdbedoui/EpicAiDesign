@@ -1,8 +1,8 @@
  {% load static %}
+ {% load image_to_base64_filter %}
 <div style="max-width: 300px" class="ms-product-item">
                         <div class="ms-product-img p-relative mb-20">
-                            <a href="shop-details.html"><img src="{% static image %}"
-                                                             alt="product img"></a>
+                            <a href="shop-details.html"> <img src="{{ item.image|file_to_base64_image }}" alt="{{ item.title }}"> </a>
                             <div class="ms-product-links">
                                 <ul>
                                     <li><a href="#" class="ms-model-show"><i class="flaticon-view"></i></a>
@@ -12,8 +12,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <h3 class="ms-product-title mb-20"><a href="shop-details.html">Denon DJ LC6000 Prime
-                            Perfor
+                        <h3 class="ms-product-title mb-20"><a href="shop-details.html">{{ item.title }}
                             mance Expansion Controller</a></h3>
                         <span class="ms-product-price ms-text2">$899.00</span>
                     </div>

@@ -52,7 +52,7 @@
                             </div>
                             <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
                                 <div class="product__modal-img w-img">
-                                    <img src="{% static 'assets/img/shop/product-02.png' %}" alt="product image">
+                                    <img src="{% static '/images/generated_image_75.png' %}" alt="product image">
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">
@@ -124,6 +124,7 @@
                             <div class="ms-input-box style-2">
                                 <input name="title" value="{{ title }}" placeholder="Enter your title here...">
                             </div>
+                            <input type="hidden" name="image_data" id="image_data" value="">
 
                             <div class="ms-input-box style-2">
     <textarea cols="30" rows="10" name="prompt"
@@ -148,6 +149,16 @@
                             </div>
                         </form>
                     </div>
+                    <div class="saved-images mt-4">
+                        <h3>Saved Images</h3>
+                        {% for image in images %}
+                            <div class="image-item">
+                                <h4>{{ image.title }}</h4>
+                                <img src="{{ image.image.url }}" alt="{{ image.title }}"
+                                     style="width: 100%; max-width: 300px;">
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
 
@@ -157,3 +168,12 @@
 
 {% endblock %}
 
+<script>
+    // Remplir le champ caché avec les données de l'image générée
+    const imageElement = document.getElementById('generated_image');
+    const hiddenInput = document.getElementById('image_data');
+
+    if (imageElement) {
+        hiddenInput.value = imageElement.src;  // Remplir le champ caché avec les données de l'image
+    }
+</script>
