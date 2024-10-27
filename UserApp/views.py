@@ -151,8 +151,9 @@ def reset_password(request):
         user = User.objects(email=email).first()
         if user:
             user.token = create_token(user.email, 'password')
-            sendRestPassword(user.email)
             user.save()
+            sendRestPassword(user.email)
+
             messages.success(request, "A Reset Password Email Was Sent!")
             return redirect('login')
         messages.success(request, "Email Does Not Exist!")

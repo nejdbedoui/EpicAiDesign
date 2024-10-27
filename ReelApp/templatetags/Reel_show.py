@@ -33,7 +33,7 @@ def show_reel(reel):
         # Handle poem as a text overlay
         if reel.poem:
             poem_text = reel.poem.text
-            background_image_path = "background_image.jpg"  # Path to the background image
+            background_image_path = "C:/Users/Mega-PC/Desktop/5twi4/Django/EpicAiDesign/static/assets/img/bg"  # Path to the background image
 
             # Create a new image with the poem text
             # Load background image
