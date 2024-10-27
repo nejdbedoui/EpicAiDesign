@@ -12,3 +12,4 @@ class MusicArt(Document):
     rating = FloatField()
     created_at = DateTimeField()
     user = ReferenceField(UserApp.models.User)
+

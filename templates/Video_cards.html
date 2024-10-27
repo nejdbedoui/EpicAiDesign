@@ -1,0 +1,27 @@
+{% load static %}
+<div style="max-width: 300px" class="ms-product-item">
+    <div class="ms-product-img p-relative mb-20">
+        <a href="{% url 'get_video' item.id %}"><img src="{% static image %}"></a>
+        <div class="ms-product-links">
+            <ul>
+                <li><a href="{% url 'get_video' item.id %}" class="ms-model-show"><i class="flaticon-view"></i></a></li>
+                <li><a href="{% url 'update_video' item.id %}"><i class="fas fa-edit"></i></a></li>
+                <li><a href="{% url 'delete_video' item.id %}"><i class="fas fa-trash-alt"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <h3 class="ms-product-title mb-20"><a href="{% url 'get_video' item.id %}">{{ item.name }}</a></h3>
+    <span class="ms-news-by">Tags :</span>
+    <div class="ms-news-meta d-inline-block">
+        <span>
+            {% for tag in item.tags %}{{ tag.name }}{% if not forloop.last %} - {% endif %}{% endfor %}
+        </span>
+    </div>
+    <br>
+    <span class="ms-news-by">Created at :</span>
+    <div class="ms-news-meta d-inline-block">
+        <span>
+            {{ item.created_at }}
+        </span>
+    </div>
+</div>

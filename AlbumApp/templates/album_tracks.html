@@ -3,11 +3,6 @@
  {% load music_to_base64_filter %}
 {% block content %}
 
-            <!-- page title area start  -->
-
-            <!-- page title area end  -->
-
-            <!-- Products Area Start  -->
             <div class="ms-product-area  pb-70 p-relative">
   <div class="row justify-content-center">
                         <div class="col-xxl-11">
@@ -15,14 +10,12 @@
                         </div>
                     </div>
                 <div class="container">
-
-
                             <div class="ms-product-table-wrap mb-60">
                                 <div class="ms-product-table mb-45">
                                     <table class="table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Album Name</th>
+                                                <th>Track Name</th>
                                                 <th>Play</th>
                                                 <th>Action</th>
                                             </tr>
@@ -30,8 +23,8 @@
                                         <tbody>
                                          {% for track in album.tracks  %}
                                                   <tr>
-                                                <td class="ms-product-name-flex"><a >
-                                                        <img src="{% static 'assets/img/Images/note.png' %}" alt="product">
+                                                <td  class="ms-product-name-flex"><a href="{% url 'musicdetails' track.id %}">
+                                                        <img  src="{% static 'assets/img/Images/note.png' %}" alt="product">
                                                         <h6 class="ms-product-title">{{ track.title }} </h6>
                                                     </a>
 

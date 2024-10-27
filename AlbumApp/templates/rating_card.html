@@ -1,0 +1,82 @@
+{% load static %}
+
+<div style="max-width: 50%" class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="ms-genres-model-content">
+                <div class="ms-genres-top text-center mb-50">
+                    <button type="button" class="ms-model-close ms-close-btn"><i
+                            class="fa-sharp fa-solid fa-xmark"></i></button>
+                    <h2 class="ms-title2 white-text mb-20">Rate This Album </h2>
+                    <p class="ms-text2">{{ album.title }}</p>
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="ms-genres-enquire-form">
+
+                        <div class="ms-input-box text-center">
+                            <div class="ms-fun-brand-rating" id="rating-{{ album.id }}">
+                                <i style="font-size: 40px;" data-value="1" onclick="setRating(this, '{{ album.id }}')"
+                                        {% if album.rating >= 1 %} class="flaticon-star" {% else %}
+                                   class="flaticon-star unrate" {% endif %}></i>
+                                <i style="font-size: 40px;" data-value="2" onclick="setRating(this, '{{ album.id }}')"
+                                        {% if album.rating >= 2 %} class="flaticon-star" {% else %}
+                                   class="flaticon-star unrate" {% endif %}></i>
+                                <i style="font-size: 40px;" data-value="3" onclick="setRating(this, '{{ album.id }}')"
+                                        {% if album.rating >= 3 %} class="flaticon-star" {% else %}
+                                   class="flaticon-star unrate" {% endif %}></i>
+                                <i style="font-size: 40px;" data-value="4" onclick="setRating(this, '{{ album.id }}')"
+                                        {% if album.rating >= 4 %} class="flaticon-star" {% else %}
+                                   class="flaticon-star unrate" {% endif %}></i>
+                                <i style="font-size: 40px;" data-value="5" onclick="setRating(this, '{{ album.id }}')"
+                                        {% if album.rating >= 5 %} class="flaticon-star" {% else %}
+                                   class="flaticon-star unrate" {% endif %}></i>
+                            </div>
+                            <input type="hidden" name="rating" id="rating-input-{{ album.id }}"
+                                   value='{{ album.rating }}'>
+                            <input type="hidden" name="id" value='{{ album.id }}'>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-6">
+                                        <div class="ms-submit-btn text-lg-end mb-10">
+                                            <button type="submit" class="unfill__btn">Rate</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function setRating(element, albumId) {
+        var ratingValue = element.getAttribute("data-value");
+
+        // Update the corresponding hidden input field for the specific album
+        document.getElementById("rating-input-" + albumId).value = ratingValue;
+
+        // Select all stars for the specific album
+        var stars = document.querySelectorAll('#rating-' + albumId + ' i');
+        stars.forEach(function (star) {
+            if (star.getAttribute("data-value") <= ratingValue) {
+                star.classList.remove("unrate");
+
+            } else {
+                star.classList.add("unrate");
+
+            }
+        });
+    }
+
+
+</script>

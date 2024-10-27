@@ -3,6 +3,7 @@
 {% block content %}
 
     <!-- Products Area Start  -->
+
     <div class="ms-product-area p-relative">
 
         <div class="container">
@@ -16,6 +17,7 @@
                             <div class="tab-pane fade active show" id="nav1" role="tabpanel"
                                  aria-labelledby="nav1-tab">
                                 <div class="product__modal-img w-img">
+
                                     {% if base64_image %}
                                         <img src="{{ base64_image }}" alt="Generated product image">
                                     {% else %}
@@ -43,6 +45,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="ms-product-modal-content mb-60">
+
                         <form method="POST" enctype="multipart/form-data" action="{% url 'add_image' %}">
                             {% csrf_token %}
                             <div class="d-flex align-items-center justify-content-between mb-35 mr-40"></div>
@@ -128,6 +131,7 @@
         </div>
     </div>
     <!-- Products Area End  -->
+
 
 {% endblock %}
 
