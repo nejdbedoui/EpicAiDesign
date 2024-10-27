@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load image_to_base64_filter %}
+{% load music_to_base64_filter %}
+{% load Reel_show %}
+{% block content %}
+    <section class="ms-event3-area pt-130 pb-115">
+        <div class="container">
+            <div class="ms-border2 pb-40">
+                <div class="row ms-event3-wrap">
+                    {% for reel in reels %}
+                        {% include 'Reel_card.html' with reel=reel %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

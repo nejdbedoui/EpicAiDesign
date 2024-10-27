@@ -143,6 +143,8 @@
                     {% elif category == 'Poem' %}
                         {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
                     {% elif category == 'Speech' %}
+                        {% include 'Speech_cards.html' with item=item image='assets/img/Images/sound.png' %}
+                    {% endif %}
                         {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
                     {% elif category == 'Licences' %}
                         {% include 'Licences_card.html' with item=item image='assets/img/Images/licence.png' %}    {% endif %}

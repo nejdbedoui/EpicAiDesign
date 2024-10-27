@@ -1,0 +1,32 @@
+{% load static %}
+{% load image_to_base64_filter %}
+{% load music_to_base64_filter %}
+{% load Reel_show %}
+
+
+
+
+  <div class="col-xl-4 col-md-6">
+                                <div class="ms-event3-item mb-25">
+                                    <div class="ms-event3-img ms-overlay10 fix ms-br-15 p-relative zindex-10">
+                                        <a href="event-details.html">
+                                            <img src="{% static 'assets/img/genres/genres-08.jpg'%}"
+                                                alt="event image">
+                                        </a>
+                                        <span class="ms-event3-date">FEB <br>28</span>
+                                        <div class="ms-event3-content">
+                                            <div class="ms-event3-location-wrap">
+                                                <a href="#" class="ms-event3-location"><i class="fa fa-play"></i>
+                                                    Play</a>
+                                            </div>
+                                            <h3 class="ms-event3-title ms-title-border"><a
+                                                    href="event-details.html">Jennifer Lopez
+                                                    admits
+                                                    ending first engagement
+                                                    to Ben Affleck
+                                                    caused 'biggest heartbreak'</a></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+{{ reel|show_reel }}

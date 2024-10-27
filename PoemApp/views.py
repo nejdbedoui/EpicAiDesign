@@ -1,6 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
+
+import UserApp.models
 from EpicAiDesign.External_url import poeme_Ai_API_URL
 from PoemApp.models import PoemArt,License
 import requests
