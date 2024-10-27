@@ -2,6 +2,8 @@ from pathlib import Path
 from mongoengine import connect
 import time
 from django.contrib.messages import constants as message_constants
+import os
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,9 +50,12 @@ INSTALLED_APPS = [
     'MusicApp',
     'PoemApp',
     'VideoApp',
+    'TagsVideoApp',
+    'ReelApp',
     'embed_video',
     'AlbumApp',
-    'GalleryApp'
+    'GalleryApp',
+
 ]
 
 MIDDLEWARE = [
@@ -117,6 +122,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -133,5 +141,8 @@ MESSAGE_TAGS = {
     message_constants.WARNING: 'warning',
     message_constants.ERROR: 'danger',
 }
+
+LOGIN_URL = '/users/login'
+
 
 

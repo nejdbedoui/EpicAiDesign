@@ -4,6 +4,11 @@ from datetime import datetime
 from io import BytesIO
 from django.http import HttpResponseRedirect
 
+<<<<<<< HEAD
+
+def Add_image(request):
+    return render(request, 'addimage.html')
+=======
 from django.contrib import messages
 from django.shortcuts import render
 import requests
@@ -97,3 +102,4 @@ def save(request, title, category, prompt, base64_image, images):
         'base64_image':base64_image,
         'images': images  # Passer toutes les images à la template
     })
+>>>>>>> 31048a1ab8292946577aeb18d50c15ac8b018416

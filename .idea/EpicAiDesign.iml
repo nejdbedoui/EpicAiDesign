@@ -22,7 +22,10 @@
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="jplayer" level="application" />
     <orderEntry type="library" name="wavesurfer.js" level="application" />
+<<<<<<< HEAD
+=======
     <orderEntry type="library" name="@coreui/coreui" level="application" />
+>>>>>>> 31048a1ab8292946577aeb18d50c15ac8b018416
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

@@ -90,12 +90,14 @@
                                         <option value="title" {% if sort == 'title' %}selected{% endif %}>Name</option>
                                     </select>
 
+
                                 </div>
 
                             </div>
 
                 </div>
             </form>
+
             {% if category == 'Music' %}
               <div class="ms-genres-btn-box mb-20">
                                     <div class="d-flex justify-content-xl-end flex-wrap">
@@ -125,11 +127,11 @@
                     {% elif category == 'Music' %}
                         {% include 'Music_cards.html' with item=item albums=albums image='assets/img/Images/sound.png' category=category %}
                     {% elif category == 'Video' %}
-                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                        {% include 'Video_cards.html' with item=item image='assets/img/Images/pngegg.png' %}
                     {% elif category == 'Poem' %}
                         {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
                     {% elif category == 'Speech' %}
-                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                        {% include 'Speech_cards.html' with item=item image='assets/img/Images/product-01.png' %}
                     {% endif %}
                  {% endfor %}
                 </div>
@@ -212,6 +214,8 @@
         </div>
         <!-- Partner Area End Here  -->
 
+
+
     </div>
 
  <div class="modal fade ms-model1 zindex-99999" id="ms-model">
@@ -233,12 +237,14 @@
                     if (label.getAttribute('data-category') === category) {
                         label.setAttribute('aria-selected', 'true');
                         label.classList.add('active');
+
                     } else {
                         label.setAttribute('aria-selected', 'false');
                         label.classList.remove('active');
                     }
                 });
             });
+
 
 
         $(document).ready(function() {

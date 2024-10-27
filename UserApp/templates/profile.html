@@ -1,111 +1,42 @@
-
 {% extends 'index.html' %}
 
 {% block content %}
-     {% load static %}
-            <!-- News Area Start Here  -->
-            <section  class="ms-news-area pb-80 ">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-8">
-                            <div class="ms-news-sidebar mb-50">
-                               <div class="ms-news-img m-img fix ms-br-15 mb-30">
-                                   <img src="{{ request.session.profile_image }}" alt="Profile Image">
-                                   <span class="ms-news-cat"><a href="{% url 'userInfo' %}">{{request.session.user_name}}</a></span>
-                               </div>
-                                    <ul style="list-style-type: none;width: 100%;" class="tagcloud">
-                                        <li><a style="width: 100%; text-align: center" href="{% url 'userInfo' %}">Personal Info</a></li>
-                                        <li><a style="width: 100%; text-align: center" href="{% url 'editProfile' %}">Edit Profile</a></li>
-                                        <li><a style="width: 100%; text-align: center" href="#">Wish list</a></li>
-                                        <li><a style="width: 100%; text-align: center" href="#">product</a></li>
-                                        <li><a style="width: 100%; text-align: center" href="{% url 'logout' %}"> <i class="fa-solid fa-power-off"></i> Logout</a></li>
-
-                                    </ul>
-
-                                <div class="ms-news-widget">
-                                    <h3 class="ms-news-widget-title">Recent Post</h3>
-                                    <div class="ms-news-widget-content">
-                                        <div class="rc-post">
-                                            <div class="d-flex">
-                                                <div class="rc-thumb mr-20">
-                                                    <a href="profile.html">
-                                                        <img src="{% static 'assets/img/news/news-rc-01.jpg'%}" alt="news rc image">
-                                                    </a>
-                                                </div>
-                                                <div class="rc-text widget-post-body">
-                                                    <div class="rc-meta widget-post-meta"> Mar 15, 2023
-                                                    </div>
-                                                    <h6 class="widget-post-title"><a href="profile.html">The Garage
-                                                            King - who has
-                                                            won
-                                                            five MOBOs</a></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="rc-post">
-                                            <div class="d-flex">
-                                                <div class="rc-thumb mr-20">
-                                                    <a href="profile.html">
-                                                        <img src="{% static 'assets/img/news/news-rc-02.jpg'%}" alt="news rc image">
-                                                    </a>
-                                                </div>
-                                                <div class="rc-text widget-post-body">
-                                                    <div class="rc-meta widget-post-meta"> Mar 16, 2023
-                                                    </div>
-                                                    <h6 class="widget-post-title"><a href="profile.html">showed off
-                                                            the hi-tech
-                                                            toilets
-                                                            Drake gave him as a gift</a></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="rc-post">
-                                            <div class="d-flex">
-                                                <div class="rc-thumb mr-20">
-                                                    <a href="profile.html">
-                                                        <img src="{% static 'assets/img/news/news-rc-03.jpg'%}" alt="news rc image">
-                                                    </a>
-                                                </div>
-                                                <div class="rc-text widget-post-body">
-                                                    <div class="rc-meta widget-post-meta"> Mar 17, 2023
-                                                    </div>
-                                                    <h6 class="widget-post-title"><a href="profile.html">In
-                                                            an Instagram video, the DJ
-                                                            who turned 47 on Saturday</a></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="rc-post">
-                                            <div class="d-flex">
-                                                <div class="rc-thumb mr-20">
-                                                    <a href="profile.html">
-                                                        <img src="{% static 'assets/img/news/news-rc-04.jpg'%}" alt="news rc image">
-                                                    </a>
-                                                </div>
-                                                <div class="rc-text widget-post-body">
-                                                    <div class="rc-meta widget-post-meta"> Mar 18, 2023
-                                                    </div>
-                                                    <h6 class="widget-post-title"><a href="profile.html">DJ
-                                                            Khaled receives four luxury
-                                                            toilets from Drake for..</a></h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    {% load static %}
+    <!-- News Area Start Here  -->
+    <section class="ms-news-area pb-80 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-lg-8">
+                    <div class="ms-news-sidebar mb-50">
+                        <div class="ms-news-img m-img fix ms-br-15 mb-30">
+                            <img src="{{ request.session.profile_image }}" alt="Profile Image">
+                            <span class="ms-news-cat"><a href="{% url 'userInfo' %}">{{ request.session.user_name }}</a></span>
                         </div>
-                        <div class="col-xl-8 col-lg-12">
-                            <div class="ms-news-dwrap ms-news-sidebar mb-50">
-                                {% block profile_content %}
-                                {% endblock %}
-                            </div>
-                        </div>
+                        <ul style="list-style-type: none;width: 100%;" class="tagcloud">
+                            <li><a style="width: 100%; text-align: center" href="{% url 'userInfo' %}">Personal Info</a>
+                            </li>
+                            <li><a style="width: 100%; text-align: center" href="{% url 'editProfile' %}">Edit
+                                Profile</a></li>
+                            <li><a style="width: 100%; text-align: center" href="#">Wish list</a></li>
+                            <li><a style="width: 100%; text-align: center" href="#">product</a></li>
+                            <li><a style="width: 100%; text-align: center" href="{% url 'logout' %}"> <i
+                                    class="fa-solid fa-power-off"></i> Logout</a></li>
+
+                        </ul>
 
                     </div>
                 </div>
-            </section>
-            <!-- News Area End Here  -->
+                <div class="col-xl-8 col-lg-12">
+                    <div class="ms-news-dwrap ms-news-sidebar mb-50">
+                        {% block profile_content %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- News Area End Here  -->
 
 
 

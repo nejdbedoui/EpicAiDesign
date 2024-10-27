@@ -82,6 +82,22 @@
 
                                                 </li>
                                                 <li>
+
+                                                     <a href="{% url 'Gallery' %}">My Gallery</a>
+                                                </li>
+                                                <li class="has-dropdown">
+                                                    <a href="">Public Gallery</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="{% url 'Gallery' %}">Image</a></li>
+                                                        <li><a href="{% url 'Gallery' %}">Music</a></li>
+                                                        <li><a href="{% url 'Gallery' %}">Poem</a></li>
+                                                        <li><a href="{% url 'list_speechs' %}">Speech</a></li>
+                                                        <li><a href="{% url 'list_videos' %}">Video</a></li>
+                                                        <li><a href="{% url 'Gallery' %}">Reel</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+
                                                     <a href="{% url 'my_galleries' %}">Galleries</a>
                                                 </li>
                                                 <li>
@@ -178,6 +194,7 @@
                                                     <a href="contact.html"> Help Center</a>
                                                 </li>
                                                 <li>
+
                                                     {% if not request.session.profile_image and not request.session.user_name %}
                                                     <div class="enquiry__list ml-10 mr-10 ms-browse-act-wrap p-relative">
                                                         <div class="ms-enquiry-box p-relative d-none d-xl-inline-flex">

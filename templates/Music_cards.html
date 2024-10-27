@@ -1,6 +1,7 @@
 {% load static %}
 <div style="max-width: 300px" class="ms-product-item">
     <div class="ms-product-img p-relative mb-20">
+
         <a href="{% url 'musicdetails' item.id %}">
             <img src="{% static image %}" alt="product img">
         </a>
@@ -43,6 +44,7 @@
     <span class="ms-product-price ms-text2">{{ item.category }}</span>
     {% if item.text %}
         <br>
+
         <span class="ms-product-price ms-text2">{{ item.text|slice:":30" }}...</span>
     {% endif %}
 </div>
