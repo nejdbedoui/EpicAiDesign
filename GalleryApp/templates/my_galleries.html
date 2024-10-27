@@ -3,78 +3,83 @@
 {% load image_to_base64_filter %}
 
 {% block content %}
-<main>
-    <h3 class="text-center">My Galleries</h3>
+    <main>
+        <h3 class="text-center">My Galleries</h3>
 
-<div class="ms-genres-btn-box mb-20">
-                                    <div class="d-flex justify-content-xl-end flex-wrap">
-                                        <div class="add-enquiry-btn mb-20 mr-20">
-                                            <a class="ms-border-btn" href="{% url 'add_gallery' %}"><i
-                                                class="fa-solid fa-plus" ></i>
-                                                Add Gallery</a>
-                                        </div>
-                                    </div>
-                                </div>
-    <div class="container">
-        <div class="row">
-            {% for gallery in galleries %}
-            <div class="col-xl-6">
-
-                <div class="ms-genres-item ms-genres-flex mb-25">
-
-                    <div class="ms-genres-img ms-br-15 fix w-img genres-img-214">
-
-                        <!-- Image de couverture de la galerie -->
-                        <a href="{% url 'add_to_gallery' gallery.id %}">
-                            <img src="{{ gallery.cover|to_base64 }}" alt="{{ gallery.title }}">
-                        </a>
-                        <a class="popup-video ms-genres-video"
-                           href="https://www.youtube.com/watch?v=Rf9flQISwok"><i
-                           class="fa-sharp fa-solid fa-play"></i></a>
-
-                    </div>
-                    <div class="ms-genres-content p-relative">
-
-                        <!-- Titre et note de la galerie -->
-                        <span class="ms-genres-star active"><i class="fa-light fa-star"></i></span>
-                        <h4 class="ms-genres-title"><a href="{% url 'add_to_gallery' gallery.id %}">{{ gallery.title }}</a></h4>
-
-                        <p class="mb-30">Rating: {{ gallery.rating }}/5</p>
-                        <p>Images: {{ gallery.images|length }}</p>
-
-                        <div class="ms-fun-brand-bottom ms-genres-rating">
-                            <div class="ms-fun-brand-location">
-                                <a href="https://www.google.com/maps" target="_blank"> <i class="flaticon-pin"></i>Location</a>
-                            </div>
-                            <div class="ms-fun-brand-rating">
-                                {% for i in "12345"|slice:":" %}
-                                <i class="flaticon-star{% if gallery.rating < forloop.counter %} unrate{% endif %}"></i>
-                                {% endfor %}
-                                <span>({{ gallery.images|length }})</span>
-                            </div>
-                        </div>
-
-                        <!-- Bouton pour ajouter des images à la galerie -->
-                        <br>
-                        <br>
-
-                    <a class="ms-border-btn" href="{% url 'add_to_gallery' gallery.id %}"><i
-                                                class="fa-solid fa-plus" ></i>
-                                                Add Images</a>
-                    <br>
-                        <br>
-                    <form method="POST" >
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="id_gallery" value="{{ gallery.id }}">
-                                                        <button type="submit" class="ms-border-btn">
-                                                                  <i class="flaticon-bin"></i> Delete Gallery
-                                                        </button>
-                                                    </form>
-                    </div>
+        <div class="ms-genres-btn-box mb-20">
+            <div class="d-flex justify-content-xl-end flex-wrap">
+                <div class="add-enquiry-btn mb-20 mr-20">
+                    <a class="ms-border-btn" href="{% url 'add_gallery' %}"><i
+                            class="fa-solid fa-plus"></i>
+                        Add Gallery</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-</main>
+        <div class="container">
+            <div class="row">
+                {% for gallery in galleries %}
+                    <div class="col-xl-6">
+                        <div class="ms-genres-item ms-genres-flex mb-25">
+                            <div class="ms-genres-img ms-br-15 fix w-img genres-img-214">
+
+                                <!-- Image de couverture de la galerie -->
+                                <a href="{% url 'gallery_details' gallery.id %}">
+                                    <img src="{{ gallery.cover|to_base64 }}" alt="{{ gallery.title }}">
+                                </a>
+                                <a class="popup-video ms-genres-video"
+                                   href="https://www.youtube.com/watch?v=Rf9flQISwok"><i
+                                        class="fa-sharp fa-solid fa-play"></i></a>
+
+                            </div>
+                            <div class="ms-genres-content p-relative">
+
+                                <!-- Titre et note de la galerie -->
+                                <span class="ms-genres-star active"><i class="fa-light fa-star"></i></span>
+                                <h4 class="ms-genres-title"><a
+                                        href="{% url 'gallery_details' gallery.id %}">{{ gallery.title }}</a></h4>
+
+                                <p class="mb-30">Rating: {{ gallery.rating }}/5</p>
+                                <p>Images: {{ gallery.images|length }}</p>
+
+                                <div class="ms-fun-brand-bottom ms-genres-rating">
+                                    <div class="ms-fun-brand-rating">
+                                        {% for i in "12345"|slice:":" %}
+                                            <i class="flaticon-star{% if gallery.rating < forloop.counter %} unrate{% endif %}"></i>
+                                        {% endfor %}
+                                        <span>({{ gallery.images|length }})</span>
+                                    </div>
+                                </div>
+
+                                <!-- Bouton pour ajouter des images à la galerie -->
+                                <br>
+                                <br>
+
+                               <div class="d-flex align-items-center justify-content-start gap-2">
+                                    <!-- Bouton pour ajouter des images -->
+                                    <a class="ms-border-btn" href="{% url 'add_to_gallery' gallery.id %}">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </a>
+
+                                    <!-- Formulaire pour supprimer la galerie -->
+                                    <form method="POST" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id_gallery" value="{{ gallery.id }}">
+                                        <button type="submit" class="ms-border-btn">
+                                            <i class="flaticon-bin"></i>
+                                        </button>
+                                    </form>
+
+                                    <!-- Bouton pour mettre à jour la galerie -->
+                                    <a class="ms-border-btn" href="{% url 'update_gallery' gallery.id|stringformat:"s" %}">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
 {% endblock %}
