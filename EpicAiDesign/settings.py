@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'PoemApp',
     'VideoApp',
     'embed_video',
-    'AlbumApp'
+    'AlbumApp',
+    'GalleryApp'
 ]
 
 MIDDLEWARE = [

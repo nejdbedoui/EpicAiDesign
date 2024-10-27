@@ -107,6 +107,17 @@
                                     </div>
                                 </div>
             {% endif %}
+              {% if category == 'Images' %}
+              <div class="ms-genres-btn-box mb-20">
+                                    <div class="d-flex justify-content-xl-end flex-wrap">
+                                        <div class="add-enquiry-btn mb-20 mr-20">
+                                            <a class="ms-border-btn" href="{% url 'my_galleries' %}"><i
+                                                class="fa-solid fa-plus" ></i>
+                                                Add Gallery</a>
+                                        </div>
+                                    </div>
+                                </div>
+            {% endif %}
                 <div class="ms-product-wrap ms-product-grid mb-65">
                  {% for item in data %}
                     {% if category == 'Images' %}
