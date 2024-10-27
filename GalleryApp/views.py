@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 import UserApp.models
 from GalleryApp.models import ImageGallery
 from ImageApp.models import ImageArt
+from UserApp.views import gallery
 
 
 def add_gallery(request):
@@ -53,6 +54,11 @@ def add_to_gallery(request, id):
 def my_galleries(request):
     user = UserApp.models.User.objects.get(email=request.session['user_email'])
     galleries = ImageGallery.objects(user=user).all().order_by('created_at')
+    # lahna supression
+    if request.method == 'POST':
+        gallery_id  = request.POST.get('id_gallery')
+        gallery_to_delete = ImageGallery.objects.get(id=gallery_id)
+        gallery_to_delete.delete()
     return render(request, 'my_galleries.html', {'galleries': galleries})
 
 
