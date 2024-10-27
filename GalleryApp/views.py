@@ -33,7 +33,8 @@ def add_gallery(request):
 
 
 def add_to_gallery(request, id):
-    data = ImageArt.objects.all()
+    user_id = request.session.get('user_id')
+    data = ImageArt.objects.filter(user=user_id)
 
     if request.method == 'POST':
         gallery_id = id

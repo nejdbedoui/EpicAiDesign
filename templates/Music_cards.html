@@ -24,11 +24,7 @@
                         <i class="fa-solid fa-pencil-alt"></i>
                     </a>
                 </li>
-              
-                {% endif %}
-               
-
-                <li>
+              <li>
                     <a href="{% url 'delete_poem' item.id %}" onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) { document.getElementById('delete-form-{{ item.id }}').submit(); }">
                         <i class="fa-solid fa-trash"></i>
                     </a>
@@ -40,6 +36,10 @@
                             <i class="fa-solid fa-plus-circle"></i> Ajouter Licence
                         </a>
                     </li>
+                {% endif %}
+               
+
+
                 
             </ul>
         </div>
