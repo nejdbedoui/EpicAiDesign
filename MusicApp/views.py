@@ -89,5 +89,4 @@ def Details_music(request, id):
     music = MusicArt.objects(id=id).first()
     encoded_string = base64.b64encode(music.audio.read()).decode('utf-8')
     base64_audio = f"data:audio/mp3;base64,{encoded_string}"
-    print(music.audio.read())
     return render(request, 'detailsmusic.html', {'base64_audio': base64_audio, 'music': music})

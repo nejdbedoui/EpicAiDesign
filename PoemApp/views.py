@@ -27,14 +27,29 @@ def Add_poem(request):
 
 
 def generate(request, title, category, prompt):
-    response = requests.post(poeme_Ai_API_URL, json=prompt)
+    # Prepare the JSON payload
+    payload = {
+        "prompt": prompt,
+        "category": category,
+        "max_length": 200  # Adjust the length as needed
+    }
+    
+    try:
+        # Send a POST request to the poem AI API
+        response = requests.post(poeme_Ai_API_URL, json=payload)
+        response.raise_for_status()  # Raise an exception for HTTP error responses
 
-    text = response.content
+        # Parse the JSON response
+        response_data = response.json()
+        text = response_data.get("poem", "")  # Get the poem from the response JSON
+
+    except requests.exceptions.RequestException as e:
+        # Handle request errors (network issues, server errors, etc.)
+        messages.error(request, f"Error generating poem: {str(e)}")
+        text = ""
+
     return render(request, 'addPoem.html',
                   {'title': title, 'category': category, 'prompt': prompt, 'text': text})
-
-
-
 def save(request, title, category, prompt, text):
     poem = PoemArt(
         title=title,
