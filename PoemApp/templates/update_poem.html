@@ -2,22 +2,39 @@
 {% load static %}
 
 {% block content %}
-
-<div class="container">
-    <h2>Modifier le Poème</h2>
-    <form method="POST" action="{% url 'update_poem' poem.id %}">
+<div class="ms-product-area p-relative">
+    <form method="POST" action="{% url 'update_poem' poem.id %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group">
-            <label for="title">Titre du Poème:</label>
-            <input type="text" id="title" name="title" class="form-control" value="{{ poem.title }}" required>
+        <div class="container">
+            <h2 class="ms-product-title2 mb-30">Modifier le Poème</h2>
+            <div class="row mb-30">
+                <div class="col-lg-6">
+                    <div class="ms-product-modal-content mb-60">
+                        <div class="ms-input-box style-2">
+                            <label for="title">Titre du Poème:</label>
+                            <input type="text" id="title" name="title" class="form-control" value="{{ poem.title }}" placeholder="Entrez le titre du poème" required>
+                        </div>
+                        <div class="ms-product-short-desc mb-25">
+                            <div class="col-lg-12">
+                                <div class="ms-input-box style-2">
+                                    <label for="text">Texte du Poème:</label>
+                                    <textarea id="text" name="text" class="form-control" rows="5" placeholder="Entrez le texte du poème" required>{{ poem.text }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__modal-form">
+                        <div class="product-quantity-cart ms-product-quantity-flex mb-30">
+                            <div class="offcanvas__btn mb-30">
+                                <button type="submit" class="ms-border-btn"><i class="fa-solid fa-plus"></i> Mettre à Jour</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="text">Texte du Poème:</label>
-            <textarea id="text" name="text" class="form-control" rows="5" required>{{ poem.text }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Mettre à Jour</button>
-
     </form>
 </div>
-
 {% endblock %}

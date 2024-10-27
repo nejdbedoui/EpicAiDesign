@@ -1,0 +1,33 @@
+{% load static %}
+<div style="max-width: 300px" class="ms-product-item">
+    <div class="ms-product-img p-relative mb-20">
+           <a href="{% url 'musicdetails' item.id %}">
+            <img src="{% static image %}" alt="product img">
+        </a>
+        <div class="ms-product-links">
+            <ul>
+                <li>
+                    <a href="{% url 'license_details' item.id %}">
+                        <i class="flaticon-view"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ item.id }}').submit();" style="text-decoration: none; color: inherit;">
+                        <i class="fa-solid fa-trash" style="color: #e74c3c;"></i> <!-- Couleur rouge pour l'icône -->
+                    </a>
+                    <form id="delete-form-{{ item.id }}" action="{% url 'delete_license' item.id %}" method="post" style="display: none;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette licence ?');">
+                        {% csrf_token %}
+                    </form>
+                </li>
+                
+            </ul>
+            
+        </div>
+    </div>
+    <h3 class="ms-product-title mb-20"><a href="{% url 'musicdetails' item.id %}">{{ item.name }}</a></h3>
+    {% if item.description %}
+        <br>
+
+        <span class="ms-product-price ms-text2">{{ item.description|slice:":30" }}...</span>
+    {% endif %}
+</div>
