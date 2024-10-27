@@ -82,29 +82,56 @@
                     </div>
                     <div class="col-md-4">
                                 <div class="ms-genres-filter ms-genres-border ms-genres-select text-md-end mb-10">
+
                                     <span class="ms-genres-text mr-15">Sort by :</span>
                                       <select name="sort" class="ms-nice-select float-none" form="categoryForm" onchange="this.form.submit()">
                                         <option value="created_at" {% if sort == 'created_at' %}selected{% endif %}>Date</option>
                                         <option value="category" {% if sort == 'category' %}selected{% endif %}>Category</option>
                                         <option value="title" {% if sort == 'title' %}selected{% endif %}>Name</option>
                                     </select>
+
+
                                 </div>
+
                             </div>
 
                 </div>
             </form>
+
+            {% if category == 'Music' %}
+              <div class="ms-genres-btn-box mb-20">
+                                    <div class="d-flex justify-content-xl-end flex-wrap">
+                                        <div class="add-enquiry-btn mb-20 mr-20">
+                                            <button class="ms-border-btn ms-model-show"><i
+                                                class="fa-solid fa-plus"></i>
+                                                Add Album</button>
+                                        </div>
+                                    </div>
+                                </div>
+            {% endif %}
+              {% if category == 'Images' %}
+              <div class="ms-genres-btn-box mb-20">
+                                    <div class="d-flex justify-content-xl-end flex-wrap">
+                                        <div class="add-enquiry-btn mb-20 mr-20">
+                                            <a class="ms-border-btn" href="{% url 'my_galleries' %}"><i
+                                                class="fa-solid fa-plus" ></i>
+                                                Add Gallery</a>
+                                        </div>
+                                    </div>
+                                </div>
+            {% endif %}
                 <div class="ms-product-wrap ms-product-grid mb-65">
                  {% for item in data %}
                     {% if category == 'Images' %}
                         {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
                     {% elif category == 'Music' %}
-                        {% include 'Music_cards.html' with item=item image='assets/img/Images/sound.png' %}
+                        {% include 'Music_cards.html' with item=item albums=albums image='assets/img/Images/sound.png' category=category %}
                     {% elif category == 'Video' %}
                         {% include 'Video_cards.html' with item=item image='assets/img/Images/pngegg.png' %}
                     {% elif category == 'Poem' %}
                         {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
                     {% elif category == 'Speech' %}
-                        {% include 'Speech_cards.html' with item=item image='assets/img/Images/sound.png' %}
+                        {% include 'Speech_cards.html' with item=item image='assets/img/Images/product-01.png' %}
                     {% endif %}
                  {% endfor %}
                 </div>
@@ -186,19 +213,31 @@
             </div>
         </div>
         <!-- Partner Area End Here  -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Get the current category from a Django template variable passed as a JS variable
-                var category = "{{ category }}";  // Assuming category is passed in from the template context
 
-                // Get all labels with the class `nav-link`
+
+
+    </div>
+
+ <div class="modal fade ms-model1 zindex-99999" id="ms-model">
+        {% include 'AddAlbum.html' %}
+    </div>
+
+
+  <!-- Include jQuery first, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var category = "{{ category }}";
+
+
                 var labels = document.querySelectorAll('.nav-link');
 
-                // Loop through each label and check if the data-category matches the currentCategory
+
                 labels.forEach(function (label) {
                     if (label.getAttribute('data-category') === category) {
                         label.setAttribute('aria-selected', 'true');
-                        label.classList.add('active');  // Add active class if you need
+                        label.classList.add('active');
+
                     } else {
                         label.setAttribute('aria-selected', 'false');
                         label.classList.remove('active');
@@ -206,6 +245,20 @@
                 });
             });
 
-        </script>
-    </div>
+
+
+        $(document).ready(function() {
+            $('.ms-model-show').on('click', function (e) {
+                $('#ms-model').modal('show');
+                e.preventDefault();
+            });
+
+            $('.ms-close-btn').on('click', function (e) {
+                $('#ms-model').modal('hide');
+                e.preventDefault();
+            });
+        });
+    </script>
+
+
 {% endblock %}

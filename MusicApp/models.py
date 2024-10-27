@@ -1,5 +1,7 @@
 from mongoengine import Document, StringField, FileField, DateTimeField, FloatField, BooleanField, ReferenceField
-from UserApp.models import User
+
+import UserApp.models
+
 
 class MusicArt(Document):
     title = StringField(max_length=400)
@@ -9,4 +11,5 @@ class MusicArt(Document):
     public = BooleanField()
     rating = FloatField()
     created_at = DateTimeField()
-    user = ReferenceField(User, required=True, verbose_name="Utilisateur")
+    user = ReferenceField(UserApp.models.User)
+

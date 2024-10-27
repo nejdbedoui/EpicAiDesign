@@ -10,3 +10,4 @@ urlpatterns = [
     path('detail/<str:video_id>/', views.get_video, name='get_video'),
     path('video/<str:video_id>/', views.serve_video, name='serve_video'),
 ]
+

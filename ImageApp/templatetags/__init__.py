@@ -1,0 +1,1 @@
+from . import image_to_base64_filter

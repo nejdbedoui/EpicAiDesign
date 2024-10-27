@@ -12,11 +12,14 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     path('users/', include('UserApp.urls')),
     path('speech/', include('SpeechApp.urls')),
+    path('animation/', include('SpeechApp.urls')),
     path('image/', include('ImageApp.urls')),
     path('music/', include('MusicApp.urls')),
     path('poem/', include('PoemApp.urls')),
     path('video/', include('VideoApp.urls')),
     path('tagsVideo/', include('TagsVideoApp.urls')),
+    path('Album/', include('AlbumApp.urls')),
+    path('Gallery/', include('GalleryApp.urls')),
 ]
 if settings.DEBUG is True:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

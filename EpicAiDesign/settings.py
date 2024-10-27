@@ -4,6 +4,7 @@ import time
 from django.contrib.messages import constants as message_constants
 import os
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-x1ol#f1$-!56j3o*g$kjck##rd2w294644vt)i_sym2o8f^7g%'
@@ -50,8 +51,11 @@ INSTALLED_APPS = [
     'PoemApp',
     'VideoApp',
     'TagsVideoApp',
+    'ReelApp',
     'embed_video',
-    'ReelApp'
+    'AlbumApp',
+    'GalleryApp',
+
 ]
 
 MIDDLEWARE = [
@@ -139,3 +143,6 @@ MESSAGE_TAGS = {
 }
 
 LOGIN_URL = '/users/login'
+
+
+

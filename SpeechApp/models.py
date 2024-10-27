@@ -9,3 +9,4 @@ class Speech(Document):
     created_at = DateTimeField(default=datetime.now, verbose_name="Date de création")
     user = ReferenceField(User, required=True, verbose_name="Utilisateur")
     speech_file = StringField(required=True, verbose_name="Chemin du fichier speech")
+

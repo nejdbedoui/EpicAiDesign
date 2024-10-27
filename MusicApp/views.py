@@ -7,6 +7,9 @@ from django.contrib import messages
 from django.shortcuts import render
 import requests
 from django.conf import settings
+
+
+import UserApp.models
 from EpicAiDesign.External_url import *
 from MusicApp.models import MusicArt
 
@@ -64,12 +67,16 @@ def save(request, title, category, prompt, default):
     audio_data = default.split(',')[1]
     audio_bytes = base64.b64decode(audio_data)
     audio_file = BytesIO(audio_bytes)
+
+    user = UserApp.models.User.objects.get(email=request.session['user_email'])
     music_art = MusicArt(
         title=title,
         category=category,
         audio=audio_file,
         duration=0.0,
-        created_at=datetime.now()
+
+        created_at=datetime.now(),
+        user=user
     )
     music_art.save()
     messages.success(request, "Your music has been saved successfully!")
@@ -85,5 +92,4 @@ def Details_music(request, id):
     music = MusicArt.objects(id=id).first()
     encoded_string = base64.b64encode(music.audio.read()).decode('utf-8')
     base64_audio = f"data:audio/mp3;base64,{encoded_string}"
-    print(music.audio.read())
     return render(request, 'detailsmusic.html', {'base64_audio': base64_audio, 'music': music})

@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2>Add Image to Gallery</h2>
+                <form method="POST" >
+                    {% csrf_token %}
+                    <div class="ms-product-wrap ms-product-grid mb-65">
+                        {% for item in data %}
+                            <div class="image-card">
+                                <!-- Inclure chaque carte d'image -->
+
+                                <!-- Ajouter une case à cocher pour chaque image -->
+                                <input type="checkbox" name="selected_images" value="{{ item.id }}">
+                                <label for="selected_images">
+                                    {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <button class="ms-border-btn" type="submit" href="{% url 'my_galleries' %}"><i
+                                                class="fa-solid fa-plus" ></i>
+                                                Add to Gallery</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
