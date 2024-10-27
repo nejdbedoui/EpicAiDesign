@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'embed_video',
     'AlbumApp',
     'GalleryApp',
+    'BlogSpeechApp',
 
 ]
 

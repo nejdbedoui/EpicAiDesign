@@ -1,6 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+import UserApp.models
 from EpicAiDesign.External_url import poeme_Ai_API_URL
 from PoemApp.models import PoemArt
 import requests
@@ -51,11 +53,13 @@ def generate(request, title, category, prompt):
     return render(request, 'addPoem.html',
                   {'title': title, 'category': category, 'prompt': prompt, 'text': text})
 def save(request, title, category, prompt, text):
+    user = UserApp.models.User.objects.get(email=request.session['user_email'])
     poem = PoemArt(
         title=title,
         category=category,
         text=text,
-        created_at=datetime.now()
+        created_at=datetime.now(),
+        user=user
     )
     poem.save()
     messages.success(request, "Your music has been saved successfully!")

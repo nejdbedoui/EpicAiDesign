@@ -11,5 +11,6 @@ class ImageArt(Document):
     rating = FloatField()
     created_at = DateTimeField()
     user = ReferenceField(UserApp.models.User)
+
     def __str__(self):
         return self.title

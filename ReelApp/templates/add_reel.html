@@ -1,10 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'index.html' %}
+{% load static %}
+{% load image_to_base64_filter %}
+{% load music_to_base64_filter %}
+{% block content %}
+    <div style="max-width: 50%" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="ms-genres-model-content">
+                    <div class="ms-genres-top text-center mb-50">
+                        <h2 class="ms-title2 white-text mb-20">Create a Reel </h2>
+                    </div>
+                    <form method="POST" action="{% url 'add_reel' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="ms-genres-enquire-form">
+                            <div class="ms-input-box">
+                                <label>Reel title</label>
+                                <input name="title" type="text" placeholder="Album Title">
+                            </div>
+                            <div class="ms-input-box">
+                                <label>Track</label>
+                                <select class="ms-nice-select" name="selected_music">
+                                <option value="">Select a Track</option>
+                                    {% for item in music %}
+                                        <option value="{{ item.id }}">{{ item.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
-</body>
-</html>
+                            <div class="ms-input-box">
+                                <label>Images</label>
+                                <select class="ms-nice-select" name="selected_image">
+                                 <option value="">Select an Image</option>
+                                    {% for item in images %}
+                                        <option value="{{ item.id }}">{{ item.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="ms-input-box">
+                                <label>Videos</label>
+                                <select class="ms-nice-select" name="selected_video">
+                                <option value="">Select a Video</option>
+                                    {% for item in videos %}
+                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="ms-input-box">
+                                <label>Poem</label>
+                                <select class="ms-nice-select" name="selected_poem">
+                                <option value="">Select a Poem</option>
+                                    {% for item in poem %}
+                                        <option value="{{ item.id }}">{{ item.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="ms-input-box">
+                                <label>Speech</label>
+                                <select class="ms-nice-select" name="selected_speech">
+                                <option value="">Select a Speech</option>
+                                    {% for item in speech %}
+                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="ms-submit-btn text-lg-end mb-10">
+                                                <button type="submit" class="unfill__btn">Create a Reel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
