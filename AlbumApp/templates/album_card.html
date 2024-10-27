@@ -1,0 +1,142 @@
+{% load static %}
+{% load image_to_base64_filter %}
+{% load music_to_base64_filter %}
+
+<div style="max-width: 22%;" class="col-xl-4">
+                <div class="ms-event-play d-inline-block w-img p-relative mb-60">
+                   <div id="overlay-{{ album.id }}" class="ms-event-play-overlay p-absolute"></div>
+                    <img src='{{ album.cover|to_base64 }}' alt="event img">
+                    <script type="application/json" id="album-tracks-{{ forloop.counter }}">
+            [
+            {% for track in album.tracks %}
+                "{{ track.audio|music_to_base64 }}"{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            ]
+        </script>
+
+        <!-- Pass the serialized JSON data using playAudio -->
+        <button onclick="playAudio(this, JSON.parse(document.getElementById('album-tracks-{{ forloop.counter }}').textContent), '{{ album.id }}')" class="ms-play-border ms-event-play-btn">
+    Play
+</button>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="ms-event-bg p-relative mb-60"
+                    data-background="{% static 'assets/img/bg/work-bg.jpg' %}">
+                    <div class="ms-event-overlay p-absolute"></div>
+                    <div class="ms-event-wrap">
+                        <div class="ms-event-inner-box">
+                            <div class="ms-event-active">
+                                <div class="ms-event-item">
+                                    <div class="ms-event-item-top">
+                                        <h3 class="ms-event-title"><a href="event-details.html">{{ album.title }}</a></h3>
+                                        <p class="ms-event-text">{{ album.description}}</p>
+                                        <div class="ms-event-inner">
+                                         <button class="ms-model2-show"  data-toggle="modal" data-target="#ms-model-{{ album.id }}"><i class="fa-solid fa-plus"></i>Rate</button>
+
+                                            <div class="ms-event-location">
+                                                    <div class="ms-fun-brand-rating">
+                                                        <i {% if album.rating >= 1 %} class="flaticon-star" {% else %} class="flaticon-star unrate" {% endif %}></i>
+                                                        <i {% if album.rating >= 2 %} class="flaticon-star" {% else %} class="flaticon-star unrate" {% endif %}></i>
+                                                        <i {% if album.rating >= 3 %} class="flaticon-star" {% else %} class="flaticon-star unrate" {% endif %}></i>
+                                                        <i {% if album.rating >= 4 %} class="flaticon-star" {% else %} class="flaticon-star unrate" {% endif %}></i>
+                                                        <i {% if album.rating >= 5 %} class="flaticon-star" {% else %} class="flaticon-star unrate" {% endif %}></i>
+
+                                                        </div>
+                                            </div>
+                                            <div class="ms-event-date">
+                                                <span>Created At {{ album.created_at }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<!-- Modal for Add to Album -->
+<div class="modal fade ms-model2 zindex-99999" id="ms-model-{{ album.id }}" >
+    {% include 'rating_card.html' with ambum=album %}
+</div>
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    var audioPlayer = new Audio();
+    var currentTrackIndex = 0;
+    var isPlaying = false;
+    var trackList = [];
+    var activeButton = null;
+$(document).ready(function () {
+        $('.ms-model2-show').on('click', function (e) {
+            var targetModal = $(this).data('target');
+            $(targetModal).modal('show');
+            e.preventDefault();
+        });
+        $('.ms-close-btn').on('click', function (e) {
+            var targetModal = $(this).closest('.modal');
+            targetModal.modal('hide');
+            e.preventDefault();
+        });
+    });
+    function playAudio(button, tracks, id) {
+
+        var overlayDiv = document.getElementById("overlay-" + id);
+
+
+        if (trackList.length === 0 || trackList !== tracks) {
+
+            if (isPlaying && activeButton && activeButton !== button) {
+                audioPlayer.pause();
+                isPlaying = false;
+                activeButton.textContent = "Play";
+                activeButton.style.color = "";
+                var activeOverlayDiv = document.getElementById("overlay-" + activeButton.getAttribute('data-album-id'));
+                activeOverlayDiv.classList.add("ms-event-play-overlay", "p-absolute");
+            }
+
+
+            trackList = tracks;
+            currentTrackIndex = 0;
+        }
+
+        if (!isPlaying) {
+            audioPlayer.src = trackList[currentTrackIndex];
+            audioPlayer.play()
+                .then(() => {
+                    isPlaying = true;
+                    button.textContent = "Pause";
+                    button.style.color = "#5ee4c1";
+                    overlayDiv.classList.remove("ms-event-play-overlay", "p-absolute");
+                    activeButton = button;
+                    button.setAttribute('data-album-id', id);
+                })
+                .catch(error => console.error("Error playing audio:", error));
+        } else {
+            audioPlayer.pause();
+            isPlaying = false;
+            button.textContent = "Play";
+            button.style.color = "";
+            overlayDiv.classList.add("ms-event-play-overlay", "p-absolute");
+        }
+
+        audioPlayer.onended = function() {
+            currentTrackIndex++;
+            if (currentTrackIndex < trackList.length) {
+                audioPlayer.src = trackList[currentTrackIndex];
+                audioPlayer.play();
+            } else {
+                currentTrackIndex = 0;
+                isPlaying = false;
+                button.textContent = "Play";
+                overlayDiv.classList.add("ms-event-play-overlay", "p-absolute");
+            }
+        };
+
+
+
+    }
+</script>

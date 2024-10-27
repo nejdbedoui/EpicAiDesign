@@ -1,0 +1,329 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Products Area Start  -->
+    <div class="ms-product-area  p-relative">
+
+        <div class="container">
+            <div class="row mb-30">
+                <div class="col-lg-5">
+                    <div class="tab-pane fade active show" id="nav1" role="tabpanel"
+                         aria-labelledby="nav1-tab">
+                        <div class="product__modal-img w-img">
+                            <div role="tabpanel"
+                                 aria-labelledby="nav-profile-tab" tabindex="0">
+                                <div class="ms-genres-tab2-text ms-genres-tab2-padding ms-bg-2 ms-br-15">
+                                    <h4 class="ms-title3 white-text text-center mb-25">{{ title }}
+                                    </h4>
+                                    <div class="ms-genres-img fix m-img ms-br-15 mb-60 d-inline-block">
+                                        <div id="waveform"></div>
+                                    </div>
+                                    <div class="ms-border2 mb-30">
+                                        <h4 class="ms-title3 white-text text-center mb-30">Demo
+                                            Tracks
+                                        </h4>
+                                    </div>
+                                    <div class="ms-genres-audio">
+                                        <div class="ms-header2-song">
+                                            <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                                            <div id="jp_container_1" class="jp-audio" role="application"
+                                                 aria-label="media player">
+                                                <div class="jp-type-playlist">
+                                                    <!-- Hidden Singer Info -->
+                                                    <div class="ms-header2-singer d-none">
+
+                                                        <div class="ms-header2-singer-img">
+
+                                                            <a href="#"><img
+                                                                    src="{% static 'assets/img/header/singer.png' %}"
+                                                                    alt="singer"></a>
+                                                        </div>
+
+
+                                                        <div class="ms-header2-singer-text">
+                                                            <h4><a href="genres-details.html">Lazy Soul</a></h4>
+                                                            <div class="jp-title"></div>
+                                                        </div>
+                                                    </div>
+                                                    <audio id="audio-player" style="display:none;"></audio>
+                                                    <!-- Controls -->
+                                                    <div class="">
+                                                        <div class="jp-controls-holder"
+                                                             style="display: flex; align-items: center">
+
+                                                            <button class="jp-play jp-btn" tabindex="0"
+                                                                    onclick="playAudio()"><i class="fa fa-play"></i>
+                                                            </button>
+                                                            <div class="jp-times">
+                                                                <div class="jp-current-time" role="timer"
+                                                                     aria-label="time"></div>
+                                                            </div>
+                                                            -
+                                                            <div class="jp-times">
+                                                                <div class="jp-duration" role="timer"
+                                                                     aria-label="duration"></div>
+                                                            </div>
+
+                                                            <!-- Volume Control -->
+                                                            <div class="jp-volume-controls">
+                                                                <button class="jp-mute jp-btn" tabindex="0"
+                                                                        onclick="toggleMute()">
+                                                                    <i id="volume-icon" class="fa fa-volume-up"></i>
+                                                                </button>
+                                                                <div class="jp-volume-bar"
+                                                                     onclick="changeVolume(event)">
+                                                                    <div class="jp-volume-bar-value"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <!-- Time and Progress -->
+                                                    </div>
+
+                                                    <!-- Playlist -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- jPlayer Initialization -->
+                                    <script>
+                                        var audioData = "{{ base64_audio|escapejs }}";
+                                        var volumeIcon = document.getElementById("volume-icon");
+                                        var volumeBarValue = document.querySelector(".jp-volume-bar-value");
+                                        var audioPlayer = document.getElementById("audio-player");
+                                        var currentTimeElement = document.querySelector(".jp-current-time");
+                                        var durationElement = document.querySelector(".jp-duration");
+                                        var playBarElement = document.querySelector(".jp-play-bar");
+                                        var seekBarElement = document.querySelector(".jp-seek-bar");
+                                        var audiolvl = audioPlayer.volume;
+                                        var playButton = document.querySelector(".jp-play i");
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            var wavesurfer = WaveSurfer.create({
+                                                container: '#waveform',
+                                                waveColor: '#A8DBA8',
+                                                progressColor: '#3B8686',
+                                                height: 100,
+                                                barWidth: 2
+                                            });
+                                            wavesurfer.load(audioData);
+                                            audioPlayer.addEventListener('timeupdate', function () {
+                                                var currentTime = audioPlayer.currentTime;
+                                                wavesurfer.seekTo(currentTime / audioPlayer.duration);
+                                            });
+
+                                            wavesurfer.on('seek', function (progress) {
+                                                console.log("Seeked to:", progress * wavesurfer.getDuration());
+                                            });
+                                        });
+
+
+                                        function playAudio() {
+                                            if (audioPlayer.paused) {
+                                                if (!audioPlayer.src) {
+                                                    audioPlayer.src = audioData;
+                                                }
+                                                audioPlayer.play()
+                                                    .then(() => {
+                                                        console.log("Audio is playing");
+                                                        playButton.classList.remove("fa-play");
+                                                        playButton.classList.add("fa-pause");
+                                                    })
+                                                    .catch(error => {
+                                                        console.error("Error playing audio:", error);
+                                                    });
+                                            } else {
+                                                audioPlayer.pause();
+                                                playButton.classList.remove("fa-pause");
+                                                playButton.classList.add("fa-play");
+                                                console.log("Audio is paused");
+                                            }
+                                        }
+
+                                        audioPlayer.addEventListener('timeupdate', function () {
+                                            var currentTime = audioPlayer.currentTime;
+                                            var duration = audioPlayer.duration;
+                                            var progress = (currentTime / duration) * 100;
+                                            currentTimeElement.textContent = formatTime(currentTime);
+                                            playBarElement.style.width = progress + "%";
+                                        });
+
+                                        audioPlayer.addEventListener('loadedmetadata', function () {
+                                            var duration = audioPlayer.duration;
+                                            durationElement.textContent = formatTime(duration);
+                                        });
+                                        audioPlayer.addEventListener('ended', function () {
+                                            var playButton = document.querySelector(".jp-play i");
+                                            playButton.classList.remove("fa-pause");
+                                            playButton.classList.add("fa-play");
+                                            console.log("Audio has ended, play button reset.");
+                                        });
+                                        seekBarElement.addEventListener('click', function (event) {
+                                            var barWidth = seekBarElement.offsetWidth;
+                                            var clickPosition = event.offsetX;
+                                            var newTime = (clickPosition / barWidth) * audioPlayer.duration;
+
+                                            audioPlayer.currentTime = newTime;
+                                        });
+
+                                        function toggleMute() {
+                                            audioPlayer.muted = !audioPlayer.muted;
+
+                                            if (audioPlayer.muted) {
+                                                audiolvl = audioPlayer.volume;
+                                                audioPlayer.volume = 0;
+                                                volumeIcon.classList.remove("fa-volume-up");
+                                                volumeIcon.classList.add("fa-volume-mute");
+                                            } else {
+                                                audioPlayer.volume = audiolvl;
+                                                volumeIcon.classList.remove("fa-volume-mute");
+                                                volumeIcon.classList.add("fa-volume-up");
+                                            }
+                                        }
+
+                                        function changeVolume(event) {
+                                            var volumeBar = document.querySelector(".jp-volume-bar");
+                                            var barWidth = volumeBar.offsetWidth;
+                                            var clickPosition = event.offsetX;
+                                            var newVolume = clickPosition / barWidth;
+
+                                            audioPlayer.volume = newVolume;
+                                            volumeBarValue.style.width = (newVolume * 100) + "%";
+                                            audiolvl = newVolume;
+                                            if (newVolume === 0) {
+                                                volumeIcon.classList.remove("fa-volume-up");
+                                                volumeIcon.classList.add("fa-volume-mute");
+                                            } else {
+                                                volumeIcon.classList.remove("fa-volume-mute");
+                                                volumeIcon.classList.add("fa-volume-up");
+                                            }
+                                        }
+
+                                        function formatTime(seconds) {
+                                            var minutes = Math.floor(seconds / 60);
+                                            var seconds = Math.floor(seconds % 60);
+                                            if (seconds < 10) {
+                                                seconds = "0" + seconds;
+                                            }
+                                            if (minutes < 10) {
+                                                minutes = "0" + minutes;
+                                            }
+                                            return minutes + ":" + seconds;
+                                        }
+                                    </script>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
+                        <div class="product__modal-img w-img">
+                            <img src="{% static 'assets/img/shop/product-02.png' %}" alt="product image">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">
+                        <div class="product__modal-img w-img">
+                            <img src="{% static 'assets/img/shop/product-03.png' %}" alt="product image">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab">
+                        <div class="product__modal-img w-img">
+                            <img src="{% static 'assets/img/shop/product-04.png' %}" alt="product image">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ms-product-modal-content mb-60">
+                        <form method="POST" enctype="multipart/form-data" action="{% url 'music' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="audio" value="{{ base64_audio }}" id="audioInput">
+                            <div class="d-flex align-items-center justify-content-between mb-35 mr-40"></div>
+                            <h2 class="ms-product-title2 mb-30">
+                                <a href="addmusic.html">Create your music Here </a>
+                            </h2>
+                            <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
+                                <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
+                                    <div class="ms-product-stock-item mb-20">
+                                        <input style="display: none" type="radio" name="category"
+                                               value="Classical music" id="nav-faq-1"
+                                               {% if category == "Classical music" %}checked{% endif %}>
+                                        <label class="nav-link active" id="nav-faq-1-tab" for="nav-faq-1"
+                                               data-bs-toggle="tab" data-bs-target="#nav-faq-1" role="tab"
+                                               aria-controls="nav-faq-1" aria-selected="true">
+                                            Classical
+                                        </label>
+                                    </div>
+                                    <div class="ms-product-stock-item mb-20">
+                                        <input style="display: none" type="radio" name="category" value="Pop Music"
+                                               id="nav-faq-2"
+                                               {% if category == "Pop Music" %}checked{% endif %}>
+                                        <label class="nav-link" id="nav-faq-2-tab" for="nav-faq-2" data-bs-toggle="tab"
+                                               data-bs-target="#nav-faq-2" role="tab" aria-controls="nav-faq-2"
+                                               aria-selected="false">
+                                            Pop
+                                        </label>
+                                    </div>
+                                    <div class="ms-product-stock-item mb-20">
+                                        <input style="display: none" type="radio" name="category" value="Rock Music"
+                                               id="nav-faq-3"
+                                               {% if category == "Rock Music" %}checked{% endif %}>
+                                        <label class="nav-link" id="nav-faq-3-tab" for="nav-faq-3" data-bs-toggle="tab"
+                                               data-bs-target="#nav-faq-3" role="tab" aria-controls="nav-faq-3"
+                                               aria-selected="false">
+                                            Rock
+                                        </label>
+                                    </div>
+                                    <div class="ms-product-stock-item mb-20">
+                                        <input style="display: none" type="radio" name="category" value="Hip-hop Music"
+                                               id="nav-faq-4"
+                                               {% if category == "Hip-hop Music" %}checked{% endif %}>
+                                        <label class="nav-link" id="nav-faq-4-tab" for="nav-faq-4" data-bs-toggle="tab"
+                                               data-bs-target="#nav-faq-4" role="tab" aria-controls="nav-faq-4"
+                                               aria-selected="false">
+                                            Hip-hop
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                                        <div class="ms-input-box style-2">
+                                            <input name="title" value='{{ title }}' placeholder="Enter your title here...">
+                                        </div>
+
+
+                                    <div class="ms-input-box style-2">
+                                        <textarea cols="30" rows="10" name="prompt"
+                                                  placeholder="Enter your prompt here...">{{ prompt_default }}</textarea>
+                                    </div>
+
+                            <div class="product__modal-form">
+                                <div class="product-quantity-cart ms-product-quantity-flex mb-30">
+                                    <div class="offcanvas__btn mb-30">
+                                        <button type="submit" name="action" value="generate" class="ms-border-btn"><i
+                                                class="fa-solid fa-plus"></i>
+                                            Generate
+                                        </button>
+                                    </div>
+                                    <div class="banner__form-button">
+                                        <button name="action" value="save" class="ms-white-bg"><i
+                                                class="flaticon-heart"></i> Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Products Area End  -->
+
+
+{% endblock %}
