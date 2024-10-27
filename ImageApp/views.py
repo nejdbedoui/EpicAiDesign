@@ -10,6 +10,8 @@ import requests
 from django.conf import settings
 from EpicAiDesign.External_url import *
 from ImageApp.models import ImageArt
+import UserApp.models
+
 
 
 def Generate_image(request):
@@ -79,10 +81,13 @@ def save(request, title, category, prompt, base64_image, images):
     image_file = BytesIO(image_bytes)
 
     # Enregistrer l'image dans la base de données
+    user = UserApp.models.User.objects.get(email=request.session['user_email'])
     image_art = ImageArt(
         title=title,
         category=category,
-        created_at=datetime.now()
+        created_at=datetime.now(),
+        user = user
+
     )
     image_art.image.put(image_file, content_type="image/png")
     image_art.save()
