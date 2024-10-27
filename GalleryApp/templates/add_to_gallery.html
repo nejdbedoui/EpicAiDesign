@@ -5,28 +5,76 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h2>Add Image to Gallery</h2>
-                <form method="POST" >
+                <form method="POST">
                     {% csrf_token %}
                     <div class="ms-product-wrap ms-product-grid mb-65">
                         {% for item in data %}
                             <div class="image-card">
                                 <!-- Inclure chaque carte d'image -->
-
                                 <!-- Ajouter une case à cocher pour chaque image -->
-                                <input type="checkbox" name="selected_images" value="{{ item.id }}">
-                                <label for="selected_images">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="selected_images" value="{{ item.id }}">
+                                    <span class="checkmark"></span>
                                     {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
                                 </label>
                             </div>
                         {% endfor %}
                     </div>
 
-                    <button class="ms-border-btn" type="submit" href="{% url 'my_galleries' %}"><i
-                                                class="fa-solid fa-plus" ></i>
-                                                Add to Gallery</button>
+                    <button class="ms-border-btn" type="submit" href="{% url 'my_galleries' %}">
+                        <i class="fa-solid fa-plus"></i>
+                        Add to Gallery
+                    </button>
                 </form>
-
             </div>
         </div>
     </div>
+
+    <style>
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none; /* Empêche la sélection du texte */
+        }
+
+        .custom-checkbox input {
+            display: none; /* Cache la checkbox par défaut */
+        }
+
+        .checkmark {
+            width: 20px; /* Taille de la case */
+            height: 20px; /* Taille de la case */
+            background-color: #eee; /* Couleur de fond par défaut */
+            border: 2px solid #ccc; /* Bordure par défaut */
+            border-radius: 4px; /* Coins arrondis */
+            margin-right: 10px; /* Espace entre la case et le texte */
+            position: relative;
+        }
+
+        .custom-checkbox input:checked + .checkmark {
+            background-color: #2196F3; /* Couleur de fond lorsque la case est cochée */
+            border-color: #2196F3; /* Bordure lorsque la case est cochée */
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custom-checkbox input:checked + .checkmark:after {
+            display: block;
+        }
+
+        .custom-checkbox .checkmark:after {
+            left: 7px; /* Positionnement de la coche */
+            top: 3px; /* Positionnement de la coche */
+            width: 5px; /* Taille de la coche */
+            height: 10px; /* Taille de la coche */
+            border: solid white;
+            border-width: 0 2px 2px 0; /* Crée une coche */
+            transform: rotate(45deg); /* Inclinaison de la coche */
+        }
+    </style>
 {% endblock %}
