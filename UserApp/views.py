@@ -245,6 +245,7 @@ def editProfile(request):
 
 def gallery(request):
     user_id = request.session.get('user_id')
+    albums = None
     data = None
     category = request.POST.get('category')
     sort = request.POST.get('sort')
@@ -254,29 +255,16 @@ def gallery(request):
         category = 'Images'
     match category:
         case "Images":
-            data = ImageApp.models.ImageArt.objects.all().order_by(f"-{sort}")
+            data = ImageApp.models.ImageArt.objects.filter(user=user_id).order_by(f"-{sort}")
         case "Music":
-            data = MusicApp.models.MusicArt.objects.all().order_by(f"-{sort}")
-
-            albums = AlbumApp.models.MusicAlbum.objects.all()
+            data = MusicApp.models.MusicArt.objects.filter(user=user_id).order_by(f"-{sort}")
+            albums = AlbumApp.models.MusicAlbum.objects.filter(user=user_id)
         case "Video":
-            data = VideoApp.models.VideoArt.objects.all().order_by(f"-{sort}")
+            data = VideoApp.models.GeneratedVideo.objects.filter(user=user_id)
         case "Poem":
-            data = PoemApp.models.PoemArt.objects.all().order_by(f"-{sort}")
+            data = PoemApp.models.PoemArt.objects.filter(user=user_id).order_by(f"-{sort}")
         case "Speech":
-            data = SpeechApp.models.Speech.objects.all().order_by(f"-{sort}")
-    # match category:
-    #     case "Images":
-    #         data = ImageApp.models.ImageArt.objects(user=user).all().order_by(f"-{sort}")
-    #     case "Music":
-    #         data = MusicApp.models.MusicArt.objects(user=user).all().order_by(f"-{sort}")
-    #         albums = AlbumApp.models.MusicAlbum.objects(user=user).all()
-    #     case "Video":
-    #         data = VideoApp.models.GeneratedVideo.objects.filter(user=user_id)
-    #     case "Poem":
-    #         data = PoemApp.models.PoemArt.objects(user=user).all().order_by(f"-{sort}")
-    #     case "Speech":
-    #         data = SpeechApp.models.Speech.objects.filter(user=user_id)
+            data = SpeechApp.models.Speech.objects.filter(user=user_id)
     return render(request, 'gallery.html',
                   {'category': category, 'data': data, 'sort': sort, 'albums': albums})
 
