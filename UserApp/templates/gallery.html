@@ -44,6 +44,18 @@
                                                 Poem
                                             </button>
                                         </div>
+                
+                                        
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Licences" class="nav-link"
+                                                    id="nav-faq-6-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-6" role="tab"
+                                                    aria-controls="nav-faq-6"
+                                                    aria-selected="false" data-category="Licences">
+                                                Licences
+                                            </button>
+                                        </div>
+                                        
 
                                         <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
                                             <button type="submit" name="category" value="Speech" class="nav-link"
@@ -130,7 +142,9 @@
                         {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
                     {% elif category == 'Speech' %}
                         {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
-                    {% endif %}
+                    {% elif category == 'Licences' %}
+                        {% include 'Licences_card.html' with item=item image='assets/img/Images/licence.png' %}    {% endif %}
+                    
                  {% endfor %}
                 </div>
                 <div class="basic-pagination ms-border5">

@@ -33,7 +33,11 @@
                     <form id="delete-form-{{ item.id }}" action="{% url 'delete_poem' item.id %}" method="POST" style="display:none;">
                         {% csrf_token %}
                     </form>
-                </li>
+                    <li> <!-- Flex pour aligner les éléments -->
+                        <a href="{% url 'add_license' item.id|stringformat:"s" %}" class="ms-add-license-show text-success" data-toggle="modal"> <!-- Ajout d'une classe de couleur -->
+                            <i class="fa-solid fa-plus-circle"></i> Ajouter Licence
+                        </a>
+                    </li>
                 
             </ul>
         </div>

@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="ms-product-area p-relative">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <h1 class="ms-product-title2 mb-30">Ajouter une licence pour {{ poem.title }}</h1>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+            <div class="row mb-30">
+                <div class="col-lg-6">
+                    <div class="ms-product-modal-content mb-60">
+                        <div class="ms-product-stock sku ms-border2 d-inline-block pb-10 mb-30">
+                            <div class="ms-input-box style-2">
+                                <label for="license_name">Nom de la licence :</label>
+                                <input type="text" name="license_name" id="license_name" placeholder="Entrez le nom de la licence" required>
+                            </div>
+                        </div>
+                        <div class="ms-product-short-desc mb-25">
+                            <div class="col-lg-12">
+                                <div class="ms-input-box style-2">
+                                    <label for="license_description">Description de la licence :</label>
+                                    <textarea name="license_description" id="license_description" cols="30" rows="10" placeholder="Entrez une description de la licence"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__modal-form">
+                        <div class="product-quantity-cart ms-product-quantity-flex mb-30">
+                            <div class="offcanvas__btn mb-30">
+                                <button type="submit" class="ms-border-btn"><i class="fa-solid fa-plus"></i> Ajouter la licence</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

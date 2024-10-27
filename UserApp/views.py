@@ -277,6 +277,9 @@ def gallery(request):
     #         data = PoemApp.models.PoemArt.objects(user=user).all().order_by(f"-{sort}")
     #     case "Speech":
     #         data = SpeechApp.models.Speech.objects(user=user).all().order_by(f"-{sort}")
+        case "Licences":
+            user_id = request.session.get('user_id')
+            data =PoemApp.models.License.objects.filter(user=user_id).all().order_by(f"-{sort}")   
     return render(request, 'gallery.html',
                   {'category': category, 'data': data, 'sort': sort, 'albums': albums})
 
