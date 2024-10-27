@@ -1,10 +1,11 @@
+import requests
+import os
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse
 from .forms import SpeechForm, UpdateSpeechForm
 from .models import Speech
 from UserApp.decorator import custom_login_required
-import requests
-import os
 from django.conf import settings
 import uuid
 
@@ -115,4 +116,7 @@ def serve_audio(request, speech_id):
         return response
     except Speech.DoesNotExist:
         return HttpResponse("Audio not found", status=404)
+
+
+
 
