@@ -11,4 +11,3 @@ class GeneratedVideo(Document):
     user = ReferenceField(User, required=True, verbose_name="Utilisateur")
     video_file = StringField(required=True, verbose_name="Chemin du fichier vidéo")
     tags = ListField(ReferenceField(Tag), verbose_name="Tags associés")
-
