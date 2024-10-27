@@ -223,17 +223,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <script>
             document.addEventListener("DOMContentLoaded", function () {
-                // Get the current category from a Django template variable passed as a JS variable
-                var category = "{{ category }}";  // Assuming category is passed in from the template context
+                var category = "{{ category }}";
 
-                // Get all labels with the class `nav-link`
+
                 var labels = document.querySelectorAll('.nav-link');
 
-                // Loop through each label and check if the data-category matches the currentCategory
+
                 labels.forEach(function (label) {
                     if (label.getAttribute('data-category') === category) {
                         label.setAttribute('aria-selected', 'true');
-                        label.classList.add('active');  // Add active class if you need
+                        label.classList.add('active');
                     } else {
                         label.setAttribute('aria-selected', 'false');
                         label.classList.remove('active');

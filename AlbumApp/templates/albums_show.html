@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<section class="ms-event-area pb-70">
+    <div class="container">
+        <div class="row align-items-end mb-25 bdFadeUp">
+            <div class="col-lg-8">
+                <div class="section__title-wrapper mb-40 bd-title-anim">
+                    <span class="section__subtitle">Special Albums</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="trending-btn mb-40 d-flex justify-content-lg-end">
+                    <a class="border__btn" href="event.html">View All Event</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            {% for album in albums %}
+            {% include 'album_card.html' with album=album %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+{% endblock %}
