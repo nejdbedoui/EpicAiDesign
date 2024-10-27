@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load image_to_base64_filter %}
+
+{% block content %}
+<main>
+    <h2 class="text-center">{{ gallery.title }}</h2>
+    <div class="text-center mb-3">
+        <img src="{{ gallery.cover|to_base64 }}" alt="{{ gallery.title }}" style="width: 300px; height: auto;">
+    </div>
+    <p>Rating: {{ gallery.rating }}/5</p>
+    <p>Number of Images: {{ images.count }}</p>
+
+    <h4>Images in this Gallery</h4>
+    <div class="row">
+        {% for image in images %}
+            <div class="col-md-4">
+                <div class="image-container">
+                    <img src="{{ image.image.url }}" alt="Image" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

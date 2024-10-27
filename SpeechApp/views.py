@@ -8,6 +8,7 @@ from .models import Speech
 from UserApp.decorator import custom_login_required
 from django.conf import settings
 import uuid
+from base64 import b64encode
 
 
 @custom_login_required
@@ -100,8 +101,20 @@ def delete_speech(request, speech_id):
 
 @custom_login_required
 def get_speech(request, speech_id):
+    user_id = request.session.get('user_id')
+
     speech = Speech.objects.get(id=speech_id)
-    return render(request, 'speech_detail.html', {'speech': speech})
+    blogs = speech.blogs
+
+    for blog in blogs:
+        if blog.user.image:
+            image = blog.user.image.read()
+            encoded_image = b64encode(image).decode('utf-8')
+            blog.user.image_url = f"data:image/jpeg;base64,{encoded_image}"
+        else:
+            blog.user.image_url = None
+
+    return render(request, 'speech_detail.html', {'speech': speech, 'blogs': blogs, 'user_id': user_id})
 
 @custom_login_required
 def serve_audio(request, speech_id):
@@ -116,7 +129,3 @@ def serve_audio(request, speech_id):
         return response
     except Speech.DoesNotExist:
         return HttpResponse("Audio not found", status=404)
-
-
-
-
