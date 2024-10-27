@@ -104,6 +104,7 @@ def delete_poem(request, id):
 
     return redirect('Gallery') 
 
+
 def add_license(request, id):
     try:
         poem = PoemArt.objects.get(id=id)

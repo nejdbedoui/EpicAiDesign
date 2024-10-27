@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+<<<<<<< HEAD
+    <file url="file://$PROJECT_DIR$" libraries="{jplayer, jquery-3.6.0, sweetalert2, wavesurfer.js}" />
+=======
     <file url="file://$PROJECT_DIR$" libraries="{@coreui/coreui, jplayer, jquery-3.6.0, sweetalert2, wavesurfer.js}" />
+>>>>>>> 31048a1ab8292946577aeb18d50c15ac8b018416
   </component>
 </project>

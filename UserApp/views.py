@@ -8,7 +8,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
-
 import AlbumApp.models
 import ImageApp.models
 import MusicApp.models
@@ -245,6 +244,8 @@ def editProfile(request):
 
 
 def gallery(request):
+    user_id = request.session.get('user_id')
+    albums = None
     data = None
     category = request.POST.get('category')
     sort = request.POST.get('sort')
@@ -252,17 +253,16 @@ def gallery(request):
         sort = 'created_at'
     if category is None:
         category = 'Images'
-    albums = None
     match category:
         case "Images":
-            data = ImageApp.models.ImageArt.objects.all().order_by(f"-{sort}")
+            data = ImageApp.models.ImageArt.objects.filter(user=user_id).order_by(f"-{sort}")
         case "Music":
-            data = MusicApp.models.MusicArt.objects.all().order_by(f"-{sort}")
-            albums = AlbumApp.models.MusicAlbum.objects.all()
+            data = MusicApp.models.MusicArt.objects.filter(user=user_id).order_by(f"-{sort}")
+            albums = AlbumApp.models.MusicAlbum.objects.filter(user=user_id)
         case "Video":
-            data = VideoApp.models.VideoArt.objects.all().order_by(f"-{sort}")
+            data = VideoApp.models.GeneratedVideo.objects.filter(user=user_id)
         case "Poem":
-            data = PoemApp.models.PoemArt.objects.all().order_by(f"-{sort}")
+            data = PoemApp.models.PoemArt.objects.filter(user=user_id).order_by(f"-{sort}")
         case "Speech":
             data = SpeechApp.models.Speech.objects.all().order_by(f"-{sort}")
     # match category:

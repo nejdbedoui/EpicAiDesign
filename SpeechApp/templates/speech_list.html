@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="ms-news-area pt-130">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="ms-news-wrap mb-70">
+                        {% for speech in speechs %}
+                            <article>
+                                <div class="ms-news-box mb-25">
+                                    <div class="ms-news-img m-img fix ms-br-15 mb-30">
+                                        {% if speech.speech_file %}
+                                            <audio width="100%" height="100%" controls>
+                                                <source src="{% url 'serve_audio' speech_id=speech.id %}"
+                                                        type="audio/mp3">
+                                                Votre navigateur ne supporte pas l'élément audio.
+                                            </audio>
+                                        {% else %}
+                                            <p>Aucun fichier audio disponible.</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-news-content">
+                                        <div class="ms-news-meta-wrap mb-20">
+                                            <span class="ms-news-by">By :</span>
+                                            <div class="ms-news-meta d-inline-block">
+                                                <span>{{ speech.user.username }}</span>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="ms-news-title2 mb-30"><a href="{% url 'get_speech' speech.id %}">{{ speech.name }}</a></h3>
+                                        <p class="mb-45">{{ speech.text }}</p>
+                                        <p class="mb-45">Created at : <strong>{{ speech.created_at }}</strong></p>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

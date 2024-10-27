@@ -1,6 +1,7 @@
 {% load static %}
 <div style="max-width: 300px" class="ms-product-item">
     <div class="ms-product-img p-relative mb-20">
+
         <a href="{% url 'musicdetails' item.id %}">
             <img src="{% static image %}" alt="product img">
         </a>
@@ -10,7 +11,8 @@
                 <li><a href="{% url 'musicdetails' item.id %}"><i class="flaticon-view"></i></a></li>
 
                     <li>
-                        <a class="ms-model2-show" data-toggle="modal" data-target="#ms-model-{{ item.id }}" href="javascript:void(0);">
+                        <a class="ms-model2-show" data-toggle="modal" data-target="#ms-model-{{ item.id }}"
+                           href="javascript:void(0);">
                             <i class="fa-regular fa-folder-plus"></i>
                         </a>
                     </li>
@@ -46,21 +48,23 @@
     <span class="ms-product-price ms-text2">{{ item.category }}</span>
     {% if item.text %}
         <br>
+
         <span class="ms-product-price ms-text2">{{ item.text|slice:":30" }}...</span>
     {% endif %}
 </div>
 
 <!-- Modal for Add to Album -->
-<div class="modal fade ms-model2 zindex-99999" id="ms-model-{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade ms-model2 zindex-99999" id="ms-model-{{ item.id }}" tabindex="-1" role="dialog"
+     aria-labelledby="modalLabel" aria-hidden="true">
     {% include 'Add_To_Album.html' with item=item albums=albums %}
 </div>
 
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Show the modal when the Add to Album button is clicked
-        $('.ms-model2-show').on('click', function(e) {
+        $('.ms-model2-show').on('click', function (e) {
             // Use data-target to find the correct modal
             var targetModal = $(this).data('target');
             $(targetModal).modal('show');
@@ -68,7 +72,7 @@
         });
 
         // Close button handler if you have one in your modal
-        $('.ms-close-btn').on('click', function(e) {
+        $('.ms-close-btn').on('click', function (e) {
             // Find the correct modal using the button context
             var targetModal = $(this).closest('.modal');
             targetModal.modal('hide');

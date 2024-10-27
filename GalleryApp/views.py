@@ -5,6 +5,8 @@ import UserApp.models
 from GalleryApp.models import ImageGallery
 from ImageApp.models import ImageArt
 from UserApp.views import gallery
+# from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 
 def add_gallery(request):
@@ -79,3 +81,58 @@ def add_img_to_gallery (request) :
             messages.error(request, 'Gallery not found.')
 
     return redirect('my_galleries')
+
+
+# def update_gallery(request, id):
+#     gallery = get_object_or_404(ImageGallery, id=id)
+#
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         cover = request.FILES.get('cover')
+#
+#         if title:
+#             gallery.title = title
+#         if cover:
+#             gallery.cover = cover
+#
+#         gallery.save()
+#         messages.success(request, 'Gallery updated successfully!')
+#         return redirect('my_galleries')
+#
+#     return render(request, 'update_gallery.html', {'gallery': gallery})
+
+
+def update_gallery(request, id):
+    try:
+        gallery = ImageGallery.objects.get(id=id)
+    except ImageGallery.DoesNotExist:
+        raise Http404("Gallery not found")
+
+    # Continuer le traitement de mise à jour ici
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        cover = request.FILES.get('cover')
+
+        if title:
+            gallery.title = title
+        if cover:
+            gallery.cover = cover
+
+        gallery.save()
+        messages.success(request, "Gallery updated successfully!")
+        return redirect('my_galleries')
+
+    return render(request, 'update_gallery.html', {'gallery': gallery})
+
+
+def gallery_details(request, id):
+    try:
+        gallery = ImageGallery.objects.get(id=id)
+        images = gallery.images.all()  # Récupérez toutes les images associées à la galerie
+    except ImageGallery.DoesNotExist:
+        raise Http404("Gallery not found")
+
+    return render(request, 'gallery_details.html', {
+        'gallery': gallery,
+        'images': images,
+    })

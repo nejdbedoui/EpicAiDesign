@@ -11,7 +11,7 @@
                  {% csrf_token %}
                 <input hidden="hidden" name="category" value={{ category }}>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         <div class="ms-product-stock sku  d-inline-block ">
                             <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
                                     <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                                 <div class="ms-genres-filter ms-genres-border ms-genres-select text-md-end mb-10">
 
                                     <span class="ms-genres-text mr-15">Sort by :</span>
@@ -102,12 +102,14 @@
                                         <option value="title" {% if sort == 'title' %}selected{% endif %}>Name</option>
                                     </select>
 
+
                                 </div>
 
                             </div>
 
                 </div>
             </form>
+
             {% if category == 'Music' %}
               <div class="ms-genres-btn-box mb-20">
                                     <div class="d-flex justify-content-xl-end flex-wrap">
@@ -137,7 +139,7 @@
                     {% elif category == 'Music' %}
                         {% include 'Music_cards.html' with item=item albums=albums image='assets/img/Images/sound.png' category=category %}
                     {% elif category == 'Video' %}
-                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                        {% include 'Video_cards.html' with item=item image='assets/img/Images/pngegg.png' %}
                     {% elif category == 'Poem' %}
                         {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
                     {% elif category == 'Speech' %}
@@ -226,6 +228,8 @@
         </div>
         <!-- Partner Area End Here  -->
 
+
+
     </div>
 
  <div class="modal fade ms-model1 zindex-99999" id="ms-model">
@@ -237,23 +241,24 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <script>
             document.addEventListener("DOMContentLoaded", function () {
-                // Get the current category from a Django template variable passed as a JS variable
-                var category = "{{ category }}";  // Assuming category is passed in from the template context
+                var category = "{{ category }}";
 
-                // Get all labels with the class `nav-link`
+
                 var labels = document.querySelectorAll('.nav-link');
 
-                // Loop through each label and check if the data-category matches the currentCategory
+
                 labels.forEach(function (label) {
                     if (label.getAttribute('data-category') === category) {
                         label.setAttribute('aria-selected', 'true');
-                        label.classList.add('active');  // Add active class if you need
+                        label.classList.add('active');
+
                     } else {
                         label.setAttribute('aria-selected', 'false');
                         label.classList.remove('active');
                     }
                 });
             });
+
 
 
         $(document).ready(function() {

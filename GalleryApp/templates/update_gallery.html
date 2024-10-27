@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <div class="ms-genres-item ms-genres-flex mb-25">
+                    <div class="ms-genres-img ms-br-15 fix w-img genres-img-214">
+                        <!-- Aperçu de l'image de couverture existante -->
+                        <img id="cover-preview" src="{{ gallery.cover.url }}" alt="{{ gallery.title }}">
+                    </div>
+                    <div class="ms-genres-content p-relative">
+                        <h2 class="ms-genres-title">Edit Gallery</h2>
+
+                        <form method="POST" action="{% url 'update_gallery' gallery.id %}" enctype="multipart/form-data" class="mt-4">
+                            {% csrf_token %}
+                            <div class="mb-3">
+        <div class="ms-input-box style-2">
+            <input id="title" name="title" type="text" placeholder="Gallery Title" value="{{ gallery.title }}" required>
+        </div>
+    </div>
+                            <div style="display: flex; justify-content: center; align-items: center; text-align: center;" class="ms-upload-img">
+                            <div class="ms-upload-file image-upload">
+                                <label for="cover">Cover Image</label>
+                                <input id="cover" type="file" name="cover" accept="image/*" class="form-control" onchange="previewCover()" >
+
+                            </div>
+                            </div>
+                             <br>
+
+    <button class="ms-border-btn" type="submit"><i class="fa-solid fa-edit"></i> Update Gallery</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Script pour afficher un aperçu de la nouvelle image de couverture sélectionnée
+    function previewCover() {
+        const fileInput = document.getElementById('cover');
+        const preview = document.getElementById('cover-preview');
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+{% endblock %}

@@ -19,5 +19,4 @@ path('licenses/delete/<str:id>/', views.delete_license, name='delete_license'),
 
 
 
-
 ]

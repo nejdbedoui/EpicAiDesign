@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="ms-news-area pt-130">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="ms-news-wrap mb-70">
+                        <article>
+                            <div class="ms-news-box mb-25">
+                                <div class="ms-news-img m-img fix ms-br-15 mb-30">
+                                    {% if speech.speech_file %}
+                                        <audio width="100%" height="100%" controls>
+                                            <source src="{% url 'serve_audio' speech_id=speech.id %}"
+                                                    type="audio/mp3">
+                                            Votre navigateur ne supporte pas l'élément audio.
+                                        </audio>
+                                    {% else %}
+                                        <p>Aucun fichier audio disponible.</p>
+                                    {% endif %}
+                                </div>
+                                <div class="ms-news-content">
+                                    <div class="ms-news-meta-wrap mb-20">
+                                        <span class="ms-news-by">By :</span>
+                                        <div class="ms-news-meta d-inline-block">
+                                            <span>{{ speech.user.username }}</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="ms-news-title2 mb-30">{{ speech.name }}</h3>
+                                    <p class="mb-45">{{ speech.text }}</p>
+                                    <p class="mb-25">Display for all users : <strong>{{ speech.display }}</strong></p>
+                                    <p class="mb-45">Created at : <strong>{{ speech.created_at }}</strong></p>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="ms-comment-box mb-65 mt-65">
+                            <h3 class="ms-title4 mb-55">Comments :</h3>
+                            <div class="ms-comment-list-wrap">
+                                {% for blog in blogs %}
+                                    <div class="ms-comment-list ms-border2">
+                                        <div class="ms-comment-img">
+                                            <img src="{{ blog.user.image_url }}" alt="author">
+                                        </div>
+                                        <div class="ms-comment-content">
+                                            <div class="ms-comment-title">
+                                                {% if user_id|stringformat:"s" == blog.user.id|stringformat:"s" %}
+                                                    <span class="ms-reply"><a href="{% url 'delete_blog' blog.id %}">Delete</a></span>
+                                                {% endif %}
+                                                <h3>{{ blog.user.username }}</h3>
+                                                <span>{{ blog.created_at }}</span>
+                                                <p>{{ blog.text }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="ms-comment-form">
+                            <h3 class="ms-title4 mb-35">Leave a Comments</h3>
+                            <form method="POST" action="{% url 'add_blog' speech.id %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="ms-input2-box mb-30">
+                                                    <textarea cols="30" rows="10" name="text"
+                                                              placeholder="Write Comments . . ."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="ms-submit-btn">
+                                            <button class="unfill__btn" type="submit">Post
+                                                Comment
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
