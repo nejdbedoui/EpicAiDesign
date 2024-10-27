@@ -29,13 +29,12 @@
                                             </div>
 
                                         </div>
-                                        <h3 class="ms-news-title2 mb-30">{{ speech.name }}</h3>
+                                        <h3 class="ms-news-title2 mb-30"><a href="{% url 'get_speech' speech.id %}">{{ speech.name }}</a></h3>
                                         <p class="mb-45">{{ speech.text }}</p>
                                         <p class="mb-45">Created at : <strong>{{ speech.created_at }}</strong></p>
                                     </div>
                                 </div>
                             </article>
-
                         {% endfor %}
                     </div>
                 </div>
