@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="ms-news-area pt-130">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="ms-news-wrap mb-70">
+                        <article>
+                            <div class="ms-news-box mb-25">
+                                <div class="ms-news-img m-img fix ms-br-15 mb-30">
+                                    {% if video.video_file %}
+                                        <video width="100%" height="100%" controls>
+                                            <source src="{% url 'serve_video' video_id=video.id %}"
+                                                    type="video/mp4">
+                                            Votre navigateur ne supporte pas la balise vidéo.
+                                        </video>
+                                    {% else %}
+                                        <p>Aucun fichier vidéo disponible.</p>
+                                    {% endif %}
+                                </div>
+                                <div class="ms-news-content">
+                                    <div class="ms-news-meta-wrap mb-20">
+                                        <span class="ms-news-by">By :</span>
+                                        <div class="ms-news-meta d-inline-block">
+                                            <span>{{ video.user.username }}</span>
+                                            <span class="ms-news-by">Tags :</span>
+                                            <div class="ms-news-meta d-inline-block">
+                                                    <span>
+                                                        {% for tag in video.tags %}
+                                                            {{ tag.name }}{% if not forloop.last %} - {% endif %}
+                                                        {% endfor %}
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3 class="ms-news-title2 mb-30">{{ video.name }}</h3>
+                                    <p class="mb-45">{{ video.prompt }}</p>
+                                    <p class="mb-25">Display for all users : <strong>{{ video.display }}</strong></p>
+                                    <p class="mb-45">Created at : <strong>{{ video.created_at }}</strong></p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

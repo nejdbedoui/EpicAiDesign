@@ -1,301 +1,276 @@
+{% load static %}
 
- {% load static %}
-    <!-- Offcanvas area start -->
-    <div class="fix">
-        <div class="offcanvas__info">
-            <div class="offcanvas__wrapper">
-                <div class="offcanvas__content">
-                    <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
-                        <div class="offcanvas__logo">
-                            <a href="{% url 'home' %}">
-                                <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo">
-                            </a>
-                        </div>
-                        <div class="offcanvas__close">
-                            <button>
-                                <i class="fal fa-times"></i>
-                            </button>
-                        </div>
+
+<!-- Offcanvas area start -->
+<div class="fix">
+    <div class="offcanvas__info">
+        <div class="offcanvas__wrapper">
+            <div class="offcanvas__content">
+                <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
+                    <div class="offcanvas__logo">
+                        <a href="{% url 'home' %}">
+                            <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo">
+                        </a>
                     </div>
-                    <div class="offcanvas__user mb-30 d-xxl-none">
-                        <div class="user__acount">
+                    <div class="offcanvas__close">
+                        <button>
+                            <i class="fal fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="offcanvas__user mb-30 d-xxl-none">
+                    <div class="user__acount">
                             <span>
                                 <a href="javascript:void(0)"><i class="flaticon-user"></i></a>
                             </span>
-                            <div class="user__name-mail">
-                                <h4 class="user__name"><a href="javascript:void(0)">Johnson</a></h4>
-                                <p class="user__mail">johnson@webmail.com</p>
-                            </div>
+                        <div class="user__name-mail">
+                            <h4 class="user__name"><a href="javascript:void(0)">Johnson</a></h4>
+                            <p class="user__mail">johnson@webmail.com</p>
                         </div>
                     </div>
-                    <div class="offcanvas__search mb-30">
-                        <form action="#">
-                            <input type="text" placeholder="Search Here">
-                            <button type="submit"><i class="far fa-search"></i></button>
-                        </form>
-                    </div>
-                    <div class="hr-1 mt-30 mb-30 d-xl-none"></div>
-                    <div class="mobile-menu fix mb-30  d-xl-none"></div>
-                    <div class="hr-1 mt-30 mb-30 d-xl-none"></div>
-                    <div class="offcanvas__btn mb-30">
-                        <a class="ms-border-btn" href="services.html"><i class="fa-solid fa-plus"></i> List Your
-                            Service</a>
-                    </div>
-                    <div class="offcanvas__social">
-                        <div class="ms-footer-social mb-0">
-                            <a href="https://www.linkedin.com/" title="Instagram" target="_blank">IN</a>
-                            <a href="https://twitter.com/" title="Twitter" target="_blank">TW</a>
-                            <a href="https://www.facebook.com/" title="Facebook" target="_blank">FB</a>
-                        </div>
+                </div>
+                <div class="offcanvas__search mb-30">
+                    <form action="#">
+                        <input type="text" placeholder="Search Here">
+                        <button type="submit"><i class="far fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="hr-1 mt-30 mb-30 d-xl-none"></div>
+                <div class="mobile-menu fix mb-30  d-xl-none"></div>
+                <div class="hr-1 mt-30 mb-30 d-xl-none"></div>
+                <div class="offcanvas__btn mb-30">
+                    <a class="ms-border-btn" href="services.html"><i class="fa-solid fa-plus"></i> List Your
+                        Service</a>
+                </div>
+                <div class="offcanvas__social">
+                    <div class="ms-footer-social mb-0">
+                        <a href="https://www.linkedin.com/" title="Instagram" target="_blank">IN</a>
+                        <a href="https://twitter.com/" title="Twitter" target="_blank">TW</a>
+                        <a href="https://www.facebook.com/" title="Facebook" target="_blank">FB</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="offcanvas__overlay"></div>
-    <div class="offcanvas__overlay-white"></div>
-    <!-- Offcanvas area start -->
+<div class="offcanvas__overlay"></div>
+<div class="offcanvas__overlay-white"></div>
+<!-- Offcanvas area start -->
 
-    <!-- Header area start -->
-    <header>
-        <div id="header-sticky" class="header__area header-1 ms-header-fixed ms-bg-body">
-            <div class="container-fluid ms-maw-1710">
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        <div class="mega__menu-wrapper p-relative">
-                            <div class="header__main d-flex align-items-center justify-content-between">
-                                <div class="header__logo pt-25 pb-25">
-                                    <a href="{% url 'home' %}">
-                                        <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo not found">
-                                    </a>
-                                </div>
-                                <div class="d-none d-xxl-block">
-                                    <div class="browse-filter p-relative ms-browse-act-wrap">
-                                        <div class="ms-browse-icon ms-cp">
-                                            <a class="browse-filter__text" href="javascript:void(0)"><i
-                                                    class="flaticon-options-lines"></i>
-                                                Browse Acts</a>
+<!-- Header area start -->
+<header>
+    <div id="header-sticky" class="header__area header-1 ms-header-fixed ms-bg-body">
+        <div class="container-fluid ms-maw-1710">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <div class="mega__menu-wrapper p-relative">
+                        <div class="header__main d-flex align-items-center justify-content-between">
+                            <div class="header__logo pt-25 pb-25">
+                                <a href="{% url 'home' %}">
+                                    <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo not found">
+                                </a>
+                            </div>
+
+
+                                <div class="mean__menu-wrapper">
+                                    <div class="main-menu main-menu-ff-space">
+                                        <nav id="mobile-menu">
+                                            <ul>
+                                                <li>
+                                                    <a href="{% url 'home' %}">Home</a>
+
+                                                </li>
+                                                <li>
+                                                     <a href="{% url 'Gallery' %}">My Gallery</a>
+                                                </li>
+                                                <li class="has-dropdown">
+                                                    <a href="">Public Gallery</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="{% url 'Gallery' %}">Image</a></li>
+                                                        <li><a href="{% url 'Gallery' %}">Music</a></li>
+                                                        <li><a href="{% url 'Gallery' %}">Poem</a></li>
+                                                        <li><a href="{% url 'list_speechs' %}">Speech</a></li>
+                                                        <li><a href="{% url 'list_videos' %}">Video</a></li>
+                                                        <li><a href="{% url 'Gallery' %}">Reel</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    {% if not request.session.profile_image and not request.session.user_name %}
+                                                    <div class="enquiry__list ml-10 mr-10 ms-browse-act-wrap p-relative">
+                                                        <div class="ms-enquiry-box p-relative d-none d-xl-inline-flex">
+                                                            <a href="{% url 'login' %}"><i
+                                                                    class="flaticon-star icon"></i> <span class="text">Start Now</span>
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                    {% endif %}
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                        <!-- for wp -->
+                                        <div class="header__hamburger ml-50 d-none">
+                                            <button type="button" class="hamburger-btn offcanvas-open-btn">
+                                                <span>01</span>
+                                                <span>01</span>
+                                                <span>01</span>
+                                            </button>
                                         </div>
-                                        <div class="ms-browse-act-item-wrap p-absolute">
-                                            <div class="ms-song-item">
-                                                <div class="ms-song-img p-relative">
-                                                    <a href="genres.html"><img src="{% static 'assets/img/genres/genres-01.jpg' %}"
-                                                            alt="brand-song"></a>
-                                                </div>
-                                                <div class="ms-song-content">
-                                                    <h3 class="ms-song-title"><a href="genres.html">The Different
-                                                            Lights</a>
-                                                    </h3>
-                                                </div>
+                                    </div>
+                                </div>
+
+                            <div class="header__right">
+                                <div class="header__action-inner d-flex align-items-center">
+                                    {% if request.session.profile_image and request.session.user_name %}
+                                              <div class="d-none d-xxl-block">
+                                <div class="browse-filter p-relative ms-browse-act-wrap">
+                                    <div class="ms-browse-icon ms-cp">
+                                        <a class="browse-filter__text" href="javascript:void(0)"><i
+                                                class="flaticon-options-lines"></i>
+                                            Create New</a>
+                                    </div>
+                                    <div class="ms-browse-act-item-wrap p-absolute">
+                                        <div class="ms-song-item">
+                                            <div class="ms-song-img p-relative">
+                                                <a href="{% url 'add_image' %}"><img
+                                                        src="{% static 'assets/img/genres/genres-01.jpg' %}"
+                                                        alt="brand-song"></a>
                                             </div>
-                                            <div class="ms-song-item">
-                                                <div class="ms-song-img p-relative">
-                                                    <a href="genres.html"><img src="{% static 'assets/img/genres/genres-02.jpg' %}"
-                                                            alt="brand-song"></a>
-                                                </div>
-                                                <div class="ms-song-content">
-                                                    <h3 class="ms-song-title"><a href="genres.html">The Sweet
-                                                            lockdown</a>
-                                                    </h3>
-                                                </div>
+                                            <div class="ms-song-content">
+                                                <h3 class="ms-song-title"><a href="{% url 'add_image' %}">Image</a>
+                                                </h3>
                                             </div>
-                                            <div class="ms-song-item">
-                                                <div class="ms-song-img p-relative">
-                                                    <a href="genres.html"><img src="../../static/assets/img/genres/genres-03.jpg"
-                                                            alt="brand-song"></a>
-                                                </div>
-                                                <div class="ms-song-content">
-                                                    <h3 class="ms-song-title"><a href="genres.html">The Sonics
-                                                            Corporate
-                                                            Band</a>
-                                                    </h3>
-                                                </div>
+                                        </div>
+                                        <div class="ms-song-item">
+                                            <div class="ms-song-img p-relative">
+                                                <a href="{% url 'music' %}"><img
+                                                        src="{% static 'assets/img/genres/genres-02.jpg' %}"
+                                                        alt="brand-song"></a>
                                             </div>
-                                            <div class="ms-song-item">
-                                                <div class="ms-song-img p-relative">
-                                                    <a href="genres.html"><img src="../../static/assets/img/genres/genres-04.jpg"
-                                                            alt="brand-song"></a>
-                                                </div>
-                                                <div class="ms-song-content">
-                                                    <h3 class="ms-song-title"><a href="genres.html">The
-                                                            Northern
-                                                            Lights</a>
-                                                    </h3>
-                                                </div>
+                                            <div class="ms-song-content">
+                                                <h3 class="ms-song-title"><a href="{% url 'music' %}">Music</a>
+                                                </h3>
                                             </div>
-                                            <div class="ms-song-item">
-                                                <div class="ms-song-img p-relative">
-                                                    <a href="genres.html"><img src="../../static/assets/img/genres/genres-05.jpg"
-                                                            alt="brand-song"></a>
-                                                </div>
-                                                <div class="ms-song-content">
-                                                    <h3 class="ms-song-title"><a href="genres.html">The Sweet The
-                                                            Jets</a>
-                                                    </h3>
-                                                </div>
+                                        </div>
+                                        <div class="ms-song-item">
+                                            <div class="ms-song-img p-relative">
+                                                <a href="{% url 'add_poem' %}"><img
+                                                        src="{% static 'assets/img/genres/genres-03.jpg' %}"
+                                                        alt="brand-song"></a>
+                                            </div>
+                                            <div class="ms-song-content">
+                                                <h3 class="ms-song-title"><a href="{% url 'add_poem' %}">Poem</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="ms-song-item">
+                                            <div class="ms-song-img p-relative">
+                                                <a href="{% url 'add_speech' %}"><img
+                                                        src="{% static 'assets/img/genres/genres-04.jpg' %}"
+                                                        alt="brand-song"></a>
+                                            </div>
+                                            <div class="ms-song-content">
+                                                <h3 class="ms-song-title"><a href="{% url 'add_speech' %}">Speech</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="ms-song-item">
+                                            <div class="ms-song-img p-relative">
+                                                <a href="{% url 'add_video' %}"><img
+                                                        src="{% static 'assets/img/genres/genres-05.jpg' %}"
+                                                        alt="brand-song"></a>
+                                            </div>
+                                            <div class="ms-song-content">
+                                                <h3 class="ms-song-title"><a href="{% url 'add_video' %}">Video</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="ms-song-item">
+                                            <div class="ms-song-img p-relative">
+                                                <a href="genres.html"><img
+                                                        src="{% static 'assets/img/genres/genres-05.jpg' %}"
+                                                        alt="brand-song"></a>
+                                            </div>
+                                            <div class="ms-song-content">
+                                                <h3 class="ms-song-title"><a href="genres.html">Reel</a>
+                                                </h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="header__right">
-                                    <div class="mean__menu-wrapper">
-                                        <div class="main-menu main-menu-ff-space">
-                                            <nav id="mobile-menu">
-                                                <ul>
-                                                    <li >
-                                                        <a href="{% url 'home' %}">Home</a>
-
-                                                    </li>
-                                                    <li>
-                                                        <a href="about.html">About us</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="work-system.html">How It Works</a>
-                                                    </li>
-                                                    <li class="has-dropdown has-mega-menu">
-                                                        <a href="javascript:void(0)">Pages</a>
-                                                        <ul class="mega-menu">
-                                                            <li>
-                                                                <a href="javasript:void(0);"
-                                                                    class="mega-menu-title">Page
-                                                                    Layout
-                                                                    1</a>
-                                                                <ul>
-                                                                    <li><a href="index.html">Home Style 01</a></li>
-                                                                    <li><a href="index-2.html">Home Style 02</a></li>
-                                                                    <li><a href="index-3.html">Home Style 03</a></li>
-                                                                    <li><a href="index-rtl.html">Home Style 01 RTL</a>
-                                                                    </li>
-                                                                    <li><a href="index-2-rtl.html">Home Style 02 RTL</a>
-                                                                    </li>
-                                                                    <li><a href="index-3-rtl.html">Home Style 03 RTL</a>
-                                                                    </li>
-                                                                    <li><a href="about.html">About</a></li>
-
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javasript:void(0);"
-                                                                    class="mega-menu-title">Page
-                                                                    Layout
-                                                                    2</a>
-                                                                <ul>
-                                                                    <li><a href="genres.html">genres</a></li>
-                                                                    <li><a href="genres-details.html">genres details</a>
-                                                                    </li>
-                                                                    <li><a href="team.html">Team</a></li>
-                                                                    <li><a href="team-details.html">team details</a>
-                                                                    </li>
-                                                                    <li><a href="enquiry-list.html">enquiry list</a>
-                                                                    </li>
-                                                                    <li><a href="work-system.html">how it works</a></li>
-                                                                    <li><a href="faq.html">FAQ</a></li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javasript:void(0);"
-                                                                    class="mega-menu-title">Page
-                                                                    Layout
-                                                                    3</a>
-                                                                <ul>
-                                                                    <li><a href="event.html">event</a></li>
-                                                                    <li><a href="event-details.html">event details</a>
-                                                                    </li>
-                                                                    <li><a href="ideas-advice.html">ideas advice</a>
-                                                                    </li>
-                                                                    <li><a href="ideas-advice-details.html">ideas advice
-                                                                            details</a></li>
-                                                                    <li><a href="news.html">blog</a></li>
-                                                                    <li><a href="news-details.html">blog details</a>
-                                                                    </li>
-                                                                    <li><a href="join.html">Join Us</a></li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javasript:void(0);"
-                                                                    class="mega-menu-title">Page
-                                                                    Layout
-                                                                    4</a>
-                                                                <ul>
-                                                                    <li><a href="shop.html">Shop</a></li>
-                                                                    <li><a href="shop-details.html">Shop
-                                                                            Details</a></li>
-                                                                    <li><a href="cart.html">cart</a></li>
-                                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                                    <li><a href="login.html">Login</a></li>
-                                                                    <li><a href="signup.html">Register</a></li>
-                                                                    <li><a href="contact.html">contact</a></li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="has-dropdown">
-                                                        <a href="news.html">Blog</a>
-                                                        <ul class="submenu">
-                                                            <li><a href="news.html">Blog</a></li>
-                                                            <li><a href="news-details.html">Blog details</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <a href="contact.html"> Help Center</a>
-                                                    </li>
-                                                    <li>
-                                                         <div class="enquiry__list ml-10 mr-10 ms-browse-act-wrap p-relative">
-                                            <div class="ms-enquiry-box p-relative d-none d-xl-inline-flex">
-                                                <a href="{% url 'login' %}"><i class="flaticon-star icon"></i> <span class="text">Start Now</span> </a>
-                                            </div>
-
-                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                            <!-- for wp -->
-                                            <div class="header__hamburger ml-50 d-none">
-                                                <button type="button" class="hamburger-btn offcanvas-open-btn">
-                                                    <span>01</span>
-                                                    <span>01</span>
-                                                    <span>01</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="header__action-inner d-flex align-items-center">
-                                        {% if request.session.profile_image and request.session.user_name %}
-                                            <div class="user__acount d-none d-xxl-inline-flex">
+                            </div>
+                                        <div class="user__acount d-none d-xxl-inline-flex">
                                                 <span>
                                                     <a href="{% url 'userInfo' %}">
-                                                        <img src="{{ request.session.profile_image }}" alt="Profile Image" style="width: 100%; height: 100%;background-size: cover; border-radius: 50%;">
+                                                        <img src="{{ request.session.profile_image }}"
+                                                             alt="Profile Image"
+                                                             style="width: 100%; height: 100%;background-size: cover; border-radius: 50%;">
                                                     </a>
                                                 </span>
-                                            </div>
-                                        {% endif %}
-                                        {% if not request.session.profile_image and request.session.user_name %}
-                                            <div class="user__acount d-none d-xxl-inline-flex">
+                                        </div>
+                                    {% endif %}
+                                    {% if not request.session.profile_image and request.session.user_name %}
+                                        <div class="user__acount d-none d-xxl-inline-flex">
                                                 <span>
                                                     <a href="{% url 'userInfo' %}">
                                                         <i class="flaticon-user"></i>
                                                     </a>
                                                 </span>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="header__hamburger">
-                                        <div class="sidebar__toggle">
-                                            <a class="bar-icon" href="javascript:void(0)">
-                                                <span></span>
-                                                <span></span>
-                                                <span></span>
-                                            </a>
                                         </div>
+                                    {% endif %}
+                                </div>
+                                <div class="header__hamburger">
+                                    <div class="sidebar__toggle">
+                                        <a class="bar-icon" href="javascript:void(0)">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% if messages %}
+                        <div class="alert-container">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <style>
+                            .fade-out {
+                                opacity: 0;
+                                transition: opacity 0.5s ease;
+                            }
+                        </style>
+
+                        <script>
+                            const alertDuration = 2000;
+
+                            document.querySelectorAll('.alert').forEach((alert) => {
+                                setTimeout(() => {
+                                    alert.classList.add('fade-out'); // Add the fade-out class
+                                    setTimeout(() => {
+                                        const bsAlert = new bootstrap.Alert(alert);
+                                        bsAlert.close(); // Close the alert after fading out
+                                    }, 500); // Wait for fade-out transition to finish
+                                }, alertDuration);
+                            });
+                        </script>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    </header>
-    <!-- Header area end -->
+    </div>
+
+</header>
+<!-- Header area end -->
+
+
+

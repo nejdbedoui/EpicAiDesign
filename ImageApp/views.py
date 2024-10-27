@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def Add_image(request):
+    return render(request, 'addimage.html')

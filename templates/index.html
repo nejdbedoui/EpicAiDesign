@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{% static 'assets/app/css/fontawesome-pro.css' %}">
     <link rel="stylesheet" href="{% static 'assets/app/css/spacing.css' %}">
     <link rel="stylesheet" href="{% static 'assets/app/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/app/css/select2.min.css' %}">
 </head>
 
 <body>
@@ -79,6 +80,24 @@
     <script src="{% static 'assets/app/js/jplayer.playlist.js' %}"></script>
     <script src="{% static 'assets/app/js/settings.js' %}"></script>
     <script src="{% static 'assets/app/js/main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/jplayer/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jplayer/2.9.2/add-on/jplayer.playlist.min.js"></script>
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="{% static 'assets/app/js/select2.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2({
+                placeholder: "Select tags",
+                allowClear: true,
+                dropdownCssClass: "bg-dark text-light",
+                selectionCssClass: "form-select form-select-lg bg-dark text-light",
+            });
+        });
+    </script>
+
 </body>
 
 </html>

@@ -1,9 +1,10 @@
 from pathlib import Path
 from mongoengine import connect
 import time
+from django.contrib.messages import constants as message_constants
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 SECRET_KEY = 'django-insecure-x1ol#f1$-!56j3o*g$kjck##rd2w294644vt)i_sym2o8f^7g%'
 
@@ -13,9 +14,9 @@ ALLOWED_HOSTS = []
 
 # connect(db="aiDesign", host="mongodb+srv://nejdbedoui:6qModREgAzqUrtIw@aidesign.duaor.mongodb.net/aiDesign?retryWrites=true&w=majority")
 
+retries = 0
 
-def connect_with_retry(db, host, max_retries=20, retry_delay=3):
-    retries = 0
+def connect_with_retry(db, host, retries, max_retries=20, retry_delay=3):
     while retries < max_retries:
         try:
             connect(db=db, host=host)
@@ -33,8 +34,7 @@ def connect_with_retry(db, host, max_retries=20, retry_delay=3):
 db_name = "aiDesign"
 host_url = "mongodb+srv://nejdbedoui:6qModREgAzqUrtIw@aidesign.duaor.mongodb.net/aiDesign?retryWrites=true&w=majority"
 
-connect_with_retry(db=db_name, host=host_url)
-
+connect_with_retry(db=db_name, host=host_url, retries=retries)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,11 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'UserApp',
-    'AnimationApp',
+    'SpeechApp',
     'ImageApp',
     'MusicApp',
     'PoemApp',
     'VideoApp',
+    'TagsVideoApp',
+    'embed_video',
+    'ReelApp'
 ]
 
 MIDDLEWARE = [
@@ -82,14 +85,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'EpicAiDesign.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -106,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -115,9 +115,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -127,3 +129,13 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'testmailsenderspringboot@gmail.com'
 EMAIL_HOST_PASSWORD = 'zjakcqhzmybjuvfn'
+
+MESSAGE_TAGS = {
+    message_constants.DEBUG: 'debug',
+    message_constants.INFO: 'info',
+    message_constants.SUCCESS: 'success',
+    message_constants.WARNING: 'warning',
+    message_constants.ERROR: 'danger',
+}
+
+LOGIN_URL = '/users/login'
