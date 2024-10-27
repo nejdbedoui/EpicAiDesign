@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-white mb-4">{{ poeme.title }}</h2> <!-- Title outside of the card -->
+
+    <div class="poem-card-wrap p-relative">
+        <div class="poem-overlay p-absolute zindex--1"></div>
+        
+        <div class="poem-card border-light shadow-lg" style="background-color: rgba(0, 0, 0, 0.8); border: 1px solid grey; border-radius: 15px; padding: 20px;">
+            <div class="card-body text-light">
+                <p><strong>Category:</strong> {{ poeme.category }}</p>
+                <p><strong>Text:</strong></p>
+                <div class="poem-text">
+                    <p>{{ poeme.text|linebreaksbr }}</p> <!-- linebreaksbr for keeping line breaks -->
+                </div>
+                <p><strong>Public:</strong> {{ poeme.public|yesno:"Yes,No" }}</p>
+                <p><strong>Rating:</strong> {{ poeme.rating|default:"Not Rated" }}</p>
+                <p><strong>Created at:</strong> {{ poeme.created_at|date:"F j, Y, g:i a" }}</p>
+                
+                <p><strong>Author:</strong> {{ poeme.user.username }}</p> <!-- Assuming 'user' is a related field with 'username' -->
+            </div>
+            <div class="card-footer border-0">
+                <div class="actions">
+                    <a href="{% url 'add_poem' %}" class="btn btn-primary">Add New Poem</a>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

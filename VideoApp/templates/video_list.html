@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="ms-news-area pt-130">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-12">
+                    <div class="ms-news-wrap mb-70">
+                        {% for video in videos %}
+                            <article>
+                                <div class="ms-news-box mb-25">
+                                    <div class="ms-news-img m-img fix ms-br-15 mb-30">
+                                        {% if video.video_file %}
+                                            <video width="100%" height="100%" controls>
+                                                <source src="{% url 'serve_video' video_id=video.id %}"
+                                                        type="video/mp4">
+                                                Votre navigateur ne supporte pas la balise vidéo.
+                                            </video>
+                                        {% else %}
+                                            <p>Aucun fichier vidéo disponible.</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-news-content">
+                                        <div class="ms-news-meta-wrap mb-20">
+                                            <span class="ms-news-by">By :</span>
+                                            <div class="ms-news-meta d-inline-block">
+                                                <span>{{ video.user.username }}</span>
+                                                <span class="ms-news-by">Tags :</span>
+                                                <div class="ms-news-meta d-inline-block">
+                                                    <span>
+                                                        {% for tag in video.tags %}
+                                                            {{ tag.name }}{% if not forloop.last %} - {% endif %}
+                                                        {% endfor %}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="ms-news-title2 mb-30">{{ video.name }}</h3>
+                                        <p class="mb-45">{{ video.prompt }}</p>
+                                        <p class="mb-45">Created at : <strong>{{ video.created_at }}</strong></p>
+                                    </div>
+                                </div>
+                            </article>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-8">
+
+                    <div class="ms-product-total mb-60">
+                        <h3 class="ms-title3 white-text ms-border2 pb-35 mb-50 pt-5">Add Tag</h3>
+                        <div class="ms-coupon-form">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input name="name" type="text" placeholder="Enter your title here...">
+                                <button type="submit">Save</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="ms-news-sidebar mb-70">
+
+                        <div class="ms-news-widget">
+                            <h3 class="ms-news-widget-title">My Tags</h3>
+                            <div class="tagcloud">
+                                {% for mytag in mytags %}
+                                    <div class="ms-product-total mb-20">
+                                        <div class="ms-coupon-form">
+                                            <a href="{% url 'list_videos' %}?tag={{ mytag.id }}">{{ mytag.name }}</a>
+                                            <form action="{% url 'delete_tag' mytag.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="ms-news-widget">
+                            <h3 class="ms-news-widget-title">All Tags <a href="{% url 'list_videos' %}">( Cancel <i class="fas fa-times-circle"></i> )</a></h3>
+                            <div class="tagcloud">
+                                {% for tag in alltags %}
+                                    <a href="{% url 'list_videos' %}?tag={{ tag.id }}">{{ tag.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

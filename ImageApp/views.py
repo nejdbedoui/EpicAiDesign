@@ -4,6 +4,7 @@ from datetime import datetime
 from io import BytesIO
 from django.http import HttpResponseRedirect
 
+
 from django.contrib import messages
 from django.shortcuts import render
 import requests
