@@ -1,0 +1,79 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .card {
+        background-color: transparent;
+        border: 1px solid rgba(128, 128, 128, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 300px;
+        flex: 1 1 calc(30% - 40px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card h3 {
+        margin: 0 0 10px;
+        color: #ffffff;
+        font-size: 1.5em;
+    }
+
+    .card p {
+        color: #ffffff;
+       
+        margin: 5px 0;
+    }
+    .title {
+        text-align: center; /* Centrer le titre */
+        color: #ffffff; /* Couleur du titre */
+        margin-bottom: 30px; /* Espacement en bas */
+        font-size: 2em; /* Taille du texte */
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            flex: 1 1 calc(100% - 40px);
+        }
+    }
+</style>
+<div class="container my-5">
+    <h2 class="title">Détails de la Licence: {{ license_item.name }}</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Description</h5>
+            <p class="card-text">{{ license_item.description }}</p>
+
+            <h5 class="card-title">Créé le</h5>
+            <p class="card-text">{{ license_item.created_at|date:"F j, Y" }}</p>
+
+            <h5 class="card-title">Poème Associé</h5>
+            {% if license_item.poem %}
+                <p class="card-text">{{ license_item.poem.title }}</p>
+            {% else %}
+                <p class="card-text">Aucun poème associé.</p>
+            {% endif %}
+
+            <h5 class="card-title">Auteur</h5>
+            <p class="card-text">{{ license_item.user.username }}</p>
+
+            <a href="{% url 'Gallery' %}" class="btn btn-secondary">Retour à la Liste des Licences</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -264,7 +264,22 @@ def gallery(request):
         case "Poem":
             data = PoemApp.models.PoemArt.objects.filter(user=user_id).order_by(f"-{sort}")
         case "Speech":
-            data = SpeechApp.models.Speech.objects.filter(user=user_id)
+            data = SpeechApp.models.Speech.objects.all().order_by(f"-{sort}")
+    # match category:
+    #     case "Images":
+    #         data = ImageApp.models.ImageArt.objects(user=user).all().order_by(f"-{sort}")
+    #     case "Music":
+    #         data = MusicApp.models.MusicArt.objects(user=user).all().order_by(f"-{sort}")
+    #         albums = AlbumApp.models.MusicAlbum.objects(user=user).all()
+    #     case "Video":
+    #         data = VideoApp.models.VideoArt.objects(user=user).all().order_by(f"-{sort}")
+    #     case "Poem":
+    #         data = PoemApp.models.PoemArt.objects(user=user).all().order_by(f"-{sort}")
+    #     case "Speech":
+    #         data = SpeechApp.models.Speech.objects(user=user).all().order_by(f"-{sort}")
+        case "Licences":
+            user_id = request.session.get('user_id')
+            data =PoemApp.models.License.objects.filter(user=user_id).all().order_by(f"-{sort}")   
     return render(request, 'gallery.html',
                   {'category': category, 'data': data, 'sort': sort, 'albums': albums})
 

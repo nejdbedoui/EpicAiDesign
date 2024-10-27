@@ -11,7 +11,7 @@
                  {% csrf_token %}
                 <input hidden="hidden" name="category" value={{ category }}>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         <div class="ms-product-stock sku  d-inline-block ">
                             <div class="nav nav-tabs mb-tab-button-style " id="nav-tab" role="tablist">
                                     <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
@@ -44,6 +44,18 @@
                                                 Poem
                                             </button>
                                         </div>
+                
+                                        
+                                        <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
+                                            <button type="submit" name="category" value="Licences" class="nav-link"
+                                                    id="nav-faq-6-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#nav-faq-6" role="tab"
+                                                    aria-controls="nav-faq-6"
+                                                    aria-selected="false" data-category="Licences">
+                                                Licences
+                                            </button>
+                                        </div>
+                                        
 
                                         <div class="nav nav-tabs ms-tab-button border-0 ms-border2-btn ms-tab-prevent">
                                             <button type="submit" name="category" value="Speech" class="nav-link"
@@ -80,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                                 <div class="ms-genres-filter ms-genres-border ms-genres-select text-md-end mb-10">
 
                                     <span class="ms-genres-text mr-15">Sort by :</span>
@@ -131,8 +143,10 @@
                     {% elif category == 'Poem' %}
                         {% include 'Music_cards.html' with item=item image='assets/img/Images/poetry.png' %}
                     {% elif category == 'Speech' %}
-                        {% include 'Speech_cards.html' with item=item image='assets/img/Images/product-01.png' %}
-                    {% endif %}
+                        {% include 'Image_cards.html' with item=item image='assets/img/Images/product-01.png' %}
+                    {% elif category == 'Licences' %}
+                        {% include 'Licences_card.html' with item=item image='assets/img/Images/licence.png' %}    {% endif %}
+                    
                  {% endfor %}
                 </div>
                 <div class="basic-pagination ms-border5">
