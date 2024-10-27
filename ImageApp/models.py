@@ -1,7 +1,5 @@
 from mongoengine import Document, StringField, ImageField, DateTimeField, BooleanField, FloatField, ReferenceField
-
 import UserApp.models
-
 
 class ImageArt(Document):
     title = StringField(max_length=200)
@@ -11,5 +9,6 @@ class ImageArt(Document):
     rating = FloatField()
     created_at = DateTimeField()
     user = ReferenceField(UserApp.models.User)
+
     def __str__(self):
         return self.title
