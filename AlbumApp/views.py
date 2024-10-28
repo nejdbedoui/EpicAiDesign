@@ -78,13 +78,12 @@ def album_tracks(request, id):
     album = MusicAlbum.objects(id=id).first()
     if request.method == 'POST':
         id_music = request.POST.get('id_music')
-        print('started')
-        print(id_music)
         music = MusicApp.models.MusicArt.objects(id=id_music).first()
         if music in album.tracks:
             album.tracks.remove(music)
-            print('removed')
             album.save()
+            messages.success(request, "Track Removed From Album")
+        messages.error(request, "Track Not Found")
     return render(request, 'album_tracks.html', {'album': album})
 
 

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse
 from .forms import SpeechForm, UpdateSpeechForm
@@ -39,11 +40,14 @@ def add_speech(request):
 
                 return redirect('list_speechs')
             else:
+                messages.error(request, "Error generating speech from service.")
                 form.add_error(None, 'Error generating speech from service.')
         else:
+            messages.error(request, "Form data is not valid.")
             form.add_error(None, 'Form data is not valid.')
     else:
         form = SpeechForm()
+        messages.success(request, "Speech Added")
     return render(request, 'add_speech.html', {'form': form})
 
 
@@ -60,7 +64,7 @@ def update_speech(request, speech_id):
             speech.name = data['name']
             speech.display = data['display']
             speech.save()
-
+            messages.success(request, "Speech Updated")
             return redirect('list_speechs')
     else:
         # Pré-remplir le formulaire avec les informations de la speech

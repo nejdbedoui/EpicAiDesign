@@ -1,0 +1,210 @@
+{% load static %}
+
+ <div class="fix">
+        <div class="offcanvas__info">
+            <div class="offcanvas__wrapper">
+                <div class="offcanvas__content">
+                    <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
+                        <div class="offcanvas__logo">
+                            <a href="index.html">
+                                <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo">
+                            </a>
+                        </div>
+                        <div class="offcanvas__close">
+                            <button>
+                                <i class="fal fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="offcanvas__user mb-30 d-xxl-none">
+                        <div class="user__acount">
+                            <span>
+                                <a href="javascript:void(0)"><i class="flaticon-user"></i></a>
+                            </span>
+
+                        </div>
+                    </div>
+
+                    <div class="hr-1 mt-30 mb-30 d-xl-block"></div>
+                    <div class="mobile-menu2 fix mb-30  d-xl-block"></div>
+                    <div class="hr-1 mt-30 mb-30 d-xl-block"></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas__overlay"></div>
+    <div class="offcanvas__overlay-white"></div>
+<header>
+        <div id="header-sticky2"
+            class="ms-header2 ms-header-transparent zindex-500 transition-03 ms-header-fixed mt-40">
+            <div class="ms-header2-wrap d-flex align-items-center justify-content-between">
+                <div class="ms-header2-item">
+                    <div class="ms-header2-logo pt-5 pb-5">
+                        <a href="index.html"><img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo"></a>
+                    </div>
+                </div>
+                <div class="ms-header2-item d-none d-xl-block">
+                    <div class="ms-header2-singer-wrap d-flex align-items-center">
+
+                        <div class="ms-header2-song">
+                            <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                            <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                                <div class="jp-type-playlist">
+                                    <div class="ms-header2-singer">
+                                        <div class="ms-header2-singer-img">
+                                            <a href="#"><img src="{% static 'assets/img/header/singer.png' %}" alt="singer"></a>
+                                        </div>
+                                        <div class="ms-header2-singer-text">
+                                            <h4><a href="genres-details.html">Lazy Soul</a></h4>
+                                            <div class="jp-title"></div>
+                                        </div>
+                                    </div>
+                                    <div class="jp-gui">
+
+                                        <div class="jp-toggles d-none">
+                                            <button class="jp-repeat jp-btn" tabindex="0"><i
+                                                    class="fa fa-repeat"></i></button>
+                                            <button class="jp-shuffle jp-btn" tabindex="0"><i
+                                                    class="fa fa-random"></i></button>
+                                        </div>
+                                        <div class="jp-controls-holder">
+                                            <div class="jp-controls">
+                                                <button class="jp-previous jp-btn" tabindex="0"><i
+                                                        class="fa fa-backward"></i></button>
+                                                <button class="jp-play jp-btn" tabindex="0"><i
+                                                        class="fa fa-play"></i></button>
+                                                <button class="jp-stop jp-btn d-none" tabindex="0"><i
+                                                        class="fa fa-stop"></i></button>
+                                                <button class="jp-next jp-btn" tabindex="0"><i
+                                                        class="fa fa-forward"></i></button>
+                                            </div>
+                                            <div class="jp-times">
+                                                <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+                                            </div>
+                                            <div class="jp-progress">
+                                                <div class="jp-seek-bar">
+                                                    <div class="jp-play-bar"></div>
+                                                </div>
+                                            </div>
+                                            <div class="jp-times">
+                                                <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+                                            </div>
+
+                                        </div>
+                                        <div class="jp-volume-controls">
+                                            <button class="jp-mute jp-btn" tabindex="0"><i
+                                                    class="fa fa-volume"></i></button>
+                                            <button class="jp-volume-max d-none" tabindex="0">max
+                                                volume</button>
+                                            <div class="jp-volume-bar">
+                                                <div class="jp-volume-bar-value"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="jp-playlist d-none">
+                                        <ul>
+                                            <li>&nbsp;</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ms-header2-item">
+                    <div class="ms-header2-right d-flex align-items-center">
+                        <div class="ms-dot-menu ms-cp d-flex align-items-center">
+                            <div class="sidebar__toggle lh-1">
+                                <div class="ms-dot-list">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <span class="ms-dot-menu-text">Menu</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="user__acount d-none d-xxl-inline-flex">
+                                                <span>
+                                                    <a >
+                                                        <img src="{{ request.session.profile_image }}"
+                                                             alt="Profile Image"
+                                                             style="width: 100%; height: 100%;background-size: cover; border-radius: 50%;">
+                                                    </a>
+                                                </span>
+                                        </div>
+
+                <div class="ms-header2-item d-none">
+                    <div class="mean__menu-wrapper">
+                        <div class="main-menu main-menu-ff-space">
+                            <nav id="mobile-menu2">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'dashboard' %}">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'admin_users' %}">Users List</a>
+                                    </li>
+                                     <li>
+                                        <a href="{% url 'admin_Gallery' %}">Gallery List</a>
+                                    </li>
+                                     <li>
+                                        <a href="{% url 'admin_Albums' %}">Albums List</a>
+                                    </li>
+                                </ul>
+                                <a style="width: 100%; text-align: center; color: red"  href="{% url 'logout' %}"> <i
+                                    class="fa-solid fa-power-off"></i> Logout</a>
+                            </nav>
+                            <!-- for wp -->
+                            <div class="header__hamburger ml-50 d-none">
+                                <button type="button" class="hamburger-btn offcanvas-open-btn">
+                                    <span>01</span>
+                                    <span>01</span>
+                                    <span>01</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% if messages %}
+                        <div class="alert-container">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <style>
+                            .fade-out {
+                                opacity: 0;
+                                transition: opacity 0.5s ease;
+                            }
+                        </style>
+
+                        <script>
+                            const alertDuration = 2000;
+
+                            document.querySelectorAll('.alert').forEach((alert) => {
+                                setTimeout(() => {
+                                    alert.classList.add('fade-out'); // Add the fade-out class
+                                    setTimeout(() => {
+                                        const bsAlert = new bootstrap.Alert(alert);
+                                        bsAlert.close(); // Close the alert after fading out
+                                    }, 500); // Wait for fade-out transition to finish
+                                }, alertDuration);
+                            });
+                        </script>
+            {% endif %}
+        </div>
+
+    </header>

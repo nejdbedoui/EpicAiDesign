@@ -7,5 +7,5 @@ class ImageGallery(Document):
     cover = ImageField()
     rating = FloatField()
     created_at = DateTimeField()
-    images = ListField(ReferenceField(ImageArt))  # Liste des images dans l'album
+    images = ListField(ReferenceField(ImageArt))
     user = ReferenceField(UserApp.models.User)

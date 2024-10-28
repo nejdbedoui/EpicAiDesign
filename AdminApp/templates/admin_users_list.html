@@ -1,0 +1,39 @@
+{% extends 'backoffice/index_admin.html' %}
+{% load image_to_base64_filter %}
+{% block content %}
+    {% load static %}
+    <div class="ms-product-area pt-130 pb-70 p-relative">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="ms-product-table-wrap mb-60">
+                        <div class="ms-product-table mb-50">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>email</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td class="ms-product-name-flex"><a >
+                                            <img src="{{ user.image|to_base64 }}" alt="product">
+                                            <h6 class="ms-product-title">{{ user.username }}</h6>
+                                        </a>
+                                        </td>
+                                        <td><a class="ms-product-title">{{ user.email }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

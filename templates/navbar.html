@@ -1,64 +1,6 @@
 {% load static %}
 
 
-<!-- Offcanvas area start -->
-<div class="fix">
-    <div class="offcanvas__info">
-        <div class="offcanvas__wrapper">
-            <div class="offcanvas__content">
-                <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
-                    <div class="offcanvas__logo">
-                        <a href="{% url 'home' %}">
-                            <img src="{% static 'assets/img/logo/logo.svg' %}" alt="logo">
-                        </a>
-                    </div>
-                    <div class="offcanvas__close">
-                        <button>
-                            <i class="fal fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="offcanvas__user mb-30 d-xxl-none">
-                    <div class="user__acount">
-                            <span>
-                                <a href="javascript:void(0)"><i class="flaticon-user"></i></a>
-                            </span>
-                        <div class="user__name-mail">
-                            <h4 class="user__name"><a href="javascript:void(0)">Johnson</a></h4>
-                            <p class="user__mail">johnson@webmail.com</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="offcanvas__search mb-30">
-                    <form action="#">
-                        <input type="text" placeholder="Search Here">
-                        <button type="submit"><i class="far fa-search"></i></button>
-                    </form>
-                </div>
-                <div class="hr-1 mt-30 mb-30 d-xl-none"></div>
-                <div class="mobile-menu fix mb-30  d-xl-none"></div>
-                <div class="hr-1 mt-30 mb-30 d-xl-none"></div>
-                <div class="offcanvas__btn mb-30">
-                    <a class="ms-border-btn" href="services.html"><i class="fa-solid fa-plus"></i> List Your
-                        Service</a>
-                </div>
-                <div class="offcanvas__social">
-                    <div class="ms-footer-social mb-0">
-                        <a href="https://www.linkedin.com/" title="Instagram" target="_blank">IN</a>
-                        <a href="https://twitter.com/" title="Twitter" target="_blank">TW</a>
-                        <a href="https://www.facebook.com/" title="Facebook" target="_blank">FB</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="offcanvas__overlay"></div>
-<div class="offcanvas__overlay-white"></div>
-<!-- Offcanvas area start -->
-
-<!-- Header area start -->
 <header>
     <div id="header-sticky" class="header__area header-1 ms-header-fixed ms-bg-body">
         <div class="container-fluid ms-maw-1710">
@@ -81,20 +23,9 @@
                                                     <a href="{% url 'home' %}">Home</a>
 
                                                 </li>
+{% if  request.session.profile_image and  request.session.user_name %}
 
-                                                <li class="has-dropdown">
-                                                    <a href="">Public Gallery</a>
-                                                    <ul class="submenu">
-                                                        <li><a href="{% url 'Gallery' %}">Image</a></li>
-                                                        <li><a href="{% url 'AlbumShow' %}">Music Album</a></li>
-                                                        <li><a href="{% url 'Gallery' %}">Poem</a></li>
-                                                        <li><a href="{% url 'list_speechs' %}">Speech</a></li>
-                                                        <li><a href="{% url 'list_videos' %}">Video</a></li>
-                                                        <li><a href="{% url 'Gallery' %}">Reel</a></li>
-                                                    </ul>
-                                                </li>
                                                 <li>
-
                                                     <a href="{% url 'my_galleries' %}">Galleries</a>
                                                 </li>
                                                 <li>
@@ -104,6 +35,11 @@
                                                      <a href="{% url 'my_albums' %}">My Albums</a>
                                                 </li>
 
+                                            {% endif %}
+
+                                                <li>
+                                                     <a href="{% url 'AlbumShow' %}">Music Album</a>
+                                                </li>
 
 
                                                 <li>
@@ -146,7 +82,7 @@
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
                                                 <a href="{% url 'add_image' %}"><img
-                                                        src="{% static 'assets/img/genres/genres-01.jpg' %}"
+                                                        src="{% static 'assets/img/Images/image.png' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
@@ -157,7 +93,7 @@
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
                                                 <a href="{% url 'music' %}"><img
-                                                        src="{% static 'assets/img/genres/genres-02.jpg' %}"
+                                                        src="{% static 'assets/img/Images/sound.png' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
@@ -168,7 +104,7 @@
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
                                                 <a href="{% url 'add_poem' %}"><img
-                                                        src="{% static 'assets/img/genres/genres-03.jpg' %}"
+                                                        src="{% static 'assets/img/Images/poetry.png' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
@@ -179,7 +115,7 @@
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
                                                 <a href="{% url 'add_speech' %}"><img
-                                                        src="{% static 'assets/img/genres/genres-04.jpg' %}"
+                                                        src="{% static 'assets/img/Images/rumor.png' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
@@ -190,7 +126,7 @@
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
                                                 <a href="{% url 'add_video' %}"><img
-                                                        src="{% static 'assets/img/genres/genres-05.jpg' %}"
+                                                        src="{% static 'assets/img/Images/video.png' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
@@ -200,12 +136,12 @@
                                         </div>
                                         <div class="ms-song-item">
                                             <div class="ms-song-img p-relative">
-                                                <a href="genres.html"><img
-                                                        src="{% static 'assets/img/genres/genres-05.jpg' %}"
+                                                <a href="{% url 'add_reel' %}"><img
+                                                        src="{% static 'assets/img/Images/reel.png' %}"
                                                         alt="brand-song"></a>
                                             </div>
                                             <div class="ms-song-content">
-                                                <h3 class="ms-song-title"><a href="genres.html">Reel</a>
+                                                <h3 class="ms-song-title"><a href="{% url 'add_reel' %}">Reel</a>
                                                 </h3>
                                             </div>
                                         </div>
@@ -232,15 +168,7 @@
                                         </div>
                                     {% endif %}
                                 </div>
-                                <div class="header__hamburger">
-                                    <div class="sidebar__toggle">
-                                        <a class="bar-icon" href="javascript:void(0)">
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                        </a>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
