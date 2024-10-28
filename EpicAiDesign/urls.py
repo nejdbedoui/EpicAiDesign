@@ -21,6 +21,7 @@ urlpatterns = [
     path('Gallery/', include('GalleryApp.urls')),
     path('Blog/', include('BlogSpeechApp.urls')),
     path('Reel/', include('ReelApp.urls')),
+    path('Admin/',include('AdminApp.urls')),
 ]
 if settings.DEBUG is True:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

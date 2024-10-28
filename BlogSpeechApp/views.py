@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import BlogForm, UpdateBlogForm
 from .models import Blog
@@ -25,6 +26,7 @@ def add_blog(request, speech_id):
 
             return redirect('get_speech', speech_id=speech_id)
         else:
+            messages.error(request, "Form data is not valid.")
             form.add_error(None, 'Form data is not valid.')
     else:
         form = BlogForm()
@@ -38,4 +40,5 @@ def delete_blog(request, blog_id):
         speech.blogs.remove(blog)
         speech.save()
     blog.delete()
+    messages.success(request, "Blog Deleted")
     return redirect('get_speech', speech_id=speech.id)

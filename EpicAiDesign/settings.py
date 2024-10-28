@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'AlbumApp',
     'GalleryApp',
     'BlogSpeechApp',
+    'AdminApp'
 
 ]
 

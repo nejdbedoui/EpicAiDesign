@@ -8,6 +8,7 @@ class User(Document):
     password = StringField()
     image = ImageField()
     token = StringField()
+    role = StringField()
     verified = BooleanField(default=False)
 
     def __str__(self):

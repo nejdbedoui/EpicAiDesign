@@ -4,19 +4,22 @@
 
 {% block content %}
 <main>
-    <h2 class="text-center">{{ gallery.title }}</h2>
+    <h2 class="text-center"><div class="section__title-wrapper mb-40 bd-title-anim">
+
+                </div>
+        <a class="ms-table-action text-danger"><span class="section__subtitle" style="font-size: 50px">{{ gallery.title }}  </span> <span style="font-size: 30px">{{ gallery.rating|floatformat:0 }}<i  class="fa-regular fa-star"></i></span>
+         </a></h2>
     <div class="text-center mb-3">
         <img src="{{ gallery.cover|to_base64 }}" alt="{{ gallery.title }}" style="width: 300px; height: auto;">
     </div>
-    <p>Rating: {{ gallery.rating }}/5</p>
-    <p>Number of Images: {{ images.count }}</p>
-
-    <h4>Images in this Gallery</h4>
+    <div class="section__title-wrapper mb-40 bd-title-anim">
+                    <span class="section__subtitle">Images in this Gallery ({{ images|length }})</span>
+                </div>
     <div class="row">
         {% for image in images %}
             <div class="col-md-4">
                 <div class="image-container">
-                    <img src="{{ image.image.url }}" alt="Image" style="width: 100%; height: auto;">
+                    <img src="{{ image.image|to_base64 }}" alt="Image" style="width: 100%; height: auto;">
                 </div>
             </div>
         {% endfor %}

@@ -129,8 +129,9 @@ def update_gallery(request, id):
 def gallery_details(request, id):
     try:
         gallery = ImageGallery.objects.get(id=id)
-        images = gallery.images.all()  # Récupérez toutes les images associées à la galerie
+        images = gallery.images
     except ImageGallery.DoesNotExist:
+        messages.error(request, "Gallery not found")
         raise Http404("Gallery not found")
 
     return render(request, 'gallery_details.html', {

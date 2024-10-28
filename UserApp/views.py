@@ -50,7 +50,8 @@ def signup(request):
             username=username,
             email=email,
             password=make_password(password),
-            image=profile_image
+            image=profile_image,
+            role='user'
         )
 
         user.save()
@@ -80,7 +81,10 @@ def user_login(request):
             if skip or user.verified:
                 set_user_session(request, user)
                 messages.success(request, "Logged in successfully!")
-                return redirect('userInfo')
+                if user.role == 'user':
+                    return redirect('userInfo')
+                else:
+                    return redirect('dashboard')
             else:
                 user.token = create_token(user.email, "mail")
                 user.save()
@@ -101,7 +105,7 @@ def profile(request):
 def personalInfo(request):
     return render(request, 'userDetails.html')
 
-
+@custom_login_required
 def logout_user(request):
     request.session.clear()
     return redirect('login')
@@ -213,7 +217,7 @@ def reset_password_view(request):
 def home(request):
     return render(request, 'home.html')
 
-
+@custom_login_required
 def editProfile(request):
     email = request.session.get('user_email')
     user = User.objects(email=email).first()
@@ -243,7 +247,7 @@ def editProfile(request):
             messages.error(request, "Invalid password. Please enter the correct password to update your profile.")
     return render(request, 'editProfile.html', {'user': user})
 
-
+@custom_login_required
 def gallery(request):
     user_id = request.session.get('user_id')
     albums = None
@@ -266,21 +270,20 @@ def gallery(request):
             data = PoemApp.models.PoemArt.objects.filter(user=user_id).order_by(f"-{sort}")
         case "Speech":
             data = SpeechApp.models.Speech.objects.all().order_by(f"-{sort}")
-    # match category:
-    #     case "Images":
-    #         data = ImageApp.models.ImageArt.objects(user=user).all().order_by(f"-{sort}")
-    #     case "Music":
-    #         data = MusicApp.models.MusicArt.objects(user=user).all().order_by(f"-{sort}")
-    #         albums = AlbumApp.models.MusicAlbum.objects(user=user).all()
-    #     case "Video":
-    #         data = VideoApp.models.VideoArt.objects(user=user).all().order_by(f"-{sort}")
-    #     case "Poem":
-    #         data = PoemApp.models.PoemArt.objects(user=user).all().order_by(f"-{sort}")
-    #     case "Speech":
-    #         data = SpeechApp.models.Speech.objects(user=user).all().order_by(f"-{sort}")
+        # match category:
+        #     case "Images":
+        #         data = ImageApp.models.ImageArt.objects(user=user).all().order_by(f"-{sort}")
+        #     case "Music":
+        #         data = MusicApp.models.MusicArt.objects(user=user).all().order_by(f"-{sort}")
+        #         albums = AlbumApp.models.MusicAlbum.objects(user=user).all()
+        #     case "Video":
+        #         data = VideoApp.models.VideoArt.objects(user=user).all().order_by(f"-{sort}")
+        #     case "Poem":
+        #         data = PoemApp.models.PoemArt.objects(user=user).all().order_by(f"-{sort}")
+        #     case "Speech":
+        #         data = SpeechApp.models.Speech.objects(user=user).all().order_by(f"-{sort}")
         case "Licences":
             user_id = request.session.get('user_id')
-            data =PoemApp.models.License.objects.filter(user=user_id).all().order_by(f"-{sort}")   
+            data = PoemApp.models.License.objects.filter(user=user_id).all().order_by(f"-{sort}")
     return render(request, 'gallery.html',
                   {'category': category, 'data': data, 'sort': sort, 'albums': albums})
-
